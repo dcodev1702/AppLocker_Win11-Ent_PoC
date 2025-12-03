@@ -16,8 +16,8 @@
       8007 = Policy not applied
     
 .NOTES
-    Author: DCODEV1702 & Claude Opus 4.5
-    Date: 2 December 2025
+    Author: Security Team
+    Date: December 2025
     
     Run from a non-admin user account to properly test the policy.
     Administrators typically have a blanket allow rule.
@@ -28,6 +28,19 @@ param(
 )
 
 $ErrorActionPreference = "SilentlyContinue"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CLM (Constrained Language Mode) Detection
+# When AppLocker is in Enforce mode, PowerShell runs in CLM which blocks .NET types
+# ═══════════════════════════════════════════════════════════════════════════════
+$languageMode = $ExecutionContext.SessionState.LanguageMode
+if ($languageMode -eq "ConstrainedLanguage") {
+    Write-Host "ℹ️  Running in Constrained Language Mode (CLM)" -ForegroundColor Cyan
+    Write-Host "   This is expected when AppLocker is enforcing - script is CLM-compatible.`n" -ForegroundColor DarkCyan
+} elseif ($languageMode -eq "FullLanguage") {
+    Write-Host "ℹ️  Running in Full Language Mode" -ForegroundColor Gray
+    Write-Host "   AppLocker may not be enforcing, or you may be running as admin.`n" -ForegroundColor DarkGray
+}
 
 # AppLocker Event IDs to check
 $AppLockerEventIDs = @(8003, 8004, 8006, 8007)
@@ -105,35 +118,63 @@ function Find-MSBuildInstances {
     <#
     .SYNOPSIS
         Dynamically discovers all MSBuild.exe instances under .NET Framework directories
+        CLM-COMPATIBLE: Uses only PowerShell cmdlets, no .NET type access
     #>
     
+    # Use simple array - CLM compatible
     $msbuildInstances = @()
     
-    # Scan both Framework and Framework64 directories
-    $frameworkPaths = @(
-        "$env:SystemRoot\Microsoft.NET\Framework",
-        "$env:SystemRoot\Microsoft.NET\Framework64"
+    # Known .NET Framework versions that typically contain MSBuild.exe
+    $knownPaths = @(
+        "C:\Windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe",
+        "C:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe",
+        "C:\Windows\Microsoft.NET\Framework64\v3.5\MSBuild.exe",
+        "C:\Windows\Microsoft.NET\Framework\v3.5\MSBuild.exe",
+        "C:\Windows\Microsoft.NET\Framework64\v2.0.50727\MSBuild.exe",
+        "C:\Windows\Microsoft.NET\Framework\v2.0.50727\MSBuild.exe"
     )
     
-    foreach ($basePath in $frameworkPaths) {
-        if (Test-Path $basePath) {
-            # Find all MSBuild.exe files recursively
-            $found = Get-ChildItem -Path $basePath -Filter "MSBuild.exe" -Recurse -ErrorAction SilentlyContinue
-            foreach ($msbuild in $found) {
-                # Get version info
-                $versionInfo = [System.Diagnostics.FileVersionInfo]::GetVersionInfo($msbuild.FullName)
-                $msbuildInstances += [PSCustomObject]@{
-                    Path = $msbuild.FullName
-                    Version = $versionInfo.FileVersion
-                    ProductVersion = $versionInfo.ProductVersion
-                    Framework = ($msbuild.DirectoryName -replace '.*\\(v[\d\.]+).*', '$1')
-                    Architecture = if ($basePath -match 'Framework64') { 'x64' } else { 'x86' }
-                }
+    Write-Host "    Checking known MSBuild paths..." -ForegroundColor DarkGray
+    
+    foreach ($pathToCheck in $knownPaths) {
+        # Parse architecture and framework from path
+        if ($pathToCheck -match 'Framework64') {
+            $arch = "x64"
+        } else {
+            $arch = "x86"
+        }
+        
+        if ($pathToCheck -match '\\(v[\d\.]+)\\') {
+            $framework = $matches[1]
+        } else {
+            $framework = "Unknown"
+        }
+        
+        Write-Host "    $framework [$arch]: " -ForegroundColor DarkGray -NoNewline
+        
+        # Use Test-Path only - CLM compatible
+        if (Test-Path -Path $pathToCheck -PathType Leaf) {
+            Write-Host "FOUND" -ForegroundColor Green
+            
+            # Version info is nice-to-have, not required
+            # Skip version lookup entirely in CLM - it uses .NET objects
+            $fileVersion = "Installed"
+            
+            # Add as hashtable - CLM compatible
+            $msbuildInstances += @{
+                Path = $pathToCheck
+                Version = $fileVersion
+                Framework = $framework
+                Architecture = $arch
             }
+        } else {
+            Write-Host "not found" -ForegroundColor DarkGray
         }
     }
     
-    return $msbuildInstances | Sort-Object Version -Descending
+    Write-Host "    Total instances found: $($msbuildInstances.Count)" -ForegroundColor DarkGray
+    
+    return $msbuildInstances
 }
 
 Write-Host "`n" -NoNewline
@@ -149,7 +190,16 @@ Write-Host "Date:       $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')" -ForegroundCo
 Write-Host "`n"
 
 # Check if running as admin (tests should be run as non-admin)
-$isAdmin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+# CLM-compatible: use whoami /groups instead of .NET types
+$isAdmin = $false
+try {
+    $groups = whoami /groups 2>$null
+    if ($groups -match "S-1-16-12288" -or $groups -match "High Mandatory Level") {
+        $isAdmin = $true
+    }
+} catch {
+    # If whoami fails, assume not admin
+}
 if ($isAdmin) {
     Write-Host "⚠️  WARNING: Running as Administrator!" -ForegroundColor Yellow
     Write-Host "   AppLocker typically allows all executions for Administrators." -ForegroundColor Yellow
@@ -285,12 +335,16 @@ Write-Host "──────────────────────�
 
 # Discover all MSBuild instances
 Write-Host "`nScanning for MSBuild.exe instances..." -ForegroundColor Gray
-$msbuildInstances = Find-MSBuildInstances
+$msbuildInstances = @(Find-MSBuildInstances)
 
-if ($msbuildInstances.Count -eq 0) {
-    Write-Host "  No MSBuild.exe instances found on this system." -ForegroundColor Yellow
-    Write-Host "  (.NET Framework may not be installed)" -ForegroundColor Yellow
-    $testResults += @{Name="msbuild.exe"; Blocked=$true; EventId=$null}
+Write-Host "    Received $($msbuildInstances.Count) instance(s) from discovery function" -ForegroundColor DarkGray
+
+if ($null -eq $msbuildInstances -or $msbuildInstances.Count -eq 0) {
+    Write-Host "  [SKIP] " -ForegroundColor Yellow -NoNewline
+    Write-Host "No MSBuild.exe instances found on this system." -ForegroundColor Yellow
+    Write-Host "         (.NET Framework may not be installed)" -ForegroundColor DarkGray
+    # Don't add to testResults as blocked - this is a SKIP, not a pass
+    $testResults += @{Name="msbuild.exe"; Blocked=$null; EventId=$null; Skipped=$true}
 } else {
     Write-Host "  Found $($msbuildInstances.Count) MSBuild.exe instance(s):`n" -ForegroundColor Gray
     
@@ -416,23 +470,34 @@ Write-Host ""
 
 $passed = ($testResults | Where-Object { $_.Blocked -eq $true }).Count
 $failed = ($testResults | Where-Object { $_.Blocked -eq $false }).Count
+$skipped = ($testResults | Where-Object { $_.Skipped -eq $true }).Count
 $total = $testResults.Count
 
 Write-Host "Tests Passed (Blocked): " -NoNewline
-Write-Host "$passed/$total" -ForegroundColor $(if ($passed -eq $total) { "Green" } else { "Yellow" })
+Write-Host "$passed/$total" -ForegroundColor $(if ($passed -eq ($total - $skipped)) { "Green" } else { "Yellow" })
 
 Write-Host "Tests Failed (Not Blocked): " -NoNewline
 Write-Host "$failed/$total" -ForegroundColor $(if ($failed -eq 0) { "Green" } else { "Red" })
+
+if ($skipped -gt 0) {
+    Write-Host "Tests Skipped (Not Found): " -NoNewline
+    Write-Host "$skipped/$total" -ForegroundColor "Yellow"
+}
 
 Write-Host ""
 
 # Show individual results
 Write-Host "Individual Results:" -ForegroundColor White
 foreach ($result in $testResults) {
-    $statusColor = if ($result.Blocked) { "Green" } else { "Red" }
-    $status = if ($result.Blocked) { "BLOCKED" } else { "NOT BLOCKED" }
-    Write-Host "  • $($result.Name): " -NoNewline
-    Write-Host $status -ForegroundColor $statusColor
+    if ($result.Skipped -eq $true) {
+        Write-Host "  • $($result.Name): " -NoNewline
+        Write-Host "SKIPPED (not installed)" -ForegroundColor Yellow
+    } else {
+        $statusColor = if ($result.Blocked) { "Green" } else { "Red" }
+        $status = if ($result.Blocked) { "BLOCKED" } else { "NOT BLOCKED" }
+        Write-Host "  • $($result.Name): " -NoNewline
+        Write-Host $status -ForegroundColor $statusColor
+    }
 }
 
 Write-Host ""
