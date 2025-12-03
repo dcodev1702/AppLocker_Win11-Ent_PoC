@@ -1,0 +1,2051 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AppLockerPolicy Version="1">
+    
+    <RuleCollection Type="Exe" EnforcementMode="Enabled">
+        
+        <FilePublisherRule Id="0644f8fd-62df-41c9-8c41-3b955f6e228e" Name="LOLBin Block: AddInProcess.exe" Description="Microsoft Recommended Block - AddInProcess.exe - .NET Framework MAF host process" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="ADDINPROCESS.EXE">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="b534268a-6bd2-4baa-95f4-4473420da432" Name="LOLBin Block: AddInProcess32.exe" Description="Microsoft Recommended Block - AddInProcess32.exe - .NET Framework MAF host process (32-bit)" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="ADDINPROCESS32.EXE">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="3dd30193-6175-4c6c-9a12-30a7173aedf9" Name="LOLBin Block: AddInUtil.exe" Description="Microsoft Recommended Block - AddInUtil.exe - .NET Framework add-in utility" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="ADDINUTIL.EXE">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="ec500e0a-1a85-4182-979e-7d06468f5608" Name="LOLBin Block: aspnet_compiler.exe" Description="Microsoft Recommended Block - aspnet_compiler.exe - ASP.NET compilation tool" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="ASPNET_COMPILER.EXE">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="cb0e4b35-94e1-41b4-ae1a-647ad3614779" Name="LOLBin Block: bash.exe" Description="Microsoft Recommended Block - bash.exe - Windows Subsystem for Linux" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="BASH.EXE">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="0fe37c25-ae70-4cb2-9b65-886cbc3e428e" Name="LOLBin Block: cdb.exe" Description="Microsoft Recommended Block - cdb.exe - Console debugger" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="CDB.EXE">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="cc2a5594-690e-419a-b852-a2abef7a1ce7" Name="LOLBin Block: cscript.exe" Description="Microsoft Recommended Block - cscript.exe - Windows Script Host" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="CSCRIPT.EXE">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="2b965ac2-f680-4755-841a-e2682295ad53" Name="LOLBin Block: csi.exe" Description="Microsoft Recommended Block - csi.exe - C# Interactive (Roslyn)" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="CSI.EXE">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="7b3c4def-8a92-450e-9692-89f794a7545d" Name="LOLBin Block: dbghost.exe" Description="Microsoft Recommended Block - dbghost.exe - Debug host process" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="DBGHOST.EXE">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="c0288c3e-8f95-4c21-b2f1-4390705f3cce" Name="LOLBin Block: dbgsvc.exe" Description="Microsoft Recommended Block - dbgsvc.exe - Debug service" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="DBGSVC.EXE">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="afbdf1ce-9b6d-4e72-b5cb-bae6069e866b" Name="LOLBin Block: dbgsrv.exe" Description="Microsoft Recommended Block - dbgsrv.exe - Debug server" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="DBGSRV.EXE">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="98333480-95fa-46a2-b136-36ddd4882452" Name="LOLBin Block: dnx.exe" Description="Microsoft Recommended Block - dnx.exe - .NET Execution Environment" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="DNX.EXE">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="6be40b59-1550-446c-8709-af727fcb246c" Name="LOLBin Block: dotnet.exe" Description="Microsoft Recommended Block - dotnet.exe - .NET CLI host" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="DOTNET.EXE">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="d72ac14d-d2bc-4dc3-b0b8-f387d0006760" Name="LOLBin Block: fsi.exe" Description="Microsoft Recommended Block - fsi.exe - F# Interactive" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="FSI.EXE">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="2e5f9fb8-c7f4-44c8-9a8e-34045f6a0bbe" Name="LOLBin Block: fsiAnyCpu.exe" Description="Microsoft Recommended Block - fsiAnyCpu.exe - F# Interactive (AnyCPU)" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="FSIANYCPU.EXE">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="7980b750-345c-497b-939e-018bd28436e8" Name="LOLBin Block: infdefaultinstall.exe" Description="Microsoft Recommended Block - infdefaultinstall.exe - INF file installer" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="INFDEFAULTINSTALL.EXE">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="27ca65d7-7045-4bb7-bfb2-94df2dc31ee8" Name="LOLBin Block: InstallUtil.exe" Description="Microsoft Recommended Block - InstallUtil.exe - .NET Installer utility" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="INSTALLUTIL.EXE">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="261deab9-6d8f-417f-b246-22e91c2b8a58" Name="LOLBin Block: kd.exe" Description="Microsoft Recommended Block - kd.exe - Kernel debugger" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="KD.EXE">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="eb2475f5-8bfa-471c-9b93-68ba947c764a" Name="LOLBin Block: kill.exe" Description="Microsoft Recommended Block - kill.exe - Process termination tool" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="KILL.EXE">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="7edbeae0-7683-47c0-b2f0-0df4bda3f10c" Name="LOLBin Block: lxrun.exe" Description="Microsoft Recommended Block - lxrun.exe - WSL legacy management tool" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="LXRUN.EXE">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="eb1d1210-7a3c-4fb7-a64b-551e2d5034f8" Name="LOLBin Block: Microsoft.Workflow.Compiler.exe" Description="Microsoft Recommended Block - Microsoft.Workflow.Compiler.exe - Workflow compiler" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="MICROSOFT.WORKFLOW.COMPILER.EXE">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="cacd0075-1701-4b30-85a3-8d3efb1f9ef9" Name="LOLBin Block: MSBuild.exe" Description="Microsoft Recommended Block - MSBuild.exe - Microsoft Build Engine" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="MSBUILD.EXE">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="c13282fd-c431-4d9c-acea-c1e2e3d1a8b1" Name="LOLBin Block: mshta.exe" Description="Microsoft Recommended Block - mshta.exe - HTML Application Host" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="MSHTA.EXE">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="a7765ef5-1ef4-4403-a25c-6b43ea9ebd44" Name="LOLBin Block: ntkd.exe" Description="Microsoft Recommended Block - ntkd.exe - Kernel debugger (NT)" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="NTKD.EXE">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="16f17fa3-db81-4284-a1db-f0f7033299d4" Name="LOLBin Block: ntsd.exe" Description="Microsoft Recommended Block - ntsd.exe - Symbolic debugger (NT)" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="NTSD.EXE">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="a4824bc2-61f0-47bc-bf84-8739ac2ead4a" Name="LOLBin Block: powershellcustomhost.exe" Description="Microsoft Recommended Block - powershellcustomhost.exe - PowerShell custom host" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="POWERSHELLCUSTOMHOST.EXE">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="d9333e78-5d2e-4c35-88f6-ae993150e782" Name="LOLBin Block: rcsi.exe" Description="Microsoft Recommended Block - rcsi.exe - Roslyn C# Interactive" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="RCSI.EXE">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="271a12dd-0682-455d-9f44-54f17d4eb00f" Name="LOLBin Block: runscripthelper.exe" Description="Microsoft Recommended Block - runscripthelper.exe - Run Script Helper" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="RUNSCRIPTHELPER.EXE">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="177881ee-82ae-4941-aedb-734255c263db" Name="LOLBin Block: texttransform.exe" Description="Microsoft Recommended Block - texttransform.exe - T4 Text Template transformation" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="TEXTTRANSFORM.EXE">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="a94cb4fc-10f1-4bb5-9312-65f519c26530" Name="LOLBin Block: visualuiaverifynative.exe" Description="Microsoft Recommended Block - visualuiaverifynative.exe - UI Automation Verify" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="VISUALUIAVERIFYNATIVE.EXE">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="7b088b14-bbf5-45f1-8915-87eee61c45d3" Name="LOLBin Block: wfc.exe" Description="Microsoft Recommended Block - wfc.exe - Workflow Command-line Compiler" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="WFC.EXE">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="a1e70898-401f-4b28-9073-4b327f33b31c" Name="LOLBin Block: windbg.exe" Description="Microsoft Recommended Block - windbg.exe - Windows Debugger" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="WINDBG.EXE">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="c1d81d25-3110-4dc0-ba00-8af448549b86" Name="LOLBin Block: wmic.exe" Description="Microsoft Recommended Block - wmic.exe - WMI Command-line" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="WMIC.EXE">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="ef4f9d35-f408-4b05-b5ea-292396acae62" Name="LOLBin Block: wscript.exe" Description="Microsoft Recommended Block - wscript.exe - Windows Script Host" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="WSCRIPT.EXE">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="712c1cf0-57bb-47fe-b9a9-3ec44004b374" Name="LOLBin Block: wsl.exe" Description="Microsoft Recommended Block - wsl.exe - Windows Subsystem for Linux" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="WSL.EXE">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="d3591f6d-55df-42bb-bc02-da04836eb456" Name="LOLBin Block: wslconfig.exe" Description="Microsoft Recommended Block - wslconfig.exe - WSL configuration tool" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="WSLCONFIG.EXE">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="3a9637d6-84f7-4403-893a-4e1b230cc9b6" Name="LOLBin Block: wslhost.exe" Description="Microsoft Recommended Block - wslhost.exe - WSL host process" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="WSLHOST.EXE">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="f6f47275-76f0-4256-8999-ac7e225b13ec" Name="LOLBin Block: RegAsm.exe" Description="Microsoft Recommended Block - RegAsm.exe - .NET Assembly Registration Utility" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="REGASM.EXE">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="e23f8e45-da15-470f-b152-2824c0d71897" Name="LOLBin Block: RegSvcs.exe" Description="Microsoft Recommended Block - RegSvcs.exe - .NET Component Services Utility" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="REGSVCS.EXE">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="5c60deeb-850f-4bed-ab19-2e0f380678a9" Name="LOLBin Block: PresentationHost.exe" Description="Microsoft Recommended Block - PresentationHost.exe - WPF host process" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="PRESENTATIONHOST.EXE">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="25d9c08c-c495-40aa-8ea7-0a17f35bddb0" Name="LOLBin Block: runas.exe" Description="Microsoft Recommended Block - runas.exe - Run As command (blocked for non-admins)" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="RUNAS.EXE">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="096096a1-d849-4d04-9fb6-7711bd2f5d01" Name="LOLBin Block: cipher.exe" Description="Microsoft Recommended Block - cipher.exe - Encrypting File System tool" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="CIPHER.EXE">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePathRule Id="fd686d83-a829-4351-8ff4-27c7de5755d2" Name="(Default Rule) All files" Description="Allows members of the local Administrators group to run all applications." UserOrGroupSid="S-1-5-32-544" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePathCondition Path="*"/>
+                
+            </Conditions>
+            
+        </FilePathRule>
+        
+        <FilePathRule Id="cdfd5d1c-828f-4bd6-9542-1395c6088f82" Name="All files located in the Program Files folder" Description="Allows members of the Everyone group to run applications that are located in the Program Files folder." UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePathCondition Path="%PROGRAMFILES%\*"/>
+                
+            </Conditions>
+            
+            <Exceptions>
+                
+                <FilePathCondition Path="%PROGRAMFILES%\microsoft\edge\application\setupmetrics\*"/>
+                
+                <FilePathCondition Path="%PROGRAMFILES%\microsoft\edgewebview\application\setupmetrics\*"/>
+                
+            </Exceptions>
+            
+        </FilePathRule>
+        
+        <FilePathRule Id="38080c1b-54bc-4f7e-804d-fafb70bf781b" Name="All files located in the Windows folder" Description="Allows members of the Everyone group to run applications that are located in the Windows folder." UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePathCondition Path="%WINDIR%\*"/>
+                
+            </Conditions>
+            
+            <Exceptions>
+                
+                <FilePathCondition Path="%WINDIR%\registration\crmlog\*"/>
+                
+                <FilePathCondition Path="%WINDIR%\servicestate\iddcx0102\data\*"/>
+                
+                <FilePathCondition Path="%WINDIR%\servicestate\iddcx0102\data:*"/>
+                
+                <FilePathCondition Path="%WINDIR%\servicestate\rdpidd\data\*"/>
+                
+                <FilePathCondition Path="%WINDIR%\servicestate\rdpidd\data:*"/>
+                
+                <FilePathCondition Path="%SYSTEM32%\com\dmp\*"/>
+                
+                <FilePathCondition Path="%SYSTEM32%\drivers\driverdata\*"/>
+                
+                <FilePathCondition Path="%SYSTEM32%\drivers\driverdata:*"/>
+                
+                <FilePathCondition Path="%SYSTEM32%\microsoft\crypto\rsa\machinekeys\*"/>
+                
+                <FilePathCondition Path="%SYSTEM32%\spool\*"/>
+                
+                <FilePathCondition Path="%SYSTEM32%\spool:*"/>
+                
+                <FilePathCondition Path="%SYSTEM32%\tasks\*"/>
+                
+                <FilePathCondition Path="%WINDIR%\tasks\*"/>
+                
+                <FilePathCondition Path="%WINDIR%\temp\*"/>
+                
+                <FilePathCondition Path="%WINDIR%\tracing\*"/>
+                
+                <FilePathCondition Path="%WINDIR%\tracing:*"/>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT® .NET FRAMEWORK" BinaryName="MSBUILD.EXE">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT® WINDOWS® OPERATING SYSTEM" BinaryName="RUNAS.EXE">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT® .NET FRAMEWORK" BinaryName="REGSVCS.EXE">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT® WINDOWS® OPERATING SYSTEM" BinaryName="PRESENTATIONHOST.EXE">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="INTERNET EXPLORER" BinaryName="MSHTA.EXE">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT® WINDOWS® OPERATING SYSTEM" BinaryName="CIPHER.EXE">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT® .NET FRAMEWORK" BinaryName="INSTALLUTIL.EXE">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT® .NET FRAMEWORK" BinaryName="MICROSOFT.WORKFLOW.COMPILER.EXE">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT® .NET FRAMEWORK" BinaryName="REGASM.EXE">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Exceptions>
+            
+        </FilePathRule>
+        
+        <FilePathRule Id="42a13910-e372-4cf0-a008-b24d6ff596c9" Name="Additional allowed path: \\hawk-ir.local\netlogon\*" Description="Allows Everyone to execute from \\hawk-ir.local\netlogon\*" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePathCondition Path="\\hawk-ir.local\netlogon\*"/>
+                
+            </Conditions>
+            
+        </FilePathRule>
+        
+        <FilePathRule Id="608f086d-2a10-4624-aec3-f4e7a42badca" Name="Additional allowed path: \\hawk-ir.local\sysvol\*" Description="Allows Everyone to execute from \\hawk-ir.local\sysvol\*" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePathCondition Path="\\hawk-ir.local\sysvol\*"/>
+                
+            </Conditions>
+            
+        </FilePathRule>
+        
+        <FilePathRule Id="48032796-be15-4542-af7a-577a9913b4fa" Name="Additional allowed path: %OSDRIVE%\Packages\*" Description="Allows Everyone to execute from %OSDRIVE%\Packages\*" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePathCondition Path="%OSDRIVE%\Packages\*"/>
+                
+            </Conditions>
+            
+        </FilePathRule>
+        
+        <FilePathRule Id="1d4eb459-24a6-4b2e-8d81-f3aa835cb004" Name="Additional allowed path: %OSDRIVE%\PROGRAMDATA\MICROSOFT\WINDOWS DEFENDER\*" Description="Allows Everyone to execute from %OSDRIVE%\PROGRAMDATA\MICROSOFT\WINDOWS DEFENDER\*" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePathCondition Path="%OSDRIVE%\PROGRAMDATA\MICROSOFT\WINDOWS DEFENDER\*"/>
+                
+            </Conditions>
+            
+        </FilePathRule>
+        
+        <FilePublisherRule Id="84b5d302-accb-452d-a7f2-fb6081750b50" Name="OneDrive: ONEDRIVE" Description="Product: ONEDRIVE
+Publisher: O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US
+File(s) found in: C:\Users\gcc\AppData\Local\Microsoft\OneDrive" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="ONEDRIVE" BinaryName="*">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FileHashRule Id="456bd77c-5528-4a93-8ab8-51c6b950c541" Name="Rule set created 2025-12-02 18:04" Description="Never-applicable rule to document that this AppLocker rule set was created via AaronLocker at 2025-12-02 18:04" UserOrGroupSid="S-1-3-0" Action="Deny">
+            
+            <Conditions>
+                
+                <FileHashCondition>
+                    
+                    <FileHash Type="SHA256" Data="0x0000000000000000000000000000000000000000000000000020251202180406" SourceFileName="DateTimeInfo" SourceFileLength="1"/>
+                    
+                </FileHashCondition>
+                
+            </Conditions>
+            
+        </FileHashRule>
+        
+        <FilePublisherRule Id="09eb88ed-2bb1-4507-aa13-f80e0d5fbe0f" Name="Microsoft Teams: Signer/product rule for O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US/MICROSOFT TEAMS" Description="Information acquired from TrustedSigners.ps1" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT TEAMS" BinaryName="*">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="95c5e20e-9af7-479d-8f00-1042883f1996" Name="Adobe: Signer rule for O=ADOBE INC., L=SAN JOSE, S=CA, C=US" Description="Information acquired from TrustedSigners.ps1" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=ADOBE INC., L=SAN JOSE, S=CA, C=US" ProductName="*" BinaryName="*">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="0272a3eb-2fab-4726-a802-5f0055a25397" Name="Wireshark: Signer rule for O=WIRESHARK FOUNDATION, S=CALIFORNIA, C=US" Description="Information acquired from TrustedSigners.ps1" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=WIRESHARK FOUNDATION, S=CALIFORNIA, C=US" ProductName="*" BinaryName="*">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="f493e22c-63a9-4811-ab94-c5d8a8a968f5" Name="BgInfo: Disallow old versions of Sysinternals Bginfo.exe" Description="Disallow Sysinternals Bginfo.exe versions 4.25 and earlier that aren't AppLocker-aware" UserOrGroupSid="S-1-1-0" Action="Deny">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="BGINFO" BinaryName="BGINFO.EXE">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="4.25.0.0"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="f02c38df-c1a7-4e23-af01-1fb6468555f2" Name="OneDrive (Win10 v1607 initial state): MICROSOFT ONEDRIVE" Description="Product: MICROSOFT ONEDRIVE
+Publisher: O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US
+File(s) found in : %OSDRIVE%\USERS\testuser\APPDATA\LOCAL\MICROSOFT\ONEDRIVE" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT ONEDRIVE" BinaryName="*">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="5695973b-1322-4758-987e-648c072b8987" Name="OneDrive (Win10 v1607 initial state): ONEDRIVESETUP.EXE" Description="Product: WINDOWS LIVE
+Publisher: O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US
+Original path: %OSDRIVE%\USERS\testuser\APPDATA\LOCAL\MICROSOFT\ONEDRIVE\17.3.6381.0405\ONEDRIVESETUP.EXE" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="WINDOWS LIVE" BinaryName="ONEDRIVESETUP.EXE">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FileHashRule Id="9618840d-cd6c-4a76-a6f4-0e7aa24306fc" Name="OneDrive (Win10 v1607 initial state): OneDriveStandaloneUpdater.exe - HASH RULE" Description="Identified in: %OSDRIVE%\USERS\testuser\APPDATA\LOCAL\MICROSOFT\ONEDRIVE\17.3.6381.0405\ONEDRIVESTANDALONEUPDATER.EXE" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FileHashCondition>
+                    
+                    <FileHash Type="SHA256" Data="0x276CDAADE8E65726684DE00F3AD85D5504BB82512495FA126EB78FA853A5FDA0" SourceFileName="OneDriveStandaloneUpdater.exe" SourceFileLength="493256"/>
+                    
+                </FileHashCondition>
+                
+            </Conditions>
+            
+        </FileHashRule>
+        
+        <FilePublisherRule Id="3de8ec77-379e-415a-8aa0-731729f75a06" Name="OneDrive (Win10 v1803 initial state): MICROSOFT ONEDRIVE" Description="Product: MICROSOFT ONEDRIVE
+Publisher: O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US
+File(s) found in: %OSDRIVE%\USERS\testuser\APPDATA\LOCAL\MICROSOFT\ONEDRIVE" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT ONEDRIVE" BinaryName="*">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="cc281084-bd23-40ce-b9ca-28ae5a9a4bb0" Name="OneDrive (Win10 v1803 initial state): ONEDRIVESETUP.EXE" Description="Product: WINDOWS LIVE
+Publisher: O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US
+Original path: %OSDRIVE%\USERS\testuser\APPDATA\LOCAL\MICROSOFT\ONEDRIVE\17.3.6816.0313\ONEDRIVESETUP.EXE" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="WINDOWS LIVE" BinaryName="ONEDRIVESETUP.EXE">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="8f7ccf65-1a4b-4369-af3d-05f3a1cf9268" Name="OneDrive (Win10 v1809 initial state): MICROSOFT ONEDRIVE" Description="Product: MICROSOFT ONEDRIVE
+Publisher: O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US
+File(s) found in: %OSDRIVE%\USERS\ABBY\APPDATA\LOCAL\MICROSOFT\ONEDRIVE" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT ONEDRIVE" BinaryName="*">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePathRule Id="abb19633-4259-43d4-acba-1e446529dc37" Name="Visual Studio Code - All Files" Description="Allow all files in VS Code installation directory for all users (includes EXEs, DLLs, and .node files)" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePathCondition Path="%OSDRIVE%\Users\*\AppData\Local\Programs\Microsoft VS Code\*"/>
+                
+            </Conditions>
+            
+        </FilePathRule>
+        
+    </RuleCollection>
+    
+    <RuleCollection Type="Msi" EnforcementMode="Enabled">
+        
+        <FilePathRule Id="c64e52fe-bd05-43ed-ae91-f3612182829e" Name="All Windows Installer files under %windir%\ccmcache" Description="Allows everyone to run installer files in the SCCM cache." UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePathCondition Path="%WINDIR%\ccmcache\*"/>
+                
+            </Conditions>
+            
+        </FilePathRule>
+        
+        <FilePathRule Id="5b290184-345a-4453-b184-45305f6d9a54" Name="(Default Rule) All Windows Installer files in %systemdrive%\Windows\Installer" Description="Allows members of the Everyone group to run all Windows Installer files located in %systemdrive%\Windows\Installer." UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePathCondition Path="%WINDIR%\Installer\*"/>
+                
+            </Conditions>
+            
+        </FilePathRule>
+        
+        <FilePathRule Id="64ad46ff-0d71-4fa0-a30b-3f3d30c5433d" Name="(Default Rule) All Windows Installer files" Description="Allows members of the local Administrators group to run all Windows Installer files." UserOrGroupSid="S-1-5-32-544" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePathCondition Path="*.*"/>
+                
+            </Conditions>
+            
+        </FilePathRule>
+        
+        <FilePublisherRule Id="e8e9b11c-5da3-43ce-bd04-e4441356677d" Name="Microsoft Teams: Signer/product rule for O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US/MICROSOFT TEAMS" Description="Information acquired from TrustedSigners.ps1" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT TEAMS" BinaryName="*">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="f7c4f775-a07c-4165-b11a-01446757f344" Name="Microsoft-signed MSI files: Signer rule for O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" Description="Information acquired from TrustedSigners.ps1" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="*">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="a357deab-3e0c-4afa-ae58-3c5f755cce9e" Name="Adobe: Signer rule for O=ADOBE INC., L=SAN JOSE, S=CA, C=US" Description="Information acquired from TrustedSigners.ps1" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=ADOBE INC., L=SAN JOSE, S=CA, C=US" ProductName="*" BinaryName="*">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="ed32dce7-eac8-4f2f-b206-6cf40cb31efa" Name="Wireshark: Signer rule for O=WIRESHARK FOUNDATION, S=CALIFORNIA, C=US" Description="Information acquired from TrustedSigners.ps1" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=WIRESHARK FOUNDATION, S=CALIFORNIA, C=US" ProductName="*" BinaryName="*">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+    </RuleCollection>
+    
+    <RuleCollection Type="Script" EnforcementMode="Enabled">
+        
+        <FilePathRule Id="ed97d0cb-15ff-430f-b82c-8d7832957725" Name="(Default Rule) All scripts" Description="Allows members of the local Administrators group to run all scripts." UserOrGroupSid="S-1-5-32-544" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePathCondition Path="*"/>
+                
+            </Conditions>
+            
+        </FilePathRule>
+        
+        <FilePathRule Id="742c089a-d5bc-4f1e-98dc-2535b7b164b5" Name="All scripts located in the Program Files folder" Description="Allows members of the Everyone group to run scripts that are located in the Program Files folder." UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePathCondition Path="%PROGRAMFILES%\*"/>
+                
+            </Conditions>
+            
+            <Exceptions>
+                
+                <FilePathCondition Path="%PROGRAMFILES%\microsoft\edge\application\setupmetrics\*"/>
+                
+                <FilePathCondition Path="%PROGRAMFILES%\microsoft\edgewebview\application\setupmetrics\*"/>
+                
+            </Exceptions>
+            
+        </FilePathRule>
+        
+        <FilePathRule Id="2d2e2715-50d1-4f32-9885-7c935e189f44" Name="All scripts located in the Windows folder" Description="Allows members of the Everyone group to run scripts that are located in the Windows folder." UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePathCondition Path="%WINDIR%\*"/>
+                
+            </Conditions>
+            
+            <Exceptions>
+                
+                <FilePathCondition Path="%WINDIR%\registration\crmlog\*"/>
+                
+                <FilePathCondition Path="%WINDIR%\servicestate\iddcx0102\data\*"/>
+                
+                <FilePathCondition Path="%WINDIR%\servicestate\iddcx0102\data:*"/>
+                
+                <FilePathCondition Path="%WINDIR%\servicestate\rdpidd\data\*"/>
+                
+                <FilePathCondition Path="%WINDIR%\servicestate\rdpidd\data:*"/>
+                
+                <FilePathCondition Path="%SYSTEM32%\com\dmp\*"/>
+                
+                <FilePathCondition Path="%SYSTEM32%\drivers\driverdata\*"/>
+                
+                <FilePathCondition Path="%SYSTEM32%\drivers\driverdata:*"/>
+                
+                <FilePathCondition Path="%SYSTEM32%\microsoft\crypto\rsa\machinekeys\*"/>
+                
+                <FilePathCondition Path="%SYSTEM32%\spool\*"/>
+                
+                <FilePathCondition Path="%SYSTEM32%\spool:*"/>
+                
+                <FilePathCondition Path="%SYSTEM32%\tasks\*"/>
+                
+                <FilePathCondition Path="%WINDIR%\tasks\*"/>
+                
+                <FilePathCondition Path="%WINDIR%\temp\*"/>
+                
+                <FilePathCondition Path="%WINDIR%\tracing\*"/>
+                
+                <FilePathCondition Path="%WINDIR%\tracing:*"/>
+                
+            </Exceptions>
+            
+        </FilePathRule>
+        
+        <FilePathRule Id="bc9ca71c-41fa-49fe-8a63-3b290069dfb0" Name="Additional allowed path: \\hawk-ir.local\netlogon\*" Description="Allows Everyone to execute from \\hawk-ir.local\netlogon\*" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePathCondition Path="\\hawk-ir.local\netlogon\*"/>
+                
+            </Conditions>
+            
+        </FilePathRule>
+        
+        <FilePathRule Id="a93ade4e-1f02-4140-913f-b7deab4ede37" Name="Additional allowed path: \\hawk-ir.local\sysvol\*" Description="Allows Everyone to execute from \\hawk-ir.local\sysvol\*" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePathCondition Path="\\hawk-ir.local\sysvol\*"/>
+                
+            </Conditions>
+            
+        </FilePathRule>
+        
+        <FilePathRule Id="24a7e698-7f87-4953-b671-8e4af0d72d4b" Name="Additional allowed path: %OSDRIVE%\Packages\*" Description="Allows Everyone to execute from %OSDRIVE%\Packages\*" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePathCondition Path="%OSDRIVE%\Packages\*"/>
+                
+            </Conditions>
+            
+        </FilePathRule>
+        
+        <FilePathRule Id="aca6a72e-03c8-48d3-8b89-3c49bcf7d5f6" Name="Additional allowed path: %OSDRIVE%\PROGRAMDATA\MICROSOFT\WINDOWS DEFENDER\*" Description="Allows Everyone to execute from %OSDRIVE%\PROGRAMDATA\MICROSOFT\WINDOWS DEFENDER\*" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePathCondition Path="%OSDRIVE%\PROGRAMDATA\MICROSOFT\WINDOWS DEFENDER\*"/>
+                
+            </Conditions>
+            
+        </FilePathRule>
+        
+        <FilePublisherRule Id="56ed2afa-7af6-44f9-9537-ac7c6fb70903" Name="Microsoft Teams: Signer/product rule for O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US/MICROSOFT TEAMS" Description="Information acquired from TrustedSigners.ps1" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT TEAMS" BinaryName="*">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="915713e0-d7b4-419e-8c57-be61683e218e" Name="Microsoft-signed script files: Signer rule for O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" Description="Information acquired from TrustedSigners.ps1" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="*">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="0db16f37-bb3b-48ef-b6b5-d6544a2857db" Name="Adobe: Signer rule for O=ADOBE INC., L=SAN JOSE, S=CA, C=US" Description="Information acquired from TrustedSigners.ps1" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=ADOBE INC., L=SAN JOSE, S=CA, C=US" ProductName="*" BinaryName="*">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="fd3b8af9-9937-4749-88f5-40a2a02673f4" Name="Wireshark: Signer rule for O=WIRESHARK FOUNDATION, S=CALIFORNIA, C=US" Description="Information acquired from TrustedSigners.ps1" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=WIRESHARK FOUNDATION, S=CALIFORNIA, C=US" ProductName="*" BinaryName="*">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FileHashRule Id="f2f1e717-bb1b-4d6a-81c2-37e295edbf4f" Name="OneDrive (Win10 v1607 initial state): CollectOneDriveLogs.bat - HASH RULE" Description="Identified in: %OSDRIVE%\USERS\testuser\APPDATA\LOCAL\MICROSOFT\ONEDRIVE\17.3.6381.0405\COLLECTONEDRIVELOGS.BAT" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FileHashCondition>
+                    
+                    <FileHash Type="SHA256" Data="0xCDFC28618E8831CFA2F2487587CC55F40D6868A4F912763738A5975EC5F490AB" SourceFileName="CollectOneDriveLogs.bat" SourceFileLength="5850"/>
+                    
+                </FileHashCondition>
+                
+            </Conditions>
+            
+        </FileHashRule>
+        
+        <FileHashRule Id="ac60014e-2a29-45da-abc6-e3bed54652fd" Name="OneDrive (Win10 v1803 initial state): OneDrivePersonal.cmd - HASH RULE" Description="Identified in: %OSDRIVE%\USERS\testuser\APPDATA\LOCAL\MICROSOFT\ONEDRIVE\ONEDRIVEPERSONAL.CMD" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FileHashCondition>
+                    
+                    <FileHash Type="SHA256" Data="0x69A17A4899E1AD3E5FF42F7A24DD47C5130DBAD2CDEE7E3C8FBFDB238F5A20EE" SourceFileName="OneDrivePersonal.cmd" SourceFileLength="77"/>
+                    
+                </FileHashCondition>
+                
+            </Conditions>
+            
+        </FileHashRule>
+        
+        <FileHashRule Id="28e55e5d-f553-4be1-b1a6-d5c98701b817" Name="OneDrive (Win10 v1809 initial state): CollectSyncLogs.bat - HASH RULE" Description="Identified in: %OSDRIVE%\USERS\ABBY\APPDATA\LOCAL\MICROSOFT\ONEDRIVE\18.143.0717.0002\COLLECTSYNCLOGS.BAT" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FileHashCondition>
+                    
+                    <FileHash Type="SHA256" Data="0x3702A8CFC028A01B06A1E43354F02C99836EEF07F8876D4626DEF966446062AF" SourceFileName="CollectSyncLogs.bat" SourceFileLength="6420"/>
+                    
+                </FileHashCondition>
+                
+            </Conditions>
+            
+        </FileHashRule>
+        
+    </RuleCollection>
+    
+    <RuleCollection Type="Dll" EnforcementMode="Enabled">
+        
+        <FilePublisherRule Id="8dc9e770-88db-425f-86a6-200c0012d824" Name="LOLBin Block (DLL): lxssmanager.dll" Description="Microsoft Recommended Block - lxssmanager.dll - WSL Manager" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="LXSSMANAGER.DLL">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="6d9591a6-7252-445f-9ac8-5ffcf41acbda" Name="LOLBin Block (DLL): Microsoft.Build.dll" Description="Microsoft Recommended Block - Microsoft.Build.dll - MSBuild core library" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="MICROSOFT.BUILD.DLL">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="bb2426a1-96e7-4ab6-9ee2-f941e0ad1467" Name="LOLBin Block (DLL): MSBuild.dll" Description="Microsoft Recommended Block - MSBuild.dll - MSBuild library" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="MSBUILD.DLL">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="e6da685f-5f5a-485a-897e-1893a85a5aff" Name="LOLBin Block (DLL): System.Management.Automation.dll" Description="Microsoft Recommended Block - System.Management.Automation.dll - PowerShell core" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="SYSTEM.MANAGEMENT.AUTOMATION.DLL">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="60ac9555-1cf8-4371-8668-a3bea5058a8d" Name="LOLBin Block (DLL): davsvc.dll" Description="Microsoft Recommended Block - davsvc.dll - WebDAV client (WebClnt)" UserOrGroupSid="S-1-1-0" Action="Deny">
+            <Conditions>
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="DAVSVC.DLL">
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                </FilePublisherCondition>
+            </Conditions>
+        </FilePublisherRule>
+        <FilePublisherRule Id="0645a114-e55a-4d95-9511-5905489867c6" Name="Disallow PowerShell v2" Description="Explicitly deny signed DLLs needed for PowerShell v2 (implicitly allow 10.* and above)" UserOrGroupSid="S-1-1-0" Action="Deny">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT (R) WINDOWS (R) OPERATING SYSTEM" BinaryName="SYSTEM.MANAGEMENT.AUTOMATION.DLL">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="9.9.9.9"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePathRule Id="fe64f59f-6fca-45e5-a731-0f6715327c38" Name="(Default Rule) All DLLs" Description="Allows members of the local Administrators group to load all DLLs." UserOrGroupSid="S-1-5-32-544" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePathCondition Path="*"/>
+                
+            </Conditions>
+            
+        </FilePathRule>
+        
+        <FilePathRule Id="860f0fa5-afd9-4929-880b-cf0c6f052c67" Name="Microsoft Windows DLLs" Description="Allows members of the Everyone group to load DLLs located in the Windows folder." UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePathCondition Path="%WINDIR%\*"/>
+                
+            </Conditions>
+            
+            <Exceptions>
+                
+                <FilePathCondition Path="%WINDIR%\registration\crmlog\*"/>
+                
+                <FilePathCondition Path="%WINDIR%\servicestate\iddcx0102\data\*"/>
+                
+                <FilePathCondition Path="%WINDIR%\servicestate\iddcx0102\data:*"/>
+                
+                <FilePathCondition Path="%WINDIR%\servicestate\rdpidd\data\*"/>
+                
+                <FilePathCondition Path="%WINDIR%\servicestate\rdpidd\data:*"/>
+                
+                <FilePathCondition Path="%SYSTEM32%\com\dmp\*"/>
+                
+                <FilePathCondition Path="%SYSTEM32%\drivers\driverdata\*"/>
+                
+                <FilePathCondition Path="%SYSTEM32%\drivers\driverdata:*"/>
+                
+                <FilePathCondition Path="%SYSTEM32%\microsoft\crypto\rsa\machinekeys\*"/>
+                
+                <FilePathCondition Path="%SYSTEM32%\spool\*"/>
+                
+                <FilePathCondition Path="%SYSTEM32%\spool:*"/>
+                
+                <FilePathCondition Path="%SYSTEM32%\tasks\*"/>
+                
+                <FilePathCondition Path="%WINDIR%\tasks\*"/>
+                
+                <FilePathCondition Path="%WINDIR%\temp\*"/>
+                
+                <FilePathCondition Path="%WINDIR%\tracing\*"/>
+                
+                <FilePathCondition Path="%WINDIR%\tracing:*"/>
+                
+            </Exceptions>
+            
+        </FilePathRule>
+        
+        <FilePathRule Id="e431d080-a8e3-48d6-904b-19bda95b3fb7" Name="All DLLs located in the Program Files folder" Description="Allows members of the Everyone group to load DLLs that are located in the Program Files folder." UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePathCondition Path="%PROGRAMFILES%\*"/>
+                
+            </Conditions>
+            
+            <Exceptions>
+                
+                <FilePathCondition Path="%PROGRAMFILES%\microsoft\edge\application\setupmetrics\*"/>
+                
+                <FilePathCondition Path="%PROGRAMFILES%\microsoft\edgewebview\application\setupmetrics\*"/>
+                
+            </Exceptions>
+            
+        </FilePathRule>
+        
+        <FilePathRule Id="4f39bf10-f9ea-49d5-ba26-55535ba5fb35" Name="Disallow PowerShell v2" Description="Explicitly deny unsigned JIT native images needed for PowerShell v2" UserOrGroupSid="S-1-1-0" Action="Deny">
+            
+            <Conditions>
+                
+                <FilePathCondition Path="%WINDIR%\assembly\NativeImages_v2.0.50727_32\System.Management.A#\*"/>
+                
+            </Conditions>
+            
+        </FilePathRule>
+        
+        <FilePathRule Id="31d0a17e-420f-4b79-953f-d681fd69289f" Name="Disallow PowerShell v2" Description="Explicitly deny unsigned JIT native images needed for PowerShell v2" UserOrGroupSid="S-1-1-0" Action="Deny">
+            
+            <Conditions>
+                
+                <FilePathCondition Path="%WINDIR%\assembly\NativeImages_v2.0.50727_64\System.Management.A#\*"/>
+                
+            </Conditions>
+            
+        </FilePathRule>
+        
+        <FilePathRule Id="19cfec6f-48d3-4719-8f0f-b8e15c9bd89e" Name="Additional allowed path: \\hawk-ir.local\netlogon\*" Description="Allows Everyone to execute from \\hawk-ir.local\netlogon\*" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePathCondition Path="\\hawk-ir.local\netlogon\*"/>
+                
+            </Conditions>
+            
+        </FilePathRule>
+        
+        <FilePathRule Id="c953a66f-b15f-4ea9-8eff-174585203a87" Name="Additional allowed path: \\hawk-ir.local\sysvol\*" Description="Allows Everyone to execute from \\hawk-ir.local\sysvol\*" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePathCondition Path="\\hawk-ir.local\sysvol\*"/>
+                
+            </Conditions>
+            
+        </FilePathRule>
+        
+        <FilePathRule Id="e2fbf9a1-1c18-4409-91f0-fcb9cd7a659e" Name="Additional allowed path: %OSDRIVE%\Packages\*" Description="Allows Everyone to execute from %OSDRIVE%\Packages\*" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePathCondition Path="%OSDRIVE%\Packages\*"/>
+                
+            </Conditions>
+            
+        </FilePathRule>
+        
+        <FilePathRule Id="1171027a-cdd4-4a7c-8f22-342695a2eb25" Name="Additional allowed path: %OSDRIVE%\PROGRAMDATA\MICROSOFT\WINDOWS DEFENDER\*" Description="Allows Everyone to execute from %OSDRIVE%\PROGRAMDATA\MICROSOFT\WINDOWS DEFENDER\*" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePathCondition Path="%OSDRIVE%\PROGRAMDATA\MICROSOFT\WINDOWS DEFENDER\*"/>
+                
+            </Conditions>
+            
+        </FilePathRule>
+        
+        <FilePublisherRule Id="3109daec-408f-4b5d-a058-97b062dd5d5a" Name="Microsoft Teams: Signer/product rule for O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US/MICROSOFT TEAMS" Description="Information acquired from TrustedSigners.ps1" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT TEAMS" BinaryName="*">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="a98eaf43-74ef-45e2-b716-67ea20bd9385" Name="Allow selected files from %OSDRIVE%\.~BT\SOURCES during Windows upgrade: Signer/product/file rule for O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US/MICROSOFT® WINDOWS® OPERATING SYSTEM/GENERALTEL.DLL" Description="Information acquired from TrustedSigners.ps1" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT® WINDOWS® OPERATING SYSTEM" BinaryName="GENERALTEL.DLL">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="513f4d81-54f7-4118-b658-60931f11c64a" Name="Allow selected files from %OSDRIVE%\.~BT\SOURCES during Windows upgrade: Signer/product/file rule for O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US/MICROSOFT® WINDOWS® OPERATING SYSTEM/WDSCORE.DLL" Description="Information acquired from TrustedSigners.ps1" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT® WINDOWS® OPERATING SYSTEM" BinaryName="WDSCORE.DLL">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="3b26caa0-daa4-4a71-8b28-b5632da14544" Name="Allow selected files from %OSDRIVE%\.~BT\SOURCES during Windows upgrade: Signer/product/file rule for O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US/MICROSOFT® WINDOWS® OPERATING SYSTEM/AEINV.DLL" Description="Information acquired from TrustedSigners.ps1" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT® WINDOWS® OPERATING SYSTEM" BinaryName="AEINV.DLL">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="7edf25e7-ba56-46c2-8f83-82895e250d64" Name="MS Edge content protection: Signer/product rule for O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US/WIDEVINE CONTENT DECRYPTION MODULE" Description="Information acquired from TrustedSigners.ps1" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="WIDEVINE CONTENT DECRYPTION MODULE" BinaryName="*">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="0294f9ae-b315-480d-b380-134a2c07b682" Name="Adobe: Signer rule for O=ADOBE INC., L=SAN JOSE, S=CA, C=US" Description="Information acquired from TrustedSigners.ps1" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=ADOBE INC., L=SAN JOSE, S=CA, C=US" ProductName="*" BinaryName="*">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="29837999-6e72-492d-ae14-368ba43646d5" Name="Wireshark: Signer rule for O=WIRESHARK FOUNDATION, S=CALIFORNIA, C=US" Description="Information acquired from TrustedSigners.ps1" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=WIRESHARK FOUNDATION, S=CALIFORNIA, C=US" ProductName="*" BinaryName="*">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="9d6f7cab-c3fc-401e-94f2-870d077fdcc2" Name="MSVC runtime DLL: Signer/product/file rule for O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US/MICROSOFT® VISUAL STUDIO® 2005/MSVCP80.DLL" Description="Information acquired from TrustedSigners.ps1" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT® VISUAL STUDIO® 2005" BinaryName="MSVCP80.DLL">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="8ca5e32f-80a4-49ac-993f-25013895a28c" Name="MSVC runtime DLL: Signer/product/file rule for O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US/MICROSOFT® VISUAL STUDIO® 2005/MSVCR80.DLL" Description="Information acquired from TrustedSigners.ps1" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT® VISUAL STUDIO® 2005" BinaryName="MSVCR80.DLL">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="b585b9de-435b-4caf-87c6-d6224aefb9d5" Name="MFC runtime DLL: Signer/product/file rule for O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US/MICROSOFT® VISUAL STUDIO® 2008/MFC90U.DLL" Description="Information acquired from TrustedSigners.ps1" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT® VISUAL STUDIO® 2008" BinaryName="MFC90U.DLL">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="c3e98e3b-82d6-4f46-a6f1-1059a56e3664" Name="MSVC runtime DLL: Signer/product/file rule for O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US/MICROSOFT® VISUAL STUDIO® 2008/MSVCP90.DLL" Description="Information acquired from TrustedSigners.ps1" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT® VISUAL STUDIO® 2008" BinaryName="MSVCP90.DLL">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="83135aa2-42a6-42ce-b31d-228e5ac8b72f" Name="MSVC runtime DLL: Signer/product/file rule for O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US/MICROSOFT® VISUAL STUDIO® 2008/MSVCR90.DLL" Description="Information acquired from TrustedSigners.ps1" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT® VISUAL STUDIO® 2008" BinaryName="MSVCR90.DLL">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="862bbc29-1b98-44b7-a135-e526b60b068b" Name="MSVC runtime DLL: Signer/product/file rule for O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US/MICROSOFT® VISUAL STUDIO® 2010/MSVCP100.DLL" Description="Information acquired from TrustedSigners.ps1" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT® VISUAL STUDIO® 2010" BinaryName="MSVCP100.DLL">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="3efa3e86-67d2-45c1-9b2e-2df7d91339f7" Name="MSVC runtime DLL: Signer/product/file rule for O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US/MICROSOFT® VISUAL STUDIO® 2010/MSVCR100_CLR0400.DLL" Description="Information acquired from TrustedSigners.ps1" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT® VISUAL STUDIO® 2010" BinaryName="MSVCR100_CLR0400.DLL">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="43734a91-a44e-4e1e-93fd-7f56bde166d4" Name="MFC runtime DLL: Signer/product/file rule for O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US/MICROSOFT® VISUAL STUDIO® 2012/MFC110.DLL" Description="Information acquired from TrustedSigners.ps1" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT® VISUAL STUDIO® 2012" BinaryName="MFC110.DLL">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="16e236b0-5f3b-4ef7-8e1c-ad8863706a1f" Name="MSVC runtime DLL: Signer/product/file rule for O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US/MICROSOFT® VISUAL STUDIO® 2012/MSVCP110.DLL" Description="Information acquired from TrustedSigners.ps1" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT® VISUAL STUDIO® 2012" BinaryName="MSVCP110.DLL">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="4c4a576d-16c6-4ea9-850c-32362becc8bf" Name="MSVC runtime DLL: Signer/product/file rule for O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US/MICROSOFT® VISUAL STUDIO® 2012/MSVCR110.DLL" Description="Information acquired from TrustedSigners.ps1" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT® VISUAL STUDIO® 2012" BinaryName="MSVCR110.DLL">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="4704aebd-b5c5-402a-b45e-9c52b255d6a4" Name="MFC runtime DLL: Signer/product/file rule for O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US/MICROSOFT® VISUAL STUDIO® 2013/MFC120.DLL" Description="Information acquired from TrustedSigners.ps1" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT® VISUAL STUDIO® 2013" BinaryName="MFC120.DLL">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="88775ec9-13b0-4758-97a7-1e518a762a30" Name="MFC runtime DLL: Signer/product/file rule for O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US/MICROSOFT® VISUAL STUDIO® 2013/MFC120U.DLL" Description="Information acquired from TrustedSigners.ps1" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT® VISUAL STUDIO® 2013" BinaryName="MFC120U.DLL">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="2f9b6a67-1e95-4bdf-bfef-b9bbf2842e2f" Name="MSVC runtime DLL: Signer/product/file rule for O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US/MICROSOFT® VISUAL STUDIO® 2013/MSVCP120.DLL" Description="Information acquired from TrustedSigners.ps1" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT® VISUAL STUDIO® 2013" BinaryName="MSVCP120.DLL">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="7fce5ab9-e621-4602-ab1c-cc467b0e4d91" Name="MSVC runtime DLL: Signer/product/file rule for O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US/MICROSOFT® VISUAL STUDIO® 2013/MSVCR120.DLL" Description="Information acquired from TrustedSigners.ps1" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT® VISUAL STUDIO® 2013" BinaryName="MSVCR120.DLL">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="dc23066d-0083-4c40-8a36-6619ddda6590" Name="MSVC runtime DLL: Signer/product/file rule for O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US/MICROSOFT® VISUAL STUDIO® 2015/MSVCP140.DLL" Description="Information acquired from TrustedSigners.ps1" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT® VISUAL STUDIO® 2015" BinaryName="MSVCP140.DLL">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="9def5914-169c-4aa2-9249-740d156d60cc" Name="MSVC runtime DLL: Signer/product/file rule for O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US/MICROSOFT® VISUAL STUDIO® 2015/VCRUNTIME140.DLL" Description="Information acquired from TrustedSigners.ps1" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT® VISUAL STUDIO® 2015" BinaryName="VCRUNTIME140.DLL">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="b444f997-b9a6-400e-92af-380da09bcacd" Name="MFC runtime DLL: Signer/product/file rule for O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US/MICROSOFT® VISUAL STUDIO® 2015/MFC140U.DLL" Description="Information acquired from TrustedSigners.ps1" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT® VISUAL STUDIO® 2015" BinaryName="MFC140U.DLL">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="a5c92c1f-b187-4f11-b80c-2b6b7333246f" Name="MSVC runtime DLL: Signer/product/file rule for O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US/MICROSOFT® VISUAL STUDIO® 2017/MSVCP140.DLL" Description="Information acquired from TrustedSigners.ps1" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT® VISUAL STUDIO® 2017" BinaryName="MSVCP140.DLL">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="9abb563f-7ee2-46ae-8d41-040f147beb40" Name="MSVC runtime DLL: Signer/product/file rule for O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US/MICROSOFT® VISUAL STUDIO® 2017/VCRUNTIME140.DLL" Description="Information acquired from TrustedSigners.ps1" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT® VISUAL STUDIO® 2017" BinaryName="VCRUNTIME140.DLL">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="e4dd27f0-3dde-4065-9251-1c00f5ac802b" Name="MFC runtime DLL: Signer/product/file rule for O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US/MICROSOFT® VISUAL STUDIO® 2017/MFC140.DLL" Description="Information acquired from TrustedSigners.ps1" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT® VISUAL STUDIO® 2017" BinaryName="MFC140.DLL">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="f362467f-dcc7-4c6b-b34a-997b5a72ae50" Name="MFC runtime DLL: Signer/product/file rule for O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US/MICROSOFT® VISUAL STUDIO® 10/MFC100U.DLL" Description="Information acquired from TrustedSigners.ps1" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT® VISUAL STUDIO® 10" BinaryName="MFC100U.DLL">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="49d1bd5d-c2b1-4454-8c0e-773a86203f28" Name="MSVC runtime DLL: Signer/product/file rule for O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US/MICROSOFT® VISUAL STUDIO®/MSVCP140.DLL" Description="Information acquired from TrustedSigners.ps1" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT® VISUAL STUDIO®" BinaryName="MSVCP140.DLL">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="2bf68c37-8179-45f9-aa57-24172d381a79" Name="MSVC runtime DLL: Signer/product/file rule for O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US/MICROSOFT® VISUAL STUDIO®/VCRUNTIME140.DLL" Description="Information acquired from TrustedSigners.ps1" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT® VISUAL STUDIO®" BinaryName="VCRUNTIME140.DLL">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="d7c7a2b8-4086-465d-9a39-f1802c0099cc" Name="Google Chrome's Flash Player v26.0.0.137 and above" Description="Custom hand-edited because of a bug in AppLocker's PowerShell cmdlets. Signed by O=ADOBE SYSTEMS INCORPORATED, L=SAN JOSE, S=CALIFORNIA, C=US.
+Original path: C:\Users\USERNAME\AppData\Local\Google\Chrome\User Data\PepperFlash\26.0.0.137\pepflashplayer.dll." UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=ADOBE SYSTEMS INCORPORATED, L=SAN JOSE, S=CALIFORNIA, C=US" ProductName="" BinaryName="">
+                    
+                    <BinaryVersionRange LowSection="26.0.0.137" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="61b52edb-cfad-47ad-9e83-14c2a1c05667" Name="Google Chrome's Flash Player v32.0.0.171 and above" Description="Custom hand-edited because of a bug in AppLocker's PowerShell cmdlets. Signed by O=ADOBE INC., L=SAN JOSE, S=CA, C=US.
+Original path: C:\Users\USERNAME\AppData\Local\Google\Chrome\User Data\PepperFlash\32.0.0.171\pepflashplayer.dll." UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=ADOBE INC., L=SAN JOSE, S=CA, C=US" ProductName="" BinaryName="">
+                    
+                    <BinaryVersionRange LowSection="32.0.0.171" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="1b6125fd-2373-471e-9bcf-0530111bb2ef" Name="OneDrive (Win10 v1607 initial state): MICROSOFT ONEDRIVE" Description="Product: MICROSOFT ONEDRIVE
+Publisher: O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US
+File(s) found in : %OSDRIVE%\USERS\testuser\APPDATA\LOCAL\MICROSOFT\ONEDRIVE\17.3.6381.0405" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT ONEDRIVE" BinaryName="*">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="5c53b2b7-dcbe-48f8-b4fa-b3f4b4b014f8" Name="OneDrive (Win10 v1607 initial state): SQMAPI.DLL" Description="Product: MICROSOFT® WINDOWS® OPERATING SYSTEM
+Publisher: O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US
+Original path: %OSDRIVE%\USERS\testuser\APPDATA\LOCAL\MICROSOFT\ONEDRIVE\17.3.6381.0405\SQMAPI.DLL" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT® WINDOWS® OPERATING SYSTEM" BinaryName="SQMAPI.DLL">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="1899501c-2fac-43e3-83c4-46e81b8d9563" Name="OneDrive (Win10 v1607 initial state): ETWLOG.DLL" Description="Product: WINDOWS LIVE
+Publisher: O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US
+Original path: %OSDRIVE%\USERS\testuser\APPDATA\LOCAL\MICROSOFT\ONEDRIVE\17.3.6381.0405\ETWLOG.DLL" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="WINDOWS LIVE" BinaryName="ETWLOG.DLL">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FileHashRule Id="0eaf08a8-2acf-41f4-9f9e-36ea8b1e0310" Name="OneDrive (Win10 v1607 initial state): FileCoAuthLib.dll - HASH RULE" Description="Identified in: %OSDRIVE%\USERS\testuser\APPDATA\LOCAL\MICROSOFT\ONEDRIVE\17.3.6381.0405\FILECOAUTHLIB.DLL" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FileHashCondition>
+                    
+                    <FileHash Type="SHA256" Data="0xB9C37DE4028829EAEAB1C8DA9B6B3CD9502462D76C3D92E93341D9232C6AB880" SourceFileName="FileCoAuthLib.dll" SourceFileLength="26816"/>
+                    
+                </FileHashCondition>
+                
+            </Conditions>
+            
+        </FileHashRule>
+        
+        <FileHashRule Id="925fc4ee-da59-4bac-9ff1-b2c4ae55830a" Name="OneDrive (Win10 v1607 initial state): ClientTelemetry.dll - HASH RULE" Description="Identified in: %OSDRIVE%\USERS\testuser\APPDATA\LOCAL\MICROSOFT\ONEDRIVE\17.3.6381.0405\CLIENTTELEMETRY.DLL" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FileHashCondition>
+                    
+                    <FileHash Type="SHA256" Data="0x7702129FA5E7E5790FB11F4006F724844D8E3F6ACA6B4DFC2700F726561035D0" SourceFileName="ClientTelemetry.dll" SourceFileLength="679624"/>
+                    
+                </FileHashCondition>
+                
+            </Conditions>
+            
+        </FileHashRule>
+        
+        <FileHashRule Id="4b5a9475-90b3-43aa-b943-c64ec9e96d2b" Name="OneDrive (Win10 v1607 initial state): ClientTelemetry.dll - HASH RULE" Description="Identified in: %OSDRIVE%\USERS\testuser\APPDATA\LOCAL\MICROSOFT\ONEDRIVE\17.3.6381.0405\AMD64\CLIENTTELEMETRY.DLL" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FileHashCondition>
+                    
+                    <FileHash Type="SHA256" Data="0x193744053F117D24FAC50F05D21CC5AD5F57E29F1FAF1EC1850610B8ABCB834E" SourceFileName="ClientTelemetry.dll" SourceFileLength="959168"/>
+                    
+                </FileHashCondition>
+                
+            </Conditions>
+            
+        </FileHashRule>
+        
+        <FileHashRule Id="9d6522b1-0cd0-4d61-a59c-bcb21bf64ff7" Name="OneDrive (Win10 v1607 initial state): FileCoAuthLib64.dll - HASH RULE" Description="Identified in: %OSDRIVE%\USERS\testuser\APPDATA\LOCAL\MICROSOFT\ONEDRIVE\17.3.6381.0405\AMD64\FILECOAUTHLIB64.DLL" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FileHashCondition>
+                    
+                    <FileHash Type="SHA256" Data="0x77618980B668364F7C27A45E36A58D456E9F2D41852B2666F886DE9728BA32BD" SourceFileName="FileCoAuthLib64.dll" SourceFileLength="31936"/>
+                    
+                </FileHashCondition>
+                
+            </Conditions>
+            
+        </FileHashRule>
+        
+        <FilePublisherRule Id="5071b459-2051-41fd-bfcf-40b798b39d15" Name="OneDrive (Win10 v1803 initial state): MICROSOFT® ADAL" Description="Product: MICROSOFT® ADAL
+Publisher: O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US
+File(s) found in: %OSDRIVE%\USERS\testuser\APPDATA\LOCAL\MICROSOFT\ONEDRIVE\17.3.6816.0313" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT® ADAL" BinaryName="*">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="12e989f0-5c71-403b-af6f-34696433e79a" Name="OneDrive (Win10 v1803 initial state): MICROSOFT ONEDRIVE" Description="Product: MICROSOFT ONEDRIVE
+Publisher: O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US
+File(s) found in: %OSDRIVE%\USERS\testuser\APPDATA\LOCAL\MICROSOFT\ONEDRIVE\17.3.6816.0313" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT ONEDRIVE" BinaryName="*">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="60cb506e-df9b-48d3-8c4b-092b18397e67" Name="OneDrive (Win10 v1803 initial state): QT5" Description="Product: QT5
+Publisher: O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US
+File(s) found in: %OSDRIVE%\USERS\testuser\APPDATA\LOCAL\MICROSOFT\ONEDRIVE\17.3.6816.0313" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="QT5" BinaryName="*">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="dbd41e34-402b-4e2f-944c-545670035c59" Name="OneDrive (Win10 v1803 initial state): QT QUICK 2D RENDERER (QT 5.7.0)" Description="Product: QT QUICK 2D RENDERER (QT 5.7.0)
+Publisher: O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US
+File(s) found in: %OSDRIVE%\USERS\testuser\APPDATA\LOCAL\MICROSOFT\ONEDRIVE\17.3.6816.0313" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="QT QUICK 2D RENDERER (QT 5.7.0)" BinaryName="*">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="163349b2-d660-4a3b-b17a-4c113c765773" Name="OneDrive (Win10 v1803 initial state): SQMAPI.DLL" Description="Product: MICROSOFT® WINDOWS® OPERATING SYSTEM
+Publisher: O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US
+Original path: %OSDRIVE%\USERS\testuser\APPDATA\LOCAL\MICROSOFT\ONEDRIVE\17.3.6816.0313\SQMAPI.DLL" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT® WINDOWS® OPERATING SYSTEM" BinaryName="SQMAPI.DLL">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="694104ff-f175-40a7-a9c5-9cc503eae24c" Name="OneDrive (Win10 v1803 initial state): ETWLOG.DLL" Description="Product: WINDOWS LIVE
+Publisher: O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US
+Original path: %OSDRIVE%\USERS\testuser\APPDATA\LOCAL\MICROSOFT\ONEDRIVE\17.3.6816.0313\ETWLOG.DLL" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="WINDOWS LIVE" BinaryName="ETWLOG.DLL">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FileHashRule Id="33ec42cf-0875-42b7-b4a5-59629516606b" Name="OneDrive (Win10 v1803 initial state): libGLESv2.dll - HASH RULE" Description="Identified in: %OSDRIVE%\USERS\testuser\APPDATA\LOCAL\MICROSOFT\ONEDRIVE\17.3.6816.0313\LIBGLESV2.DLL" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FileHashCondition>
+                    
+                    <FileHash Type="SHA256" Data="0x1AA358B0772081FACDCF7D4E6F8432E085A3A62D8813E0EBF5185296F1FFF4E7" SourceFileName="libGLESv2.dll" SourceFileLength="2005632"/>
+                    
+                </FileHashCondition>
+                
+            </Conditions>
+            
+        </FileHashRule>
+        
+        <FileHashRule Id="d76fc55c-386a-46ef-8183-a7c2233fe115" Name="OneDrive (Win10 v1803 initial state): libEGL.dll - HASH RULE" Description="Identified in: %OSDRIVE%\USERS\testuser\APPDATA\LOCAL\MICROSOFT\ONEDRIVE\17.3.6816.0313\LIBEGL.DLL" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FileHashCondition>
+                    
+                    <FileHash Type="SHA256" Data="0xB12D338844E4DCDFAD8CDFC9B250361C0AED871225AA053C2DA87178D82DAD7A" SourceFileName="libEGL.dll" SourceFileLength="26752"/>
+                    
+                </FileHashCondition>
+                
+            </Conditions>
+            
+        </FileHashRule>
+        
+        <FilePublisherRule Id="f294511b-c197-481a-ad0e-f4cb7b4f9fcc" Name="OneDrive (Win10 v1809 initial state): MICROSOFT ONEDRIVE" Description="Product: MICROSOFT ONEDRIVE
+Publisher: O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US
+File(s) found in: %OSDRIVE%\USERS\ABBY\APPDATA\LOCAL\MICROSOFT\ONEDRIVE\18.143.0717.0002" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT ONEDRIVE" BinaryName="*">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="558016fe-88c2-4e6e-ac81-4996ecd82b75" Name="OneDrive (Win10 v1809 initial state): LIBEGL" Description="Product: LIBEGL
+Publisher: O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US
+File(s) found in: %OSDRIVE%\USERS\ABBY\APPDATA\LOCAL\MICROSOFT\ONEDRIVE\18.143.0717.0002" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="LIBEGL" BinaryName="*">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="fc1d10ac-4f36-4221-9a01-8397ddd81d7b" Name="OneDrive (Win10 v1809 initial state): LIBGLESV2" Description="Product: LIBGLESV2
+Publisher: O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US
+File(s) found in: %OSDRIVE%\USERS\ABBY\APPDATA\LOCAL\MICROSOFT\ONEDRIVE\18.143.0717.0002" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="LIBGLESV2" BinaryName="*">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="f16b3006-2816-4524-aa4a-ee31ae61272d" Name="OneDrive (Win10 v1809 initial state): MICROSOFT AD RMS" Description="Product: MICROSOFT AD RMS
+Publisher: O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US
+File(s) found in: %OSDRIVE%\USERS\ABBY\APPDATA\LOCAL\MICROSOFT\ONEDRIVE\18.143.0717.0002" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT AD RMS" BinaryName="*">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="53a25cb3-dbff-496c-a87d-4e8fa3cc2da3" Name="OneDrive (Win10 v1809 initial state): MICROSOFT© ADAL" Description="Product: MICROSOFT© ADAL
+Publisher: O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US
+File(s) found in: %OSDRIVE%\USERS\ABBY\APPDATA\LOCAL\MICROSOFT\ONEDRIVE\18.143.0717.0002" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT© ADAL" BinaryName="*">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="44d69c96-a3bb-44ea-8db4-99df69883ddf" Name="OneDrive (Win10 v1809 initial state): MICROSOFT.OFFICE.IRM.MSOPROTECTOR" Description="Product: MICROSOFT.OFFICE.IRM.MSOPROTECTOR
+Publisher: O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US
+File(s) found in: %OSDRIVE%\USERS\ABBY\APPDATA\LOCAL\MICROSOFT\ONEDRIVE\18.143.0717.0002" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT.OFFICE.IRM.MSOPROTECTOR" BinaryName="*">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="b7d0363b-e9cd-42e0-b24f-b83beaf38b4d" Name="OneDrive (Win10 v1809 initial state): MICROSOFT.OFFICE.IRM.OFCPROTECTOR" Description="Product: MICROSOFT.OFFICE.IRM.OFCPROTECTOR
+Publisher: O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US
+File(s) found in: %OSDRIVE%\USERS\ABBY\APPDATA\LOCAL\MICROSOFT\ONEDRIVE\18.143.0717.0002" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT.OFFICE.IRM.OFCPROTECTOR" BinaryName="*">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="de951a56-3748-448e-abcf-0638e7588994" Name="OneDrive (Win10 v1809 initial state): MICROSOFT.OFFICE.IRM.PDFPROTECTOR" Description="Product: MICROSOFT.OFFICE.IRM.PDFPROTECTOR
+Publisher: O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US
+File(s) found in: %OSDRIVE%\USERS\ABBY\APPDATA\LOCAL\MICROSOFT\ONEDRIVE\18.143.0717.0002" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT.OFFICE.IRM.PDFPROTECTOR" BinaryName="*">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="a6fa74fa-ecb6-4b5e-bec0-87b2a1b5d93d" Name="OneDrive (Win10 v1809 initial state): THE OPENSSL TOOLKIT" Description="Product: THE OPENSSL TOOLKIT
+Publisher: O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US
+File(s) found in: %OSDRIVE%\USERS\ABBY\APPDATA\LOCAL\MICROSOFT\ONEDRIVE\18.143.0717.0002" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="THE OPENSSL TOOLKIT" BinaryName="*">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="de6f943f-a4df-4c43-bc1a-93930f97e79c" Name="OneDrive (Win10 v1809 initial state): QT5" Description="Product: QT5
+Publisher: O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US
+File(s) found in: %OSDRIVE%\USERS\ABBY\APPDATA\LOCAL\MICROSOFT\ONEDRIVE\18.143.0717.0002" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="QT5" BinaryName="*">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="1316b862-9b71-413b-b67c-624587d3dd9d" Name="OneDrive (Win10 v1809 initial state): APISETSTUB" Description="Product: MICROSOFT® WINDOWS® OPERATING SYSTEM
+Publisher: O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US
+Original path: %OSDRIVE%\USERS\ABBY\APPDATA\LOCAL\MICROSOFT\ONEDRIVE\18.143.0717.0002\API-MS-WIN-CORE-CONSOLE-L1-1-0.DLL" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT® WINDOWS® OPERATING SYSTEM" BinaryName="APISETSTUB">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePublisherRule Id="295101fd-6030-4ac2-b938-235855af29c1" Name="OneDrive (Win10 v1809 initial state): UCRTBASE.DLL" Description="Product: MICROSOFT® WINDOWS® OPERATING SYSTEM
+Publisher: O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US
+Original path: %OSDRIVE%\USERS\ABBY\APPDATA\LOCAL\MICROSOFT\ONEDRIVE\18.143.0717.0002\UCRTBASE.DLL" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="MICROSOFT® WINDOWS® OPERATING SYSTEM" BinaryName="UCRTBASE.DLL">
+                    
+                    <BinaryVersionRange LowSection="*" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+        <FilePathRule Id="0d28a196-2d53-4905-a0e7-fb0870fa0d09" Name="Visual Studio Code - All DLLs and Dependencies" Description="Allow all DLL files and native modules in VS Code installation directory for all users" UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePathCondition Path="%OSDRIVE%\Users\*\AppData\Local\Programs\Microsoft VS Code\*"/>
+                
+            </Conditions>
+            
+        </FilePathRule>
+        
+    </RuleCollection>
+    
+    <RuleCollection Type="Appx" EnforcementMode="Enabled">
+        
+        <FilePublisherRule Id="a9e18c21-ff8f-43cf-b9fc-db40eed693ba" Name="(Default Rule) All signed packaged apps" Description="Allows members of the Everyone group to run packaged apps that are signed." UserOrGroupSid="S-1-1-0" Action="Allow">
+            
+            <Conditions>
+                
+                <FilePublisherCondition PublisherName="*" ProductName="*" BinaryName="*">
+                    
+                    <BinaryVersionRange LowSection="0.0.0.0" HighSection="*"/>
+                    
+                </FilePublisherCondition>
+                
+            </Conditions>
+            
+        </FilePublisherRule>
+        
+    </RuleCollection>
+    
+</AppLockerPolicy>
