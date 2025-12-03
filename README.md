@@ -1,4 +1,4 @@
-# AppLocker Policy Enhancement - LOLBins Block Summary
+# AppLocker Policy Enablement - w/ LOLBin Blocks
 
 ## What is AppLocker?
 
