@@ -232,7 +232,7 @@ Set-AppLockerPolicy -XmlPolicy "C:\Policies\AppLockerPolicy-Enhanced-LOLBins-Blo
 
 <img width="1430" height="544" alt="image" src="https://github.com/user-attachments/assets/47bf338b-dd21-4321-bf98-8454054923b4" />
 
-## Download the AppLocker Policies and apply them using the proper naming convention. 
+## Download the [AppLocker Policies](https://github.com/dcodev1702/AppLocker_Win11-Ent_PoC/tree/main/AppLocker_Policies) and apply them using the proper naming convention. 
   * Edit the GPO, navigate to "AppLocker", right click and 'Import Policy' 
 
 <img width="1276" height="944" alt="image" src="https://github.com/user-attachments/assets/e1a3ed09-8106-464e-9864-70b51269982d" />
