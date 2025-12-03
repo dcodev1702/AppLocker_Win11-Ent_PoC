@@ -13,7 +13,8 @@ Traditional security controls like antivirus and EDR are **reactive** - they det
 | Security Layer | Function | Limitation |
 |----------------|----------|------------|
 | **Antivirus/EDR** | Detects known malware and suspicious behavior | Can miss zero-days, fileless attacks, LOLBins |
-| **AppLocker** | Prevents unauthorized executables from running | Requires careful policy management |
+| **AppLocker** | Prevents unauthorized executables from running | Requires careful & continuous policy management |
+| **ASR** | Attack Surface Reduction | Requires MDAV and careful management |
 | **Combined** | Defense-in-depth - multiple layers of protection | Most effective approach |
 
 **Key Defense-in-Depth Benefits:**
