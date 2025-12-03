@@ -249,14 +249,14 @@ gpresult /r /source computer
 
 <img width="743" height="1127" alt="image" src="https://github.com/user-attachments/assets/42035a7a-e660-4dc5-bdd4-50983275b562" />
 
-### [CLIENT VM] - Lastly, run various tests and examine the behavior of AppLocker.
+### [CLIENT VM] - Lastly, run various tests and examine the behavior of the applied AppLocker policy.
 ```powershell
 .\LOLBin_AppLocker_Tests.ps1
 ```
 
 <img width="452" height="985" alt="image" src="https://github.com/user-attachments/assets/15fd585e-3fd9-454c-9d1b-abaeb8e4587a" />
 
-### [CLIENT VM] - Observe the results and tune using AaronLocker and Claude as necessary.
+### [CLIENT VM] - Observe the results and tune AppLocker policy rules using AaronLocker and Claude as necessary.
 
 <img width="646" height="860" alt="image" src="https://github.com/user-attachments/assets/73c3f03b-f598-48ce-9452-a28771b87278" />
 
