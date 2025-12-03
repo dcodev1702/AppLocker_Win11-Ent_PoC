@@ -1,290 +1,233 @@
-# AppLocker LOLBin Manual Test Commands
+# AppLocker Policy Enhancement - LOLBins Block Summary
 
-## Quick Validation Tests
+## What is AppLocker?
 
-Run these commands from a **non-administrator** command prompt or PowerShell session.
-If AppLocker is working correctly, each command should **fail with an access denied error**.
+**AppLocker** is a Windows application control feature that allows administrators to specify which users or groups can run particular applications based on unique identities of files. It provides granular control over executables, scripts, Windows Installer files, packaged apps, and DLLs.
 
-> ⚠️ **Important:** Run as a standard user, not as Administrator. 
-> Administrators typically have blanket allow rules in AppLocker policies.
+**Microsoft Documentation:** [AppLocker Overview](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/app-control-for-business/applocker/applocker-overview)
+
+### Why Use AppLocker for Defense-in-Depth?
+
+Traditional security controls like antivirus and EDR are **reactive** - they detect known malware signatures or suspicious behaviors after execution begins. AppLocker provides a **proactive** layer by preventing unauthorized code from executing in the first place.
+
+| Security Layer | Function | Limitation |
+|----------------|----------|------------|
+| **Antivirus/EDR** | Detects known malware and suspicious behavior | Can miss zero-days, fileless attacks, LOLBins |
+| **AppLocker** | Prevents unauthorized executables from running | Requires careful policy management |
+| **Combined** | Defense-in-depth - multiple layers of protection | Most effective approach |
+
+**Key Defense-in-Depth Benefits:**
+
+1. **Blocks Unknown Malware:** Even if malware evades AV detection, it cannot execute if not whitelisted
+2. **Prevents LOLBin Abuse:** Blocks legitimate Windows tools that attackers repurpose for malicious actions
+3. **Stops User-Initiated Threats:** Prevents users from running malicious downloads, even accidentally
+4. **Reduces Attack Surface:** Limits what can execute to only approved applications
+5. **Complements Other Controls:** Works alongside (not instead of) AV, EDR, and other security tools
+
+### The AppLocker Management Challenge
+
+While AppLocker is powerful, Microsoft provides **no built-in GUI or tooling** for creating and managing comprehensive policies. Administrators must either:
+
+- Manually craft XML policy files (error-prone and time-consuming)
+- Use basic GPO wizards that create overly simplistic rules
+- Build custom PowerShell automation from scratch
+
+This gap between AppLocker's capabilities and its management tooling has historically led to failed deployments, overly permissive policies, or abandoned implementations.
+
+**This is where AaronLocker comes in.**
 
 ---
 
-## Test 1: cipher.exe
+## About AaronLocker - The Foundation
 
-**Threat Actor Use Case:** 
-- Secure deletion of files to cover tracks
-- Overwriting free space after ransomware encryption
-- Data exfiltration preparation
+**AaronLocker** fills the management gap by providing a complete, production-ready toolkit for creating robust AppLocker policies. Developed by Aaron Margosis at Microsoft, it transforms AppLocker from a powerful-but-impractical feature into a deployable security control.
 
-**Test Command (CMD):**
-```cmd
-cipher /?
-```
+**Source:** [GitHub - microsoft/AaronLocker](https://github.com/microsoft/AaronLocker)
 
-**Test Command (PowerShell):**
+### What is AaronLocker?
+
+AaronLocker is a set of PowerShell scripts and documentation designed to make Windows application whitelisting with AppLocker dramatically easier and more practical. It addresses the real-world challenges that have historically made AppLocker deployments difficult to implement and maintain.
+
+### Why Use AaronLocker?
+
+Without AaronLocker (or similar tooling), organizations face significant barriers:
+
+| Challenge | How AaronLocker Solves It |
+|-----------|---------------------------|
+| **No management GUI** | Provides ready-to-use scripts that generate comprehensive policies automatically |
+| **Maintenance burden** | Creates rules based on publisher signatures rather than file paths, reducing update churn |
+| **User writeable paths** | Automatically identifies and blocks execution from user-writable locations |
+| **LOLBin gaps** | Generates deny rules for known bypass techniques (enhanced further by this policy) |
+| **Testing difficulty** | Includes audit mode support and validation tools |
+| **Policy complexity** | Outputs clean, well-structured XML that can be reviewed and version-controlled |
+
+### Key Benefits
+
+1. **Publisher-Based Rules:** Uses digital signatures rather than paths, so applications continue to work after updates without policy changes.
+
+2. **Denies User-Writable Paths:** Automatically blocks execution from locations where standard users can write files (AppData, Downloads, etc.) - the primary attack vector for malware.
+
+3. **Practical Defaults:** Designed for real enterprise environments where users need to run legitimate software while blocking malware.
+
+4. **Scriptable & Repeatable:** Entire policy generation is automated via PowerShell, making it auditable and version-controllable.
+
+### How This Policy Extends AaronLocker
+
+The base AaronLocker policy provides excellent protection, but this enhancement adds:
+
+- **42 additional EXE deny rules** for Microsoft-documented LOLBins
+- **5 additional DLL deny rules** for critical bypass libraries
+- **Explicit blocks** for tools like MSBuild.exe, mshta.exe, and cscript.exe that sophisticated attackers abuse
+
+This layered approach combines AaronLocker's practical whitelisting with Microsoft's recommended block list for defense-in-depth.
+
+---
+
+## LOLBin Enhancement Overview
+
+This document details the Microsoft Recommended Block Rules that have been added to the base AaronLocker policy. These rules target "Living Off the Land Binaries" (LOLBins) - legitimate Microsoft-signed tools that attackers abuse to bypass security controls.
+
+**Source:** [Microsoft Learn - Applications that can bypass App Control](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/app-control-for-business/design/applications-that-can-bypass-appcontrol)
+
+---
+
+## Implementation Details
+
+- **Rule Type:** FilePublisherRule with Action="Deny"
+- **Target SID:** S-1-1-0 (Everyone)
+- **Publisher:** O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US
+- **Placement:** Deny rules placed at the beginning of each RuleCollection (takes precedence over Allow rules)
+
+---
+
+## Blocked Executables (42 Rules)
+
+| Binary Name | Category | Description |
+|------------|----------|-------------|
+| AddInProcess.exe | .NET Framework | MAF host process - can execute arbitrary code |
+| AddInProcess32.exe | .NET Framework | MAF host process (32-bit) - can execute arbitrary code |
+| AddInUtil.exe | .NET Framework | Add-in utility - can load arbitrary assemblies |
+| aspnet_compiler.exe | ASP.NET | ASP.NET compilation tool - can compile and execute code |
+| bash.exe | WSL | Windows Subsystem for Linux - bypasses Windows controls |
+| cdb.exe | Debugging | Console debugger - can inject code into processes |
+| cscript.exe | Scripting | Windows Script Host - executes VBScript/JScript |
+| csi.exe | Roslyn | C# Interactive - can execute arbitrary C# code |
+| dbghost.exe | Debugging | Debug host process - can execute arbitrary code |
+| dbgsvc.exe | Debugging | Debug service - can execute arbitrary code |
+| dbgsrv.exe | Debugging | Debug server - can execute arbitrary code |
+| dnx.exe | .NET | .NET Execution Environment - can run arbitrary .NET code |
+| dotnet.exe | .NET | .NET CLI host - can execute arbitrary .NET code |
+| fsi.exe | F# | F# Interactive - can execute arbitrary F# code |
+| fsiAnyCpu.exe | F# | F# Interactive (AnyCPU) - can execute arbitrary F# code |
+| infdefaultinstall.exe | Windows | INF file installer - can execute setup commands |
+| InstallUtil.exe | .NET Framework | .NET Installer utility - can execute arbitrary code |
+| kd.exe | Debugging | Kernel debugger - can execute arbitrary code |
+| kill.exe | Debugging | Process termination tool - from debugging tools |
+| lxrun.exe | WSL | WSL legacy management tool - bypasses Windows controls |
+| Microsoft.Workflow.Compiler.exe | .NET Framework | Workflow compiler - can compile and execute arbitrary XOML |
+| MSBuild.exe | .NET Framework | Microsoft Build Engine - can execute arbitrary code via tasks |
+| mshta.exe | Internet Explorer | HTML Application Host - can execute arbitrary scripts |
+| ntkd.exe | Debugging | NT Kernel debugger - can execute arbitrary code |
+| ntsd.exe | Debugging | NT Symbolic debugger - can execute arbitrary code |
+| powershellcustomhost.exe | PowerShell | PowerShell custom host - can bypass PS restrictions |
+| rcsi.exe | Roslyn | Roslyn C# Interactive - can execute arbitrary C# code |
+| runscripthelper.exe | Windows | Run Script Helper - can execute arbitrary scripts |
+| texttransform.exe | Visual Studio | T4 Text Template transformation - can execute arbitrary code |
+| visualuiaverifynative.exe | Windows | UI Automation Verify - can load arbitrary assemblies |
+| wfc.exe | .NET Framework | Workflow Command-line Compiler - can compile arbitrary code |
+| windbg.exe | Debugging | Windows Debugger - can inject code into processes |
+| wmic.exe | Windows | WMI Command-line - can execute arbitrary WMI commands |
+| wscript.exe | Scripting | Windows Script Host - executes VBScript/JScript |
+| wsl.exe | WSL | Windows Subsystem for Linux - bypasses Windows controls |
+| wslconfig.exe | WSL | WSL configuration tool - WSL management |
+| wslhost.exe | WSL | WSL host process - WSL execution environment |
+| RegAsm.exe | .NET Framework | Assembly Registration Utility - can load assemblies |
+| RegSvcs.exe | .NET Framework | Component Services Utility - can register components |
+| PresentationHost.exe | WPF | WPF host process - can execute XAML applications |
+| runas.exe | Windows | Run As command - can elevate privileges |
+| cipher.exe | Windows | Encrypting File System tool - can be used for data exfiltration |
+
+---
+
+## Blocked DLLs (5 Rules)
+
+| Binary Name | Category | Description |
+|------------|----------|-------------|
+| lxssmanager.dll | WSL | WSL Manager DLL - core WSL functionality |
+| Microsoft.Build.dll | .NET Framework | MSBuild core library - build engine component |
+| MSBuild.dll | .NET Framework | MSBuild library - build engine component |
+| System.Management.Automation.dll | PowerShell | PowerShell core DLL - all PS versions |
+| davsvc.dll | WebDAV | WebDAV client (WebClnt) - can be used for remote code execution |
+
+---
+
+## Existing Rules Preserved
+
+Your original policy already contained some protective measures that have been preserved:
+
+1. **BgInfo Deny Rule:** Blocks Sysinternals Bginfo.exe versions ≤4.25 (vulnerable versions)
+2. **PowerShell v2 Deny Rules:** Blocks older PowerShell versions via DLL and path rules
+3. **Path Exceptions:** Multiple LOLBins were already blocked as exceptions in the Windows folder allow rule
+
+---
+
+## Rule Processing Order
+
+AppLocker processes rules in this order:
+
+1. **Deny rules** are evaluated first (highest priority)
+2. **Allow rules** are evaluated second
+3. If no explicit rule matches, the file is denied by default
+
+By placing all LOLBin Deny rules at the beginning of each RuleCollection, we ensure they take precedence over any Allow rules that might match the same files.
+
+---
+
+## Deployment Notes
+
+### Testing Recommendations
+
+1. **Audit Mode First:** Consider testing in Audit mode before enforcement
+   - Change `EnforcementMode="Enabled"` to `EnforcementMode="AuditOnly"`
+   - Monitor Event Log: `Applications and Services Logs\Microsoft\Windows\AppLocker`
+
+2. **Critical Applications:** Verify no critical applications depend on blocked binaries:
+   - Development environments may need dotnet.exe, MSBuild.exe
+   - WSL environments will be completely blocked
+   - Debugging tools will be blocked
+
+### Potential Business Impact
+
+Some binaries may be needed for legitimate purposes:
+
+| Binary | Potential Legitimate Use | Mitigation |
+|--------|--------------------------|------------|
+| dotnet.exe | .NET development | Create exception for developer workstations |
+| MSBuild.exe | Build processes | Use dedicated build servers with different policy |
+| wsl.exe | Linux development | Evaluate if WSL is needed in your environment |
+| windbg.exe | Debugging | Allow for IT/Security teams only |
+
+### Group Policy Deployment
+
 ```powershell
-& cipher.exe /?
-```
+# Import the policy via PowerShell
+Set-AppLockerPolicy -XmlPolicy "\\domain\sysvol\policies\AppLockerPolicy-Enhanced-LOLBins-Blocked.xml" -Ldap "LDAP://CN={GPO-GUID},CN=Policies,CN=System,DC=domain,DC=com"
 
-**Expected Result if BLOCKED:**
-```
-This program is blocked by group policy. For more information, contact your system administrator.
-```
-
-**If NOT blocked:** You'll see the cipher help text explaining encryption options.
-
----
-
-## Test 2: mshta.exe
-
-**Threat Actor Use Case:**
-- Execute malicious HTA files from phishing emails
-- Inline VBScript/JScript execution
-- Download and execute payloads (very common in initial access)
-- Bypass application whitelisting
-
-**Test Command (CMD):**
-```cmd
-mshta javascript:close();
-```
-
-**Test Command (PowerShell):**
-```powershell
-Start-Process mshta.exe -ArgumentList 'javascript:close();' -ErrorAction Stop
-```
-
-**Expected Result if BLOCKED:**
-```
-This program is blocked by group policy. For more information, contact your system administrator.
-```
-
-**If NOT blocked:** A brief flash of a window that immediately closes (the javascript:close() command).
-
----
-
-## Test 3: msbuild.exe
-
-**Threat Actor Use Case:**
-- Execute arbitrary C# or VB.NET code via inline tasks
-- Compile and run malicious payloads without dropping executables
-- Bypass application control (code runs within trusted msbuild.exe)
-- Used by APT groups and red teams extensively
-
-**Find all MSBuild instances (PowerShell):**
-```powershell
-# Discover all MSBuild.exe installations
-Get-ChildItem -Path "$env:SystemRoot\Microsoft.NET\Framework*" -Filter "MSBuild.exe" -Recurse -ErrorAction SilentlyContinue | 
-ForEach-Object {
-    $ver = [System.Diagnostics.FileVersionInfo]::GetVersionInfo($_.FullName)
-    [PSCustomObject]@{
-        Path = $_.FullName
-        Version = $ver.FileVersion
-        Arch = if ($_.FullName -match 'Framework64') {'x64'} else {'x86'}
-    }
-} | Format-Table -AutoSize
-```
-
-**Test each discovered instance:**
-```powershell
-# Test all discovered MSBuild instances
-Get-ChildItem -Path "$env:SystemRoot\Microsoft.NET\Framework*" -Filter "MSBuild.exe" -Recurse -EA SilentlyContinue | 
-ForEach-Object {
-    Write-Host "Testing: $($_.FullName)" -ForegroundColor Cyan
-    & $_.FullName /version 2>&1
-    Write-Host ""
-}
-```
-
-**Test a specific instance (CMD):**
-```cmd
-C:\Windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe /version
-```
-
-**Expected Result if BLOCKED:**
-```
-This program is blocked by group policy. For more information, contact your system administrator.
-```
-
-**If NOT blocked:** You'll see version info like:
-```
-Microsoft (R) Build Engine version 4.8.9037.0
+# Or import to local policy for testing
+Set-AppLockerPolicy -XmlPolicy "C:\Policies\AppLockerPolicy-Enhanced-LOLBins-Blocked.xml"
 ```
 
 ---
 
-## Test 4: cscript.exe
+## References
 
-**Threat Actor Use Case:**
-- Execute malicious VBScript files
-- COM object abuse for system access
-- Download cradles for malware
-- WMI-based attacks
-- Very common in macro-based malware
-
-**Test Command (CMD):**
-```cmd
-cscript //?
-```
-
-**Test Command (PowerShell):**
-```powershell
-& cscript.exe //?
-```
-
-**Expected Result if BLOCKED:**
-```
-This program is blocked by group policy. For more information, contact your system administrator.
-```
-
-**If NOT blocked:** You'll see the Windows Script Host help text.
+- [AaronLocker - Microsoft GitHub](https://github.com/microsoft/AaronLocker) - Robust and practical application control for Windows
+- [Microsoft - Applications that can bypass App Control](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/app-control-for-business/design/applications-that-can-bypass-appcontrol)
+- [LOLBAS Project](https://lolbas-project.github.io/) - Living Off The Land Binaries, Scripts and Libraries
+- [Ultimate WDAC Bypass List](https://github.com/bohops/UltimateWDACBypassList)
 
 ---
 
-## Checking AppLocker Event Logs
-
-After running tests, check if blocks were logged:
-
-**PowerShell (run as Admin):**
-```powershell
-# Get recent AppLocker events (IDs 8003, 8004, 8006, 8007)
-Get-WinEvent -FilterHashtable @{
-    LogName = 'Microsoft-Windows-AppLocker/EXE and DLL'
-    ID = 8003, 8004, 8006, 8007
-} -MaxEvents 20 | 
-Format-Table TimeCreated, Id, @{L='Status';E={
-    switch ($_.Id) {
-        8003 { 'ALLOWED/AUDIT' }
-        8004 { 'BLOCKED' }
-        8006 { 'Policy Applied' }
-        8007 { 'Policy NOT Applied' }
-    }
-}}, Message -Wrap
-```
-
-**Event Viewer Path:**
-```
-Applications and Services Logs > Microsoft > Windows > AppLocker > EXE and DLL
-```
-
-**Event IDs:**
-| ID | Meaning | Color in Script |
-|----|---------|-----------------|
-| 8003 | Allowed / Audit logged (shows what WOULD be blocked) | Yellow |
-| 8004 | Blocked by policy (Enforce mode - working!) | Green |
-| 8006 | Policy applied successfully | Cyan |
-| 8007 | Policy not applied (check AppIDSvc) | Red | |
-
----
-
-## Quick All-in-One Test Block
-
-Copy and paste this entire block into PowerShell to test all four at once:
-
-```powershell
-Write-Host "`n=== AppLocker LOLBin Quick Test ===" -ForegroundColor Cyan
-Write-Host "Running as: $env:USERNAME`n" -ForegroundColor Yellow
-
-# Test cipher, mshta, cscript
-$tests = @(
-    @{Name="cipher.exe"; Cmd={& cipher.exe /? 2>&1}},
-    @{Name="mshta.exe"; Cmd={& mshta.exe "javascript:close();" 2>&1}},
-    @{Name="cscript.exe"; Cmd={& cscript.exe //? 2>&1}}
-)
-
-foreach ($test in $tests) {
-    Write-Host "Testing $($test.Name)... " -NoNewline
-    try {
-        $result = & $test.Cmd
-        if ($result -match "blocked by group policy|Access is denied") {
-            Write-Host "BLOCKED ✓" -ForegroundColor Green
-        } else {
-            Write-Host "NOT BLOCKED ✗" -ForegroundColor Red
-        }
-    } catch {
-        Write-Host "BLOCKED ✓" -ForegroundColor Green
-    }
-}
-
-# Dynamically discover and test all MSBuild instances
-Write-Host "`nDiscovering MSBuild.exe instances..." -ForegroundColor Gray
-$msbuildList = Get-ChildItem "$env:SystemRoot\Microsoft.NET\Framework*" -Filter "MSBuild.exe" -Recurse -EA SilentlyContinue
-foreach ($msbuild in $msbuildList) {
-    $arch = if ($msbuild.FullName -match 'Framework64') {'x64'} else {'x86'}
-    $ver = ([System.Diagnostics.FileVersionInfo]::GetVersionInfo($msbuild.FullName)).FileVersion
-    Write-Host "Testing msbuild.exe [$arch v$ver]... " -NoNewline
-    try {
-        $result = & $msbuild.FullName /version 2>&1
-        if ($result -match "blocked by group policy|Access is denied") {
-            Write-Host "BLOCKED ✓" -ForegroundColor Green
-        } else {
-            Write-Host "NOT BLOCKED ✗" -ForegroundColor Red
-        }
-    } catch {
-        Write-Host "BLOCKED ✓" -ForegroundColor Green
-    }
-}
-
-# Show recent AppLocker events
-Write-Host "`n=== Recent AppLocker Events ===" -ForegroundColor Cyan
-Get-WinEvent -FilterHashtable @{
-    LogName='Microsoft-Windows-AppLocker/EXE and DLL'
-    ID=8003,8004,8006,8007
-} -MaxEvents 10 -EA SilentlyContinue | 
-Where-Object {$_.TimeCreated -gt (Get-Date).AddSeconds(-30)} |
-ForEach-Object {
-    $color = switch($_.Id){8003{'Yellow'};8004{'Green'};8006{'Cyan'};8007{'Red'};default{'Gray'}}
-    Write-Host "  [$($_.Id)] " -NoNewline -ForegroundColor $color
-    Write-Host ($_.Message -split "`n")[0].Substring(0,[Math]::Min(80,($_.Message -split "`n")[0].Length)) -ForegroundColor Gray
-}
-Write-Host ""
-```
-
----
-
-## Troubleshooting
-
-If tests show "NOT BLOCKED":
-
-1. **Verify policy is applied:**
-   ```powershell
-   Get-AppLockerPolicy -Effective -Xml | Out-File C:\temp\effective-policy.xml
-   # Then check the XML for your deny rules
-   ```
-
-2. **Force Group Policy update:**
-   ```cmd
-   gpupdate /force
-   ```
-
-3. **Check Application Identity service:**
-   ```powershell
-   Get-Service AppIDSvc | Select Status, StartType
-   # Should be: Running, Automatic
-   ```
-
-4. **Verify you're not an admin:**
-   ```powershell
-   ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
-   # Should return: False
-   ```
-
-5. **Check enforcement mode:**
-   ```powershell
-   Get-AppLockerPolicy -Effective | Select -ExpandProperty RuleCollections | 
-   Select RuleCollectionType, EnforcementMode
-   # Should show: Enabled (not AuditOnly)
-   ```
-
----
-
-## Why These 4 LOLBins?
-
-| LOLBin | MITRE ATT&CK | Prevalence | Notes |
-|--------|--------------|------------|-------|
-| **cipher.exe** | T1485, T1070 | Medium | Ransomware cleanup, anti-forensics |
-| **mshta.exe** | T1218.005 | Very High | #1 phishing payload delivery method |
-| **msbuild.exe** | T1127.001 | High | APT favorite, executes C# inline |
-| **cscript.exe** | T1059.005 | Very High | Classic malware delivery via VBS |
-
-All four are in Microsoft's recommended block list and are commonly observed in real-world attacks.
+*Generated: December 3, 2025*
+*Base Policy: AaronLocker*
+*Enhancement: Microsoft Recommended Block Rules*
