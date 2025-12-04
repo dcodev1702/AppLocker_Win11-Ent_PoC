@@ -251,7 +251,7 @@ gpresult /r /source computer
 
 <img width="743" height="1127" alt="image" src="https://github.com/user-attachments/assets/42035a7a-e660-4dc5-bdd4-50983275b562" />
 
-### [CLIENT VM] - Lastly, run various tests and examine the behavior of the applied AppLocker policy.
+### [CLIENT VM] - Lastly, run the PS script and examine the behavior of the applied AppLocker policy.
 ```powershell
 .\AppLocker-LOLBin-PolicyCheck.ps1
 ```
