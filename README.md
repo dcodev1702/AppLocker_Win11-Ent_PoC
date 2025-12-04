@@ -84,7 +84,7 @@ The base AaronLocker policy provides excellent protection, but this enhancement 
 
 - **42 additional EXE deny rules** for Microsoft-documented LOLBins
 - **5 additional DLL deny rules** for critical bypass libraries
-- **Explicit blocks** for tools like MSBuild.exe, mshta.exe, and cscript.exe that sophisticated attackers abuse
+- **Explicit blocks** for tools like MSBuild.exe, mshta.exe, and cscript.exe that sophisticated cyber threat actors commonly abuse
 
 This layered approach combines AaronLocker's practical whitelisting with Microsoft's recommended block list for defense-in-depth.
 
