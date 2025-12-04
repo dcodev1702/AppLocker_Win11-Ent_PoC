@@ -253,7 +253,7 @@ gpresult /r /source computer
 
 ### [CLIENT VM] - Lastly, run various tests and examine the behavior of the applied AppLocker policy.
 ```powershell
-.\LOLBin_AppLocker_Tests.ps1
+.\AppLocker-LOLBin-PolicyCheck.ps1
 ```
 
 <img width="452" height="985" alt="image" src="https://github.com/user-attachments/assets/15fd585e-3fd9-454c-9d1b-abaeb8e4587a" />
