@@ -317,13 +317,13 @@ gpresult /r /source computer
 
 <img width="452" height="985" alt="image" src="https://github.com/user-attachments/assets/15fd585e-3fd9-454c-9d1b-abaeb8e4587a" />
 
-### [CLIENT VM] - Observe the results and tune AppLocker policy rules using AaronLocker and Claude as necessary.
+### [CLIENT 🖥️] - Observe the results and tune AppLocker policy rules using AaronLocker and Claude as necessary.
 
 <img width="646" height="860" alt="image" src="https://github.com/user-attachments/assets/73c3f03b-f598-48ce-9452-a28771b87278" />
 
 ---
 
-## AppLocker Rules
+## 🧬 Anaotmy of AppLocker Rules 🔍
 
 AppLocker rules control what applications can run in your organization. Each rule is based on a **rule condition**—criteria that AppLocker uses to identify the apps the rule affects. There are three primary rule condition types.
 
