@@ -464,8 +464,6 @@ File hash conditions identify an app using a **cryptographic hash** (Authenticod
 
 ---
 
-*Generated: December 3, 2025*
-
-*Base Policy: AaronLocker*
-
+*Generated: December 3, 2025* <br/>
+*Base Policy: AaronLocker* <br/>
 *Enhancement: Microsoft Recommended Block Rules*
