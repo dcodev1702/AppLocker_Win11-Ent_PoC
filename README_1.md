@@ -2,7 +2,9 @@
 
 ## What is AppLocker?
 
-**AppLocker** is a Windows application control feature that allows administrators to specify which users or groups can run particular applications based on unique identities of files. It provides granular control over executables, scripts, Windows Installer files, packaged apps, and DLLs.
+**AppLocker** is a Windows application control and enforcement mechanism that enables administrators to restrict application execution based on authoritative file characteristics—specifically publisher certificate metadata, file path rules, and cryptographic hash values.
+By leveraging these rule types, AppLocker enforces deterministic allow/deny decisions across executables, scripts, Windows Installer packages, packaged apps, and DLLs.
+It integrates with Group Policy and the Application Identity (AppID) service to validate each process launch against policy, providing a robust method for reducing attack surface, preventing unauthorized code execution, and supporting a Zero Trust execution model within enterprise environments.
 
 **Microsoft Documentation:** [AppLocker Overview](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/app-control-for-business/applocker/applocker-overview)
 
