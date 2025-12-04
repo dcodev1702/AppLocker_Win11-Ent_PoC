@@ -1,4 +1,4 @@
-# AppLocker Policy Enablement - w/ LOLBin Blocks
+# 🚀 AppLocker 🔐 Policy Enablement - w/ LOLBin Blocks
 
 ## What is AppLocker?
 
@@ -59,7 +59,7 @@ Traditional security controls like antivirus and EDR are **reactive** - they det
 
 ---
 
-## AppLocker Architecture and Components
+## AppLocker Architecture and Components 🏗️
 
 AppLocker uses the **Application Identity service** to provide attributes for a file and to evaluate the AppLocker policy for the file. AppLocker policies are conditional access control entries (ACEs), and policies are evaluated using the attribute-based access control `SeAccessCheckWithSecurityAttributes` or `AuthzAccessCheck` functions.
 
@@ -93,11 +93,11 @@ This gap between AppLocker's capabilities and its management tooling has histori
 
 Learn more about Microsoft's AppLocker Tools [here.](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/app-control-for-business/applocker/tools-to-use-with-applocker)
 
-**This is where AaronLocker comes in!**
+**This is where AaronLocker comes in! 🔧**
 
 ---
 
-## About AaronLocker - The Foundation
+## ✨ About AaronLocker - The Foundation
 
 **AaronLocker** fills the management gap by providing a complete, production-ready toolkit for creating robust AppLocker policies. Developed by Aaron Margosis at Microsoft, it transforms AppLocker from a powerful-but-impractical feature into a deployable security control.
 
@@ -114,7 +114,7 @@ AaronLocker is a set of PowerShell scripts and documentation designed to make Wi
 
 ### Why Use AaronLocker?
 
-Without AaronLocker (or similar tooling), organizations face significant barriers:
+Without AaronLocker ⚙️ (or similar tooling), organizations face significant barriers:
 
 | Challenge | How AaronLocker Solves It |
 |-----------|---------------------------|
@@ -125,7 +125,7 @@ Without AaronLocker (or similar tooling), organizations face significant barrier
 | **Testing difficulty** | Includes audit mode support and validation tools |
 | **Policy complexity** | Outputs clean, well-structured XML that can be reviewed and version-controlled |
 
-### Key Benefits
+### Key Benefits 💡
 
 1. **Publisher-Based Rules:** Uses digital signatures rather than paths, so applications continue to work after updates without policy changes.
 
