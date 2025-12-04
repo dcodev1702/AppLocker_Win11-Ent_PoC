@@ -88,9 +88,9 @@ While AppLocker is powerful, Microsoft provides **no built-in GUI or tooling** f
 
 This gap between AppLocker's capabilities and its management tooling has historically led to failed deployments, overly permissive policies, or abandoned implementations.
 
-Microsoft AppLocker Tools: [Here](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/app-control-for-business/applocker/tools-to-use-with-applocker)
+Learn more about Microsoft's AppLocker Tools [here.](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/app-control-for-business/applocker/tools-to-use-with-applocker)
 
-**This is where AaronLocker comes in.**
+**This is where AaronLocker comes in!**
 
 ---
 
