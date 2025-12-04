@@ -323,7 +323,7 @@ gpresult /r /source computer
 
 ---
 
-## 🧬 Anaotmy of AppLocker Rules 🔍
+## 🧬 Anatomy of AppLocker Rules 🔍
 
 AppLocker rules control what applications can run in your organization. Each rule is based on a **rule condition**—criteria that AppLocker uses to identify the apps the rule affects. There are three primary rule condition types.
 
