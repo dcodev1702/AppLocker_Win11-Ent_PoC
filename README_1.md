@@ -329,7 +329,7 @@ AppLocker rules control what applications can run in your organization. Each rul
 
 **Microsoft Documentation:** [Understanding AppLocker Rule Condition Types](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/app-control-for-business/applocker/understanding-applocker-rule-condition-types)
 
-### [Publisher Condition]
+### [Publisher Condition]()
 
 
 Publisher conditions identify an app based on its **digital signature**. The digital signature contains information about the publisher (the company that created the app), along with extended attributes like product name, file name, and version number.
