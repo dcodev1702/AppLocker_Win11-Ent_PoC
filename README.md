@@ -50,6 +50,11 @@ This gap between AppLocker's capabilities and its management tooling has histori
 
 AaronLocker is a set of PowerShell scripts and documentation designed to make Windows application whitelisting with AppLocker dramatically easier and more practical. It addresses the real-world challenges that have historically made AppLocker deployments difficult to implement and maintain.
 
+1. **Intro to 'AaronLocker'** (7 min, circa Feb. 2019): https://youtu.be/nQyODwPR5qo
+
+2. **AaronLocker Quick Start** (13 min, circa Feb. 2019): https://youtu.be/E-IrqFtJOKU
+   - How to build, customize, and deploy robust and practical AppLocker rules quickly using AaronLocker
+
 ### Why Use AaronLocker?
 
 Without AaronLocker (or similar tooling), organizations face significant barriers:
