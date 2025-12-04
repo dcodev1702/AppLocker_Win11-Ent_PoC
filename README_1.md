@@ -54,18 +54,6 @@ Traditional security controls like antivirus and EDR are **reactive** - they det
 5. **Complements Other Controls:** Works alongside (not instead of) AV, EDR, and other security tools
 6. **Enforces on Non-User Processes:** With Rule Collection Extensions enabled, policies apply to services and scheduled tasks running as SYSTEM—preventing attackers from bypassing controls via privileged scheduled tasks or service execution
 
-### The AppLocker Management Challenge
-
-While AppLocker is powerful, Microsoft provides **no built-in GUI or tooling** for creating and managing comprehensive policies. Administrators must either:
-
-- Manually craft XML policy files (error-prone and time-consuming)
-- Use basic GPO wizards that create overly simplistic rules
-- Build custom PowerShell automation from scratch
-
-This gap between AppLocker's capabilities and its management tooling has historically led to failed deployments, overly permissive policies, or abandoned implementations.
-
-**This is where AaronLocker comes in.**
-
 ---
 
 ## AppLocker Architecture and Components
@@ -87,6 +75,21 @@ When a DLL is loaded, a notification is sent to AppLocker to verify that the DLL
 ### A Script is Run
 
 Before a script file is run, the script host (for example, PowerShell) calls AppLocker to verify the script. AppLocker calls the Application Identity component in user-mode with the file name or file handle to calculate the file properties. The script file is then evaluated against the AppLocker policy to verify that it should run.
+
+---
+
+### The AppLocker Management Challenge
+
+While AppLocker is powerful, Microsoft provides **no built-in GUI or tooling** for creating and managing comprehensive policies. Administrators must either:
+
+- Manually craft XML policy files (error-prone and time-consuming)
+- Use basic GPO wizards that create overly simplistic rules
+- Build custom PowerShell automation from scratch
+
+This gap between AppLocker's capabilities and its management tooling has historically led to failed deployments, overly permissive policies, or abandoned implementations.
+
+Microsoft AppLocker Tools: [Tools](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/app-control-for-business/applocker/tools-to-use-with-applocker)
+**This is where AaronLocker comes in.**
 
 ---
 
