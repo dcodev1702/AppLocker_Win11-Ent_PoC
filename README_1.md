@@ -370,7 +370,7 @@ Publisher conditions identify an app based on its **digital signature**. The dig
 </FilePublisherRule>
 ```
 
-### Path Condition
+### [Path Condition]()
 
 Path conditions identify an app by its **location in the file system**. Path rules affect all files in the specified directory and its subdirectories unless explicitly exempted.
 
@@ -412,7 +412,7 @@ Path conditions identify an app by its **location in the file system**. Path rul
 </FilePathRule>
 ```
 
-### File Hash Condition
+### [File Hash Condition]()
 
 File hash conditions identify an app using a **cryptographic hash** (Authenticode hash) of the file. Each unique file version produces a unique hash value.
 
