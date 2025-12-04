@@ -147,7 +147,7 @@ This layered approach combines AaronLocker's practical whitelisting with Microso
 
 ---
 
-## LOLBin Enhancement Overview
+##🛡️ LOLBin Enhancement Overview
 
 This document details the Microsoft Recommended Block Rules that have been added to the base AaronLocker policy. These rules target "Living Off the Land Binaries" (LOLBins) - legitimate Microsoft-signed tools that attackers abuse to bypass security controls.
 
