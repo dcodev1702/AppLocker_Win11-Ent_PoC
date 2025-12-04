@@ -16,7 +16,7 @@
       8007 = Policy not applied
     
 .NOTES
-    Author: Security Team
+    Author: DCODEV1702 & Claude Opus 4.5
     Date: December 2025
     
     Run from a non-admin user account to properly test the policy.
