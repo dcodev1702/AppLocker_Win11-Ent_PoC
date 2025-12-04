@@ -225,7 +225,7 @@ This document details the Microsoft Recommended Block Rules that have been added
 
 ---
 
-## Existing Rules Preserved
+## 🚨 Existing Rules Preserved
 
 Your original policy already contained some protective measures that have been preserved:
 
@@ -235,7 +235,7 @@ Your original policy already contained some protective measures that have been p
 
 ---
 
-## Rule Processing Order
+## 🧾 Rule Processing Order
 
 AppLocker processes rules in this order:
 
