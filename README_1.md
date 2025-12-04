@@ -155,7 +155,7 @@ This document details the Microsoft Recommended Block Rules that have been added
 
 ---
 
-## Implementation Details
+## Implementation Details 📜
 
 - **Rule Type:** FilePublisherRule with Action="Deny"
 - **Target SID:** S-1-1-0 (Everyone)
