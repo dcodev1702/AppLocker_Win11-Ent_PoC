@@ -196,7 +196,8 @@ By placing all LOLBin Deny rules at the beginning of each RuleCollection, we ens
 
 1. **Audit Mode First:** Consider testing in Audit mode before enforcement
    - Change `EnforcementMode="Enabled"` to `EnforcementMode="AuditOnly"`
-   - Monitor Event Log: `Applications and Services Logs\Microsoft\Windows\AppLocker`
+   - Monitor Event Log in Event Viewer: `Applications and Services Logs\Microsoft\Windows\AppLocker`
+     <img width="1495" height="686" alt="image" src="https://github.com/user-attachments/assets/88a5de13-ae27-439e-b23d-81e0a1ec1c04" />
 
 2. **Critical Applications:** Verify no critical applications depend on blocked binaries:
    - Development environments may need dotnet.exe, MSBuild.exe
