@@ -480,6 +480,14 @@ File(s) found in: %OSDRIVE%\USERS\ABBY\APPDATA\LOCAL\MICROSOFT\ONEDRIVE" UserOrG
                 <FilePathCondition Path="%OSDRIVE%\Users\*\AppData\Local\Programs\Microsoft VS Code\*"/>
             </Conditions>
         </FilePathRule>
+        <RuleCollectionExtensions>
+            <ThresholdExtensions>
+                <Services EnforcementMode="Enabled"/>
+            </ThresholdExtensions>
+            <RedstoneExtensions>
+                <SystemApps Allow="Enabled"/>
+            </RedstoneExtensions>
+        </RuleCollectionExtensions>
     </RuleCollection>
     <RuleCollection Type="Msi" EnforcementMode="AuditOnly">
         <FilePathRule Id="c64e52fe-bd05-43ed-ae91-f3612182829e" Name="All Windows Installer files under %windir%\ccmcache" Description="Allows everyone to run installer files in the SCCM cache." UserOrGroupSid="S-1-1-0" Action="Allow">
