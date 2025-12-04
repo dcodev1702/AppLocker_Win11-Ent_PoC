@@ -452,7 +452,7 @@ File hash conditions identify an app using a **cryptographic hash** (Authenticod
 
 ---
 
-## References
+## ✔️ References
 
 - [AaronLocker - Microsoft GitHub](https://github.com/microsoft/AaronLocker) - Robust and practical application control for Windows
 - [Microsoft - Applications that can bypass App Control](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/app-control-for-business/design/applications-that-can-bypass-appcontrol)
