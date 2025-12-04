@@ -1206,6 +1206,14 @@ Original path: %OSDRIVE%\USERS\ABBY\APPDATA\LOCAL\MICROSOFT\ONEDRIVE\18.143.0717
                 <FilePathCondition Path="%OSDRIVE%\Users\*\AppData\Local\Programs\Microsoft VS Code\*"/>
             </Conditions>
         </FilePathRule>
+        <RuleCollectionExtensions>
+            <ThresholdExtensions>
+                <Services EnforcementMode="Enabled"/>
+            </ThresholdExtensions>
+            <RedstoneExtensions>
+                <SystemApps Allow="Enabled"/>
+            </RedstoneExtensions>
+        </RuleCollectionExtensions>
     </RuleCollection>
     <RuleCollection Type="Appx" EnforcementMode="Enabled">
         <FilePublisherRule Id="a9e18c21-ff8f-43cf-b9fc-db40eed693ba" Name="(Default Rule) All signed packaged apps" Description="Allows members of the Everyone group to run packaged apps that are signed." UserOrGroupSid="S-1-1-0" Action="Allow">
