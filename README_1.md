@@ -298,19 +298,19 @@ Set-AppLockerPolicy -XmlPolicy "C:\Policies\AppLockerPolicy-Enhanced-LOLBins-Blo
 gpupdate /force
 ```
 
-### [CLIENT VM] - For good measure, restart the VM after the Group Policy update has been applied.
+### [CLIENT 🖥️] - For good measure, restart the VM after the Group Policy update has been applied.
 ```powershell
 Restart-Computer
 ```
 
-### [CLIENT VM] - Elevate to a PS Administrator session & validate that the GPO is successfully applied to your OU and Assets within the OU.
+### [CLIENT 🖥️] - Elevate to a PS Administrator session & validate that the GPO is successfully applied to your OU and Assets within the OU.
 ```powershell
 gpresult /r /source computer
 ```
 
 <img width="743" height="1127" alt="image" src="https://github.com/user-attachments/assets/42035a7a-e660-4dc5-bdd4-50983275b562" />
 
-### [CLIENT VM] - Lastly, run the PS script and examine the behavior of the applied AppLocker policy.
+### [CLIENT 🖥️] - Lastly, run the PS script and examine the behavior of the applied AppLocker policy.
 ```powershell
 .\AppLocker-LOLBin-PolicyCheck.ps1
 ```
