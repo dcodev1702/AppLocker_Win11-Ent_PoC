@@ -97,7 +97,7 @@ Learn more about Microsoft's AppLocker Tools [here.](https://learn.microsoft.com
 
 ---
 
-## ✨ About AaronLocker - The Foundation
+## ✨ Enter, AaronLocker
 
 **AaronLocker** fills the management gap by providing a complete, production-ready toolkit for creating robust AppLocker policies. Developed by Aaron Margosis at Microsoft, it transforms AppLocker from a powerful-but-impractical feature into a deployable security control.
 
