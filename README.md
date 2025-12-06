@@ -465,6 +465,16 @@ File hash conditions identify an app using a **cryptographic hash** (Authenticod
 
 ## 🎯 Application Whitelisting – Official Guidance Links
 
+| Source / Agency | Link | Description |
+|-----------------|------|-------------|
+| **NSA** | [Application Whitelisting Best Practices](https://apps.nsa.gov/iaarchive/library/ias/adversary-mitigations/application-whitelisting-best-practices.cfm) | Official NSA guidance on implementing and managing application whitelisting. |
+| **NSA** | [Application Whitelisting (Trifold Overview)](https://apps.nsa.gov/iaarchive/library/ia-guidance/archive/application-whitelisting-trifold.cfm) | High-level NSA summary of allowlisting concepts and benefits. |
+| **ASD / ACSC** | [Implementing Application Control](https://www.cyber.gov.au/business-government/protecting-devices-systems/hardening-systems-applications/system-hardening/implementing-application-control) | Australian Essential Eight guidance for deploying application control. |
+| **JPCERT/CC** | [Security Guidance & Technical Notes](https://www.jpcert.or.jp/english/) | JPCERT’s official defensive security publications (general system-hardening; no dedicated allowlisting document). |
+| **NIST** | [SP 800-167 – Guide to Application Whitelisting](https://csrc.nist.gov/pubs/sp/800/167/final) | U.S. NIST’s comprehensive vendor-agnostic framework for allowlisting. |
+
+
+
 - [NSA – Application Whitelisting Best Practices](https://apps.nsa.gov/iaarchive/library/ias/adversary-mitigations/application-whitelisting-best-practices.cfm) – Official NSA guidance on implementing and managing application whitelisting.
 - [NSA – Application Whitelisting (Trifold Overview)](https://apps.nsa.gov/iaarchive/library/ia-guidance/archive/application-whitelisting-trifold.cfm) – High-level NSA summary of whitelisting concepts and benefits.
 - [ASD / ACSC – Implementing Application Control](https://www.cyber.gov.au/business-government/protecting-devices-systems/hardening-systems-applications/system-hardening/implementing-application-control) – Australia's authoritative guidance for deploying allowlisting as part of the Essential Eight.
