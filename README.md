@@ -274,14 +274,6 @@ Some binaries may be needed for legitimate purposes:
 
 ### Group Policy Deployment
 
-```powershell
-# Import the policy via PowerShell
-Set-AppLockerPolicy -XmlPolicy "\\domain\sysvol\policies\AppLockerPolicy-Enhanced-LOLBins-Blocked.xml" -Ldap "LDAP://CN={GPO-GUID},CN=Policies,CN=System,DC=domain,DC=com"
-
-# Or import to local policy for testing
-Set-AppLockerPolicy -XmlPolicy "C:\Policies\AppLockerPolicy-Enhanced-LOLBins-Blocked.xml"
-```
-
 ---
 
 ### [DOMAIN CONTROLLER] - Create & Link a new GPO to the desired OU (Workstations)
@@ -322,6 +314,15 @@ gpresult /r /source computer
 <img width="646" height="860" alt="image" src="https://github.com/user-attachments/assets/73c3f03b-f598-48ce-9452-a28771b87278" />
 
 ---
+
+### Group Policy Deployment via CLI (AD-Joined and Non-AD Joined)
+```powershell
+# Import the policy to an AD-Joined Machine via PowerShell
+Set-AppLockerPolicy -XmlPolicy "\\domain\sysvol\policies\AppLockerPolicy-Enhanced-LOLBins-Blocked.xml" -Ldap "LDAP://CN={GPO-GUID},CN=Policies,CN=System,DC=domain,DC=com"
+
+# Or import to local policy for testing (Non-AD joined Machine)
+Set-AppLockerPolicy -XmlPolicy "C:\Policies\AppLockerPolicy-Enhanced-LOLBins-Blocked.xml"
+```
 
 ## 🧬 Anatomy of AppLocker Rules 🔍
 
