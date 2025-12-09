@@ -72,6 +72,15 @@ Publisher rules use digital signatures to authorize software and are the most fl
 
 **Example - Trusting a Publisher**:
 ```powershell
+# Trust all files signed by Adobe
+@{
+    label = "Adobe Applications";
+    PublisherName = "O=ADOBE INC., L=SAN JOSE, S=CA, C=US";
+}
+```
+
+**Example - Trusting a Specific Product**:
+```powershell
 # Trust an application running outside of the accepted / default paths for standard users
 # https://windirstat.net/download.html
 @{
@@ -81,15 +90,6 @@ Publisher rules use digital signatures to authorize software and are the most fl
 }
 ```
 
-```powershell
-# Trust all files signed by Adobe
-@{
-    label = "Adobe Applications";
-    PublisherName = "O=ADOBE INC., L=SAN JOSE, S=CA, C=US";
-}
-```
-
-**Example - Trusting a Specific Product**:
 ```powershell
 # Trust Microsoft Teams product specifically
 @{
