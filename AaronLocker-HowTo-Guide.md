@@ -47,7 +47,7 @@ AppLocker operates exclusively in user-land (Ring 3) and is designed to prevent 
 
 ### What AppLocker Is NOT
 
-AppLocker is not a replacement for antivirus, endpoint detection and response (EDR), or Attack Surface Reduction (ASR) rules. It does not inspect file contents for malicious code, does not prevent kernel-mode attacks (Ring 0), and does not provide runtime behavioral monitoring. Once a binary or script begins execution, AppLocker takes no further action—it is a proactive control ("left of bang") that prevents unauthorized program launch, not a reactive control ("right of bang") that monitors or terminates running processes. AppLocker is one layer in a defense-in-depth strategy and should be combined with antimalware solutions, EDR, and other security controls.
+AppLocker is not a replacement for Antivirus (e.g. Microsoft Defender AntiVirus - MDAV), endpoint detection and response (EDR), or Attack Surface Reduction (ASR) rules. It does not inspect file contents for malicious code, does not prevent kernel-mode attacks (Ring 0), and does not provide runtime behavioral monitoring. Once a binary or script begins execution, AppLocker takes no further action—it is a proactive control ("left of bang") that prevents unauthorized program launch, not a reactive control ("right of bang") that monitors or terminates running processes. AppLocker is one layer in a defense-in-depth strategy and should be combined with antimalware solutions, EDR, and other security controls.
 
 ---
 
