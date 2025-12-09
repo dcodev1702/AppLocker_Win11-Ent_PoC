@@ -72,6 +72,15 @@ Publisher rules use digital signatures to authorize software and are the most fl
 
 **Example - Trusting a Publisher**:
 ```powershell
+# Trust an application running outside of the accepted / default paths for standard users
+@{
+     label = "WinDirStat";
+     paths = "C:\WinDirStat";
+     pubruleGranularity = "pubProdBinVer";
+}
+```
+
+```powershell
 # Trust all files signed by Adobe
 @{
     label = "Adobe Applications";
