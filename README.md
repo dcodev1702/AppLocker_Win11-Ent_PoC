@@ -112,6 +112,10 @@ AaronLocker is a set of PowerShell scripts and documentation designed to make Wi
 2. **AaronLocker Quick Start** (13 min, circa Feb. 2019): https://youtu.be/E-IrqFtJOKU
    - How to build, customize, and deploy robust and practical AppLocker rules quickly using AaronLocker
 
+3. **AaronLocker V2**
+   - AaronLocker Version 2 is NOT used in this PoC, however, the principles are the same and the V2 solution can be adopted to produce the same results.
+   - [Link:](https://github.com/AaronMargosis/AaronLockerV2)
+
 ### Why Use AaronLocker?
 
 Without AaronLocker ⚙️ (or similar tooling), organizations face significant barriers:
