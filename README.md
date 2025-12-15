@@ -114,7 +114,7 @@ AaronLocker is a set of PowerShell scripts and documentation designed to make Wi
 
 3. **AaronLocker V2**
    - AaronLocker Version 2 is NOT used in this PoC, however, the principles are the same and the V2 solution can be adopted to produce the same results.
-   - [Link:](https://github.com/AaronMargosis/AaronLockerV2)
+   - Link: [AaronLocker Version 2](https://github.com/AaronMargosis/AaronLockerV2)
 
 ### Why Use AaronLocker?
 
