@@ -1,5 +1,4 @@
-# Windows 11 25H2 AppLocker STIG + AaronLocker
-  ## Implementation Checklist
+# Windows 11 25H2 AppLocker STIG + AaronLocker Implementation Checklist
 
 ## Scope
 This checklist is for **Windows 11 25H2 Enterprise** endpoints that must be compliant with:
@@ -335,12 +334,12 @@ Get-AppLockerPolicy -Effective -XML > c:\temp\file.xml
 
 ### Microsoft References
 
-- **AppLocker overview:** https://learn.microsoft.com/en-us/windows/security/application-security/application-control/app-control-for-business/applocker/applocker-overview
-- **Working with AppLocker rules:** https://learn.microsoft.com/en-us/windows/security/application-security/application-control/app-control-for-business/applocker/working-with-applocker-rules
-- **Packaged apps and packaged app installer rules in AppLocker:** https://learn.microsoft.com/en-us/windows/security/application-security/application-control/app-control-for-business/applocker/packaged-apps-and-packaged-app-installer-rules-in-applocker
-- **Configure an AppLocker policy for Audit only:** https://learn.microsoft.com/en-us/windows/security/application-security/application-control/app-control-for-business/applocker/configure-an-applocker-policy-for-audit-only
-- **Understand AppLocker policy design decisions:** https://learn.microsoft.com/en-us/windows/security/application-security/application-control/app-control-for-business/applocker/understand-applocker-policy-design-decisions
-- **Requirements to use AppLocker:** https://learn.microsoft.com/en-us/windows/security/application-security/application-control/app-control-for-business/applocker/requirements-to-use-applocker
+- [AppLocker overview](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/app-control-for-business/applocker/applocker-overview)
+- [Working with AppLocker rules](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/app-control-for-business/applocker/working-with-applocker-rules)
+- [Packaged apps and packaged app installer rules in AppLocker](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/app-control-for-business/applocker/packaged-apps-and-packaged-app-installer-rules-in-applocker)
+- [Configure an AppLocker policy for Audit only](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/app-control-for-business/applocker/configure-an-applocker-policy-for-audit-only)
+- [Understand AppLocker policy design decisions](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/app-control-for-business/applocker/understand-applocker-policy-design-decisions)
+- [Requirements to use AppLocker](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/app-control-for-business/applocker/requirements-to-use-applocker)
 
 ### NSA Reference Noted By The STIG
 
