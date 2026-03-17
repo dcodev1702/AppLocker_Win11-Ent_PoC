@@ -139,7 +139,7 @@ Do **not** enable DLL rules for this rollout.
 
 ```console
 The 'Output' directory is where your AUDIT & ENFORCING XML policies reside
-`1`
+```
 
 ---
 
