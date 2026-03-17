@@ -345,6 +345,6 @@ Get-AppLockerPolicy -Effective -XML > c:\temp\file.xml
 
 The extracted local STIG text explicitly says implementation guidance is available in the NSA paper titled **"Application allowlisting using Microsoft AppLocker"**. In this V2R6 source file, the accompanying URL printed in both the fix and check text is the Microsoft AppLocker deployment guide path below:
 
-- **URL printed in the local STIG text:** https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/applocker/applocker-policies-deployment-guide
+- [URL printed in the local STIG text: Microsoft AppLocker deployment guide](https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/applocker/applocker-policies-deployment-guide)
 
 Because the local STIG text names the NSA paper but prints a Microsoft documentation URL, this checklist uses the exact wording from the extracted source and includes the current Microsoft Learn AppLocker references above.
