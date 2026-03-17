@@ -372,6 +372,8 @@ Administrators running PowerShell will still operate in FullLanguage mode due to
 .\Create-Policies.ps1
 ```
 
+When you use `Create-Policies.ps1`, AaronLocker generates the AppLocker default baseline for the enabled rule collections as part of the output policy. That includes the **Appx / Packaged app** collection and its default signed packaged app allow rule, so you do not need to manually add packaged app default rules later if you import the generated XML.
+
 **Generate Excel Documentation** (optional but recommended):
 
 Add the `-Excel` switch to generate formatted Excel spreadsheets alongside the XML policies. The spreadsheets provide a human-readable format for rule review, sorting, filtering, and change tracking:
@@ -430,7 +432,7 @@ Both policy files contain identical rules—the only difference is the `Enforcem
    - Click `OK` to import
 
 3. **Configure Rule Enforcement**:
-   - Expand `AppLocker` and click on each rule collection (Executable, Windows Installer, Script, DLL)
+   - Expand `AppLocker` and click on each rule collection (Executable, Windows Installer, Script, Packaged app, DLL)
    - Right-click → `Properties`
    - Verify enforcement mode matches your intent (Audit or Enforce)
 

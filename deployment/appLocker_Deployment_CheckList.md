@@ -119,9 +119,11 @@ For this rollout, leave **DLL rules disabled**. This reduces operational burden 
 
 ## 6. Create default rules for all enabled rule collections
 
-In the AppLocker policy, create **default rules** for each enabled rule collection.
+When you generate the policy with **AaronLocker `Create-Policies.ps1`**, the baseline default rules for the enabled AppLocker collections are created as part of the generated policy.
 
-Create default rules for:
+That means you do **not** need to manually create default rules in the GPO editor if you are importing the AaronLocker-generated XML.
+
+The generated baseline should already include defaults for:
 
 * **Executable Rules**
 * **Windows Installer Rules**
@@ -142,7 +144,9 @@ This is the important step that often causes confusion.
 
 ### Required packaged app action
 
-In the AppLocker policy:
+If you are using an **AaronLocker-generated policy**, no separate manual Appx step is required. `Create-Policies.ps1` handles the packaged app baseline automatically as part of the generated policy.
+
+If you are building or editing an AppLocker policy manually in the GPO editor instead of importing AaronLocker XML, then the required Appx action is:
 
 1. Go to **Packaged app Rules**
 2. Right-click **Packaged app Rules**
@@ -154,7 +158,7 @@ If you enforce classic AppLocker collections like EXE rules, but you do not also
 
 ### Baseline recommendation
 
-For this environment, use the **default packaged app rules** as the baseline. That is the main policy action needed to ensure packaged apps are allow-listed at a broad baseline level.
+For this environment, use the **default packaged app rules** as the baseline. In the AaronLocker workflow, this should already be present in the generated XML and does not need to be added manually afterward.
 
 You do **not** need to manually create separate rules for each built-in packaged app unless you want tighter restrictions later.
 
@@ -300,7 +304,7 @@ Use this as the implementation target:
 
 ### Required policy actions
 
-* Create default rules for:
+* Generate the policy with AaronLocker so the default enabled collections are included automatically:
 
   * Executable
   * Windows Installer
@@ -324,9 +328,9 @@ Use this as the implementation target:
 To meet this baseline:
 
 * Use AaronLocker to generate your AppLocker policy
-* Trust normal Windows locations through default rules
+* Trust normal Windows locations through the AaronLocker-generated default baseline
 * Trust your four custom root install paths only after ACL hardening
-* Explicitly include **Packaged app Rules** and **Create Default Rules**
+* Verify the generated policy still contains the **Appx** collection and default packaged app allow rule
 * Leave **DLL rules off**
 * Deploy in **Audit only** first, then enforce in phases
 

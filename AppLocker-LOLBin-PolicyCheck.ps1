@@ -528,8 +528,8 @@ Sort-Object TimeCreated -Descending |
 Select-Object -First 10
 
 if ($recentEvents) {
-    foreach ($event in $recentEvents) {
-        $color = switch ($event.Id) {
+    foreach ($recentRecord in $recentEvents) {
+        $color = switch ($recentRecord.Id) {
             8003 { "Yellow" }   # Allowed/Audit
             8004 { "Green" }    # Blocked
             8006 { "Cyan" }     # Policy applied
@@ -538,11 +538,11 @@ if ($recentEvents) {
         }
         
         # Extract filename from message
-        $filename = if ($event.Message -match '\\([^\\]+\.exe)') { $matches[1] } else { "Unknown" }
+        $filename = if ($recentRecord.Message -match '\\([^\\]+\.exe)') { $matches[1] } else { "Unknown" }
         
-        Write-Host "  $($event.TimeCreated.ToString('HH:mm:ss')) " -NoNewline
-        Write-Host "[$($event.Id)] " -ForegroundColor $color -NoNewline
-        Write-Host "$(Get-EventDescription $event.Id) " -ForegroundColor $color -NoNewline
+        Write-Host "  $($recentRecord.TimeCreated.ToString('HH:mm:ss')) " -NoNewline
+        Write-Host "[$($recentRecord.Id)] " -ForegroundColor $color -NoNewline
+        Write-Host "$(Get-EventDescription $recentRecord.Id) " -ForegroundColor $color -NoNewline
         Write-Host "- $filename" -ForegroundColor Gray
     }
 } else {
