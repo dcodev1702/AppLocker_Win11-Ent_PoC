@@ -299,9 +299,14 @@ To meet this baseline:
 
 ### STIG Source And Metadata
 
-- **Local extracted STIG source file:** [STIG/U_MS_Windows_11_V2R6_STIG/U_MS_Windows_11_V2R6_Manual_STIG/U_MS_Windows_11_STIG_V2R6_Manual-xccdf.xml](STIG/U_MS_Windows_11_V2R6_STIG/U_MS_Windows_11_V2R6_Manual_STIG/U_MS_Windows_11_STIG_V2R6_Manual-xccdf.xml)
-- **Local STIG package folder:** [STIG/U_MS_Windows_11_V2R6_STIG](STIG/U_MS_Windows_11_V2R6_STIG)
-- **STIG release package name:** `U_MS_Windows_11_V2R6_STIG`
+- **Official DISA Windows 11 STIG download:** [U_MS_Windows_11_V2R6_STIG.zip](https://dl.dod.cyber.mil/wp-content/uploads/stigs/zip/U_MS_Windows_11_V2R6_STIG.zip)
+- **DISA STIG downloads page:** [Operating Systems filter](https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems)
+- **Local extracted STIG source file:** [STIG/Windows_11/V2R6_Manual_STIG/U_MS_Windows_11_STIG_V2R6_Manual-xccdf.xml](STIG/Windows_11/V2R6_Manual_STIG/U_MS_Windows_11_STIG_V2R6_Manual-xccdf.xml)
+- **Local STIG package folder:** [STIG/Windows_11/V2R6_Manual_STIG](STIG/Windows_11/V2R6_Manual_STIG)
+- **Local STIG stylesheet:** [STIG/Windows_11/V2R6_Manual_STIG/STIG_unclass.xsl](STIG/Windows_11/V2R6_Manual_STIG/STIG_unclass.xsl)
+- **Current deployment STIG root:** [STIG](STIG)
+- **Current local STIG folder layout:** `deployment/STIG/Windows_11/V2R6_Manual_STIG/`
+- **STIG release package name in this repo:** `Windows_11/V2R6_Manual_STIG`
 - **Benchmark / Product:** Microsoft Windows 11 STIG
 - **STIG release:** `V2R6`
 - **Group ID:** `V-253262`
