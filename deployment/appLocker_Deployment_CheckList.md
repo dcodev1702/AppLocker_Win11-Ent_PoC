@@ -1,4 +1,4 @@
-# Windows 11 25H2 AppLocker STIG + AaronLocker
+# AppLocker STIG + AaronLocker (Windows 11 25H2)
 ## Implementation Checklist
 
 ## Scope
