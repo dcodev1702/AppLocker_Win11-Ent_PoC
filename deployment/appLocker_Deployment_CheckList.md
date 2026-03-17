@@ -133,8 +133,13 @@ The generated baseline should already include defaults for:
 Do **not** enable DLL rules for this rollout.
 
 ```powershell
+# Create AppLocker policy
 .\Users\xadmin\AaronLocker\Create-Policy.ps1 -Excel
 ```
+
+```console
+The 'Output' directory is where your AUDIT & ENFORCING XML policies reside
+`1`
 
 ---
 
