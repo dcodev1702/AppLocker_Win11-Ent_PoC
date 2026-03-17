@@ -154,6 +154,39 @@ For this environment, use the **default packaged app rules** as the baseline. Th
 
 You do **not** need to manually create separate rules for each built-in packaged app unless you want tighter restrictions later.
 
+### Exact AppLocker XML structure required
+
+The effective policy must contain an **Appx** rule collection with enforcement enabled and the default allow rule for signed packaged apps.
+
+```xml
+<RuleCollection Type="Appx" EnforcementMode="Enabled">
+  <FilePublisherRule
+    Id="a9e18c21-ff8f-43cf-b9fc-db40eed693ba"
+    Name="(Default Rule) All signed packaged apps"
+    Description="Allows members of the Everyone group to run packaged apps that are signed."
+    UserOrGroupSid="S-1-1-0"
+    Action="Allow">
+    <Conditions>
+      <FilePublisherCondition PublisherName="*" ProductName="*" BinaryName="*">
+        <BinaryVersionRange LowSection="0.0.0.0" HighSection="*"/>
+      </FilePublisherCondition>
+    </Conditions>
+  </FilePublisherRule>
+</RuleCollection>
+```
+
+### What to verify before moving to enforcement
+
+After exporting the effective policy, confirm all of the following are present:
+
+* `RuleCollection Type="Appx"`
+* `EnforcementMode="Enabled"` when you move out of audit mode
+* `Name="(Default Rule) All signed packaged apps"`
+* `UserOrGroupSid="S-1-1-0"`
+* `PublisherName="*" ProductName="*" BinaryName="*"`
+
+If this Appx collection or its default allow rule is missing from the **effective** policy, packaged apps can fail when enforcement is enabled.
+
 ---
 
 ## 8. Configure enforcement mode
