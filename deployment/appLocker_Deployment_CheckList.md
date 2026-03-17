@@ -130,6 +130,10 @@ Create default rules for:
 
 Do **not** enable DLL rules for this rollout.
 
+```powershell
+.\Users\xadmin\AaronLocker\Create-Policy.ps1 -Excel
+```
+
 ---
 
 ## 7. Packaged apps: what specifically must be added?
