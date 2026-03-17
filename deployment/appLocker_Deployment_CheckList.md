@@ -1,5 +1,5 @@
 # Windows 11 25H2 AppLocker STIG + AaronLocker
-  * Implementation Checklist
+  ## Implementation Checklist
 
 ## Scope
 This checklist is for **Windows 11 25H2 Enterprise** endpoints that must be compliant with:
