@@ -29,10 +29,10 @@ param(
 
 $ErrorActionPreference = "SilentlyContinue"
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# -----------------------------------------------------------------------------
 # CLM (Constrained Language Mode) Detection
 # When AppLocker is in Enforce mode, PowerShell runs in CLM which blocks .NET types
-# ═══════════════════════════════════════════════════════════════════════════════
+# -----------------------------------------------------------------------------
 $languageMode = $ExecutionContext.SessionState.LanguageMode
 if ($languageMode -eq "ConstrainedLanguage") {
     Write-Host "ℹ️  Running in Constrained Language Mode (CLM)" -ForegroundColor Cyan
@@ -178,10 +178,10 @@ function Find-MSBuildInstances {
 }
 
 Write-Host "`n" -NoNewline
-Write-Host "╔══════════════════════════════════════════════════════════════════╗" -ForegroundColor Cyan
-Write-Host "║       AppLocker LOLBin Block Validation Tests                    ║" -ForegroundColor Cyan
-Write-Host "║       Testing Microsoft Recommended Block Rules                  ║" -ForegroundColor Cyan
-Write-Host "╚══════════════════════════════════════════════════════════════════╝" -ForegroundColor Cyan
+Write-Host "+------------------------------------------------------------------+" -ForegroundColor Cyan
+Write-Host "|       AppLocker LOLBin Block Validation Tests                    |" -ForegroundColor Cyan
+Write-Host "|       Testing Microsoft Recommended Block Rules                  |" -ForegroundColor Cyan
+Write-Host "+------------------------------------------------------------------+" -ForegroundColor Cyan
 Write-Host "`n"
 
 Write-Host "Running as: $env:USERNAME" -ForegroundColor Yellow
@@ -216,13 +216,13 @@ Write-Host "`n"
 
 $testResults = @()
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# -----------------------------------------------------------------------------
 # TEST 1: CIPHER.EXE
-# ═══════════════════════════════════════════════════════════════════════════════
-Write-Host "─────────────────────────────────────────────────────────────────────" -ForegroundColor DarkGray
+# -----------------------------------------------------------------------------
+Write-Host "---------------------------------------------------------------------" -ForegroundColor DarkGray
 Write-Host "TEST 1: cipher.exe" -ForegroundColor White
 Write-Host "Threat Use: Data exfiltration, secure deletion, ransomware cleanup" -ForegroundColor DarkGray
-Write-Host "─────────────────────────────────────────────────────────────────────" -ForegroundColor DarkGray
+Write-Host "---------------------------------------------------------------------" -ForegroundColor DarkGray
 
 $blocked = $false
 $details = ""
@@ -266,14 +266,14 @@ $testResults += @{Name="cipher.exe"; Blocked=$blocked; EventId=$latestEvent.Id}
 
 Write-Host "`n"
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# -----------------------------------------------------------------------------
 # TEST 2: MSHTA.EXE
-# ═══════════════════════════════════════════════════════════════════════════════
-Write-Host "─────────────────────────────────────────────────────────────────────" -ForegroundColor DarkGray
+# -----------------------------------------------------------------------------
+Write-Host "---------------------------------------------------------------------" -ForegroundColor DarkGray
 Write-Host "TEST 2: mshta.exe" -ForegroundColor White
 Write-Host "Threat Use: Execute malicious HTA files, inline VBScript/JScript," -ForegroundColor DarkGray
 Write-Host "           proxy execution, download cradles (very common in phishing)" -ForegroundColor DarkGray
-Write-Host "─────────────────────────────────────────────────────────────────────" -ForegroundColor DarkGray
+Write-Host "---------------------------------------------------------------------" -ForegroundColor DarkGray
 
 $blocked = $false
 $details = ""
@@ -324,14 +324,14 @@ $testResults += @{Name="mshta.exe"; Blocked=$blocked; EventId=$latestEvent.Id}
 
 Write-Host "`n"
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# -----------------------------------------------------------------------------
 # TEST 3: MSBUILD.EXE (Dynamic Discovery)
-# ═══════════════════════════════════════════════════════════════════════════════
-Write-Host "─────────────────────────────────────────────────────────────────────" -ForegroundColor DarkGray
+# -----------------------------------------------------------------------------
+Write-Host "---------------------------------------------------------------------" -ForegroundColor DarkGray
 Write-Host "TEST 3: msbuild.exe (All Discovered Instances)" -ForegroundColor White
 Write-Host "Threat Use: Execute arbitrary C#/VB code via inline tasks," -ForegroundColor DarkGray
 Write-Host "           compile and run malicious code, bypass application control" -ForegroundColor DarkGray
-Write-Host "─────────────────────────────────────────────────────────────────────" -ForegroundColor DarkGray
+Write-Host "---------------------------------------------------------------------" -ForegroundColor DarkGray
 
 # Discover all MSBuild instances
 Write-Host "`nScanning for MSBuild.exe instances..." -ForegroundColor Gray
@@ -409,14 +409,14 @@ if ($null -eq $msbuildInstances -or $msbuildInstances.Count -eq 0) {
 
 Write-Host "`n"
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# -----------------------------------------------------------------------------
 # TEST 4: CSCRIPT.EXE
-# ═══════════════════════════════════════════════════════════════════════════════
-Write-Host "─────────────────────────────────────────────────────────────────────" -ForegroundColor DarkGray
+# -----------------------------------------------------------------------------
+Write-Host "---------------------------------------------------------------------" -ForegroundColor DarkGray
 Write-Host "TEST 4: cscript.exe" -ForegroundColor White
 Write-Host "Threat Use: Execute malicious VBScript/JScript, download cradles," -ForegroundColor DarkGray
 Write-Host "           COM object abuse, WMI access, very common in malware" -ForegroundColor DarkGray
-Write-Host "─────────────────────────────────────────────────────────────────────" -ForegroundColor DarkGray
+Write-Host "---------------------------------------------------------------------" -ForegroundColor DarkGray
 
 $blocked = $false
 $details = ""
@@ -460,12 +460,12 @@ $testResults += @{Name="cscript.exe"; Blocked=$blocked; EventId=$latestEvent.Id}
 
 Write-Host "`n"
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# -----------------------------------------------------------------------------
 # SUMMARY
-# ═══════════════════════════════════════════════════════════════════════════════
-Write-Host "═══════════════════════════════════════════════════════════════════" -ForegroundColor Cyan
+# -----------------------------------------------------------------------------
+Write-Host "-------------------------------------------------------------------" -ForegroundColor Cyan
 Write-Host "                         TEST SUMMARY                              " -ForegroundColor Cyan
-Write-Host "═══════════════════════════════════════════════════════════════════" -ForegroundColor Cyan
+Write-Host "-------------------------------------------------------------------" -ForegroundColor Cyan
 Write-Host ""
 
 $passed = ($testResults | Where-Object { $_.Blocked -eq $true }).Count
@@ -490,12 +490,12 @@ Write-Host ""
 Write-Host "Individual Results:" -ForegroundColor White
 foreach ($result in $testResults) {
     if ($result.Skipped -eq $true) {
-        Write-Host "  • $($result.Name): " -NoNewline
+        Write-Host "  - $($result.Name): " -NoNewline
         Write-Host "SKIPPED (not installed)" -ForegroundColor Yellow
     } else {
         $statusColor = if ($result.Blocked) { "Green" } else { "Red" }
         $status = if ($result.Blocked) { "BLOCKED" } else { "NOT BLOCKED" }
-        Write-Host "  • $($result.Name): " -NoNewline
+        Write-Host "  - $($result.Name): " -NoNewline
         Write-Host $status -ForegroundColor $statusColor
     }
 }
@@ -514,7 +514,7 @@ if ($failed -gt 0) {
 }
 
 Write-Host ""
-Write-Host "─────────────────────────────────────────────────────────────────────" -ForegroundColor DarkGray
+Write-Host "---------------------------------------------------------------------" -ForegroundColor DarkGray
 Write-Host "Recent AppLocker Events (last 30 seconds):" -ForegroundColor White
 Write-Host ""
 
@@ -554,7 +554,7 @@ if ($recentEvents) {
 }
 
 Write-Host ""
-Write-Host "─────────────────────────────────────────────────────────────────────" -ForegroundColor DarkGray
+Write-Host "---------------------------------------------------------------------" -ForegroundColor DarkGray
 Write-Host "Event Log Location:" -ForegroundColor Gray
 Write-Host "  Event Viewer > Applications and Services Logs > Microsoft >" -ForegroundColor Gray
 Write-Host "  Windows > AppLocker > EXE and DLL" -ForegroundColor Gray
@@ -564,13 +564,12 @@ Write-Host "  8003 = Allowed (in audit mode, shows what WOULD be blocked)" -Fore
 Write-Host "  8004 = Blocked (enforce mode - rule is working!)" -ForegroundColor Green
 Write-Host "  8006 = Policy applied successfully" -ForegroundColor Cyan
 Write-Host "  8007 = Policy not applied (check Application Identity service)" -ForegroundColor Red
-Write-Host "─────────────────────────────────────────────────────────────────────" -ForegroundColor DarkGray
-
+Write-Host "---------------------------------------------------------------------" -ForegroundColor DarkGray
 # SIG # Begin signature block
 # MIIHogYJKoZIhvcNAQcCoIIHkzCCB48CAQExDzANBglghkgBZQMEAgEFADB5Bgor
 # BgEEAYI3AgEEoGswaTA0BgorBgEEAYI3AgEeMCYCAwEAAAQQH8w7YFlLCE63JNLG
-# KX7zUQIBAAIBAAIBAAIBAAIBADAxMA0GCWCGSAFlAwQCAQUABCDg1PlGLHqkdAMD
-# 5E7/vGZQUUvG8OIYfawIanZxvPDcXKCCBGgwggRkMIICzKADAgECAhBVeo1yT3Ey
+# KX7zUQIBAAIBAAIBAAIBAAIBADAxMA0GCWCGSAFlAwQCAQUABCBTvLWj/GN4SS8Z
+# FmJKumvsny0w8sCfuEmJ52Op7axxxKCCBGgwggRkMIICzKADAgECAhBVeo1yT3Ey
 # oUNaMtF/B39gMA0GCSqGSIb3DQEBCwUAMEoxCzAJBgNVBAYTAlVTMRAwDgYDVQQK
 # DAdYRFIgTGFiMSkwJwYDVQQDDCBYRFIgTGFiIEFwcExvY2tlciBTY3JpcHQgU2ln
 # bmluZzAeFw0yNjAzMTgwNTUwMjhaFw0yODAzMTgwNjAwMjhaMEoxCzAJBgNVBAYT
@@ -598,14 +597,14 @@ Write-Host "──────────────────────�
 # MSkwJwYDVQQDDCBYRFIgTGFiIEFwcExvY2tlciBTY3JpcHQgU2lnbmluZwIQVXqN
 # ck9xMqFDWjLRfwd/YDANBglghkgBZQMEAgEFAKCBhDAYBgorBgEEAYI3AgEMMQow
 # CKACgAChAoAAMBkGCSqGSIb3DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcC
-# AQsxDjAMBgorBgEEAYI3AgEVMC8GCSqGSIb3DQEJBDEiBCDNQd6IirzA2Zti7buw
-# fKOMYvIGMFjo/qg4fnFzceocCzANBgkqhkiG9w0BAQEFAASCAYBn4XLKLAICMBY0
-# Ql5YgCK0OAuI7eETDaE/j3f6LHg7J6eRsD4Bj3RC55IDP280OTY+fdQZUIBGnDt7
-# uv/UhVxi5l5m763FXFIHgpcNaLDrdzMvYYAeYFGmraZzH2dNJnZWlxSO/GzaMIWs
-# l28eLrkU3/d5DRSgsfd+m6LtQLPYSwVv9dfSDUDzts8uLSs/ZFuC0cawKuqNTcAA
-# SoALaHpNWnZQL740DvN1zoI5Xb3tYOeXGRTsfBjf8ZYXtX+gSzRh4bH2MCs0YQPQ
-# MTpKkfHs1kX3nB1/FdFIuI7IN5BbZhLrmfDCWHapeIkHO3bZorqUaUKWXrbhosfo
-# 5Sn23AU82j9W8jFOn7f/OIH781ENZ++K9w22IC2CeWE99qp97HoBnvm40tdV8s+m
-# PxtwuaY8SjLuqE1BbG7tIy6Fi5syXm73+pT0g3dPxhpr/q8Zgq6xJAafhAtPHm4H
-# P9fvSNc0a8OZo5hwZybBVNmKJLO3Vt3HAd0YjDf0ThCWml8oYQ4=
+# AQsxDjAMBgorBgEEAYI3AgEVMC8GCSqGSIb3DQEJBDEiBCCpR1Hs9GvCi9i3Gmpc
+# AScOqJ/JHpX/Ybl/iWzFH5frOzANBgkqhkiG9w0BAQEFAASCAYAr6/dUNKAK2k1Q
+# HkiHvYjzWhmX4v+aIxSL2HFZTX/S45CEhI/meX1G6NSmOYuBpg+DwWr2E5aQGVcL
+# Ts8fMD2Eew5+wd9gs1rwojo1WkkhbFXdLHLmjAP0sDNgEb8w2F2lWgdjwTeFDpVa
+# XPl9UULl4tBE6BY9LGzYpaNR+R6NHbp+4mV4kZvmpKAt69LBeTg5uqfH82G+Gu4S
+# V/OM5qvdjnUn3/mDer5vDKVvDiAyNYv+lCh7psPQL1BCkj4CP+rROwlX5KjTPX1r
+# Q2M4ouKXRePHFdpB9oXdMz9hwdkQNafy/iCqFmQQuJqvokppMN7ZGAgHJ68EyN8e
+# 5Io1iOJQ6pUU967KXGtx8Vq/FRwKcZQu4OpZ7vOW9OTCYjKsU3Sv+rUuVWzaEP/P
+# UlT/bHuMckt2X1KXFs0TCm8kxdl93y6h37BHiyyek3dkO0HXBN6mLxDTsNzUuvIl
+# tV0PJ/kd58CYX4i6pVsbmU5guqUYYDNvu7Dk3NXvyZLUDGlMdvg=
 # SIG # End signature block
