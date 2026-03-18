@@ -149,6 +149,8 @@ The base AaronLocker policy provides excellent protection, but this enhancement 
 
 This layered approach combines AaronLocker's practical whitelisting with Microsoft's recommended block list for defense-in-depth.
 
+![DISA STIG - WIN-11 | APPLICATION CONTROL](https://github.com/user-attachments/assets/4939b530-8acc-49f0-b5d3-33e777f225ba)
+
 ---
 
 ## 🛡️ LOLBin Enhancement Overview
