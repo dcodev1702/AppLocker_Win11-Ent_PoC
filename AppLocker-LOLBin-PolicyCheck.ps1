@@ -565,11 +565,12 @@ Write-Host "  8004 = Blocked (enforce mode - rule is working!)" -ForegroundColor
 Write-Host "  8006 = Policy applied successfully" -ForegroundColor Cyan
 Write-Host "  8007 = Policy not applied (check Application Identity service)" -ForegroundColor Red
 Write-Host "---------------------------------------------------------------------" -ForegroundColor DarkGray
+
 # SIG # Begin signature block
 # MIIHogYJKoZIhvcNAQcCoIIHkzCCB48CAQExDzANBglghkgBZQMEAgEFADB5Bgor
 # BgEEAYI3AgEEoGswaTA0BgorBgEEAYI3AgEeMCYCAwEAAAQQH8w7YFlLCE63JNLG
-# KX7zUQIBAAIBAAIBAAIBAAIBADAxMA0GCWCGSAFlAwQCAQUABCBTvLWj/GN4SS8Z
-# FmJKumvsny0w8sCfuEmJ52Op7axxxKCCBGgwggRkMIICzKADAgECAhBVeo1yT3Ey
+# KX7zUQIBAAIBAAIBAAIBAAIBADAxMA0GCWCGSAFlAwQCAQUABCAecJcDM6ZR7QI/
+# mlext/5e6q+iQZil70LHeUWtJKD/naCCBGgwggRkMIICzKADAgECAhBVeo1yT3Ey
 # oUNaMtF/B39gMA0GCSqGSIb3DQEBCwUAMEoxCzAJBgNVBAYTAlVTMRAwDgYDVQQK
 # DAdYRFIgTGFiMSkwJwYDVQQDDCBYRFIgTGFiIEFwcExvY2tlciBTY3JpcHQgU2ln
 # bmluZzAeFw0yNjAzMTgwNTUwMjhaFw0yODAzMTgwNjAwMjhaMEoxCzAJBgNVBAYT
@@ -597,14 +598,14 @@ Write-Host "--------------------------------------------------------------------
 # MSkwJwYDVQQDDCBYRFIgTGFiIEFwcExvY2tlciBTY3JpcHQgU2lnbmluZwIQVXqN
 # ck9xMqFDWjLRfwd/YDANBglghkgBZQMEAgEFAKCBhDAYBgorBgEEAYI3AgEMMQow
 # CKACgAChAoAAMBkGCSqGSIb3DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcC
-# AQsxDjAMBgorBgEEAYI3AgEVMC8GCSqGSIb3DQEJBDEiBCCpR1Hs9GvCi9i3Gmpc
-# AScOqJ/JHpX/Ybl/iWzFH5frOzANBgkqhkiG9w0BAQEFAASCAYAr6/dUNKAK2k1Q
-# HkiHvYjzWhmX4v+aIxSL2HFZTX/S45CEhI/meX1G6NSmOYuBpg+DwWr2E5aQGVcL
-# Ts8fMD2Eew5+wd9gs1rwojo1WkkhbFXdLHLmjAP0sDNgEb8w2F2lWgdjwTeFDpVa
-# XPl9UULl4tBE6BY9LGzYpaNR+R6NHbp+4mV4kZvmpKAt69LBeTg5uqfH82G+Gu4S
-# V/OM5qvdjnUn3/mDer5vDKVvDiAyNYv+lCh7psPQL1BCkj4CP+rROwlX5KjTPX1r
-# Q2M4ouKXRePHFdpB9oXdMz9hwdkQNafy/iCqFmQQuJqvokppMN7ZGAgHJ68EyN8e
-# 5Io1iOJQ6pUU967KXGtx8Vq/FRwKcZQu4OpZ7vOW9OTCYjKsU3Sv+rUuVWzaEP/P
-# UlT/bHuMckt2X1KXFs0TCm8kxdl93y6h37BHiyyek3dkO0HXBN6mLxDTsNzUuvIl
-# tV0PJ/kd58CYX4i6pVsbmU5guqUYYDNvu7Dk3NXvyZLUDGlMdvg=
+# AQsxDjAMBgorBgEEAYI3AgEVMC8GCSqGSIb3DQEJBDEiBCA+2JBKmX3FMGy14z5M
+# OwcSP0+jLlgCuGIeQ1dwdzz6SjANBgkqhkiG9w0BAQEFAASCAYCDLUpKG2x8ndGi
+# ml6twBjmYVZYZPj8gER15bE+lm8OxitbgXC6oKsDBT7beKIkm7m/yoQ4ZZsK/RhH
+# cwPbp0UpuxFyKi6gToo56UzISPbu/Ly/rX6wJ/F0VmYCoRKkASQASO7FwXLlNNvE
+# Nxt5Z7G4WLMITzGJfeDphTSpJfm8JIYNG5B7dzAk/f3x1YDAcV+7PxN16UB3VgX1
+# azsTdmJtakig6Oz7OSGeubX2uWPSwoXtiT1HqM0L/pUc6u2o5p85JR1xiWM650gW
+# CD5ZkwiVIn0l4gm0i2qs4Di3Je5r1hBYE82PnKhj54wJKpuZb66sFf6/DGVDjvES
+# VBItrjdMVbWVCbY3M8mi5w5so0OqrWrej1DreCIceX6hp+I9Nq1kjpx/JYNhBhpQ
+# hLUv0MZqk5Cqyn82v401uMitVugVDTDT6zLb3uI3WBYOCzMKrp0/XrG55OX+HYWM
+# /Wnvaqexp3Mz7Q8KaHs7lWrtcJK8eUmLkq6kFEx2FPyBtZGhCZA=
 # SIG # End signature block
