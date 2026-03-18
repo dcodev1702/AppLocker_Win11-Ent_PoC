@@ -25,8 +25,8 @@ Folder where ACL backup files will be stored before changes are applied.
 Backs up and hardens the default folder list using the default backup folder.
 
 .EXAMPLE
-.\acl_ntfs_hardening.ps1 -Paths 'C:\Foo','C:\Bar'
-Backs up and hardens the ACLs on C:\Foo and C:\Bar.
+.\acl_ntfs_hardening.ps1 -Paths 'C:\Fonsi'
+Backs up and hardens the ACLs on C:\Fonsi.
 
 .EXAMPLE
 .\acl_ntfs_hardening.ps1 -BackupFolder 'C:\Temp\AclBackup'
@@ -42,18 +42,22 @@ Run the script from an elevated PowerShell session. Use -Paths to target specifi
 [CmdletBinding(SupportsShouldProcess)]
 param(
     [string[]]$Paths = @(
-        'C:\Foo',
-        'C:\Baz',
-        'C:\Bar',
-        'C:\Gah'
+        'C:\Fonsi'
     ),
     [string]$BackupFolder = "C:\Temp\AppLockerAclBackup"
 )
 
 $ErrorActionPreference = 'Stop'
 
-if (-not (Test-Path -LiteralPath $BackupFolder)) {
-    New-Item -Path $BackupFolder -ItemType Directory -Force | Out-Null
+function Test-IsAdministrator {
+    $currentIdentity = [System.Security.Principal.WindowsIdentity]::GetCurrent()
+    $currentPrincipal = [System.Security.Principal.WindowsPrincipal]::new($currentIdentity)
+
+    return $currentPrincipal.IsInRole([System.Security.Principal.WindowsBuiltInRole]::Administrator)
+}
+
+if (-not (Test-IsAdministrator)) {
+    throw 'Run this script from an elevated PowerShell session.'
 }
 
 function Backup-Acl {
@@ -65,6 +69,10 @@ function Backup-Acl {
     $safeName = ($Path -replace '[:\\]', '_').Trim('_')
     $backupFile = Join-Path $BackupFolder "$safeName.acl.txt"
 
+    if (-not (Test-Path -LiteralPath $BackupFolder)) {
+        New-Item -Path $BackupFolder -ItemType Directory -Force | Out-Null
+    }
+
     & icacls $Path /save $backupFile /t /c | Out-Null
     return $backupFile
 }
@@ -74,6 +82,11 @@ function Set-HardenedAcl {
         [string]$Path
     )
 
+    $systemSid = [System.Security.Principal.SecurityIdentifier]::new('S-1-5-18')
+    $adminSid = [System.Security.Principal.SecurityIdentifier]::new('S-1-5-32-544')
+    $usersSid = [System.Security.Principal.SecurityIdentifier]::new('S-1-5-32-545')
+    $authenticatedUsersSid = [System.Security.Principal.SecurityIdentifier]::new('S-1-5-11')
+
     if (-not (Test-Path -LiteralPath $Path)) {
         New-Item -Path $Path -ItemType Directory -Force | Out-Null
     }
@@ -82,8 +95,10 @@ function Set-HardenedAcl {
 
     $acl.SetAccessRuleProtection($true, $false)
 
-    foreach ($ace in @($acl.Access)) {
-        [void]$acl.RemoveAccessRule($ace)
+    $acl.SetOwner($adminSid)
+
+    foreach ($identity in @($acl.Access | Select-Object -ExpandProperty IdentityReference -Unique)) {
+        $acl.PurgeAccessRules($identity)
     }
 
     $inheritFlags = [System.Security.AccessControl.InheritanceFlags]'ContainerInherit, ObjectInherit'
@@ -91,30 +106,30 @@ function Set-HardenedAcl {
     $allow        = [System.Security.AccessControl.AccessControlType]::Allow
 
     $rules = @(
-        New-Object System.Security.AccessControl.FileSystemAccessRule(
-            'NT AUTHORITY\SYSTEM',
+        [System.Security.AccessControl.FileSystemAccessRule]::new(
+            $systemSid,
             [System.Security.AccessControl.FileSystemRights]::FullControl,
             $inheritFlags,
             $propFlags,
             $allow
         ),
-        New-Object System.Security.AccessControl.FileSystemAccessRule(
-            'BUILTIN\Administrators',
+        [System.Security.AccessControl.FileSystemAccessRule]::new(
+            $adminSid,
             [System.Security.AccessControl.FileSystemRights]::FullControl,
             $inheritFlags,
             $propFlags,
             $allow
         ),
-        New-Object System.Security.AccessControl.FileSystemAccessRule(
-            'BUILTIN\Users',
+        [System.Security.AccessControl.FileSystemAccessRule]::new(
+            $usersSid,
             ([System.Security.AccessControl.FileSystemRights]::ReadAndExecute `
              -bor [System.Security.AccessControl.FileSystemRights]::Synchronize),
             $inheritFlags,
             $propFlags,
             $allow
         ),
-        New-Object System.Security.AccessControl.FileSystemAccessRule(
-            'NT AUTHORITY\Authenticated Users',
+        [System.Security.AccessControl.FileSystemAccessRule]::new(
+            $authenticatedUsersSid,
             ([System.Security.AccessControl.FileSystemRights]::ReadAndExecute `
              -bor [System.Security.AccessControl.FileSystemRights]::Synchronize),
             $inheritFlags,
@@ -130,13 +145,10 @@ function Set-HardenedAcl {
     Set-Acl -LiteralPath $Path -AclObject $acl
 
     & icacls $Path /inheritance:d | Out-Null
-    & icacls $Path /grant:r "SYSTEM:(OI)(CI)(F)" | Out-Null
-    & icacls $Path /grant:r "Administrators:(OI)(CI)(F)" | Out-Null
-    & icacls $Path /grant:r "Users:(OI)(CI)(RX)" | Out-Null
-    & icacls $Path /grant:r "Authenticated Users:(OI)(CI)(RX)" | Out-Null
-
-    & icacls $Path /remove:g "Everyone" 2>$null | Out-Null
-    & icacls $Path /remove:g "$env:USERDOMAIN\Domain Users" 2>$null | Out-Null
+    & icacls $Path /grant:r "*S-1-5-18:(OI)(CI)(F)" | Out-Null
+    & icacls $Path /grant:r "*S-1-5-32-544:(OI)(CI)(F)" | Out-Null
+    & icacls $Path /grant:r "*S-1-5-32-545:(OI)(CI)(RX)" | Out-Null
+    & icacls $Path /grant:r "*S-1-5-11:(OI)(CI)(RX)" | Out-Null
 
     return Get-Acl -LiteralPath $Path
 }

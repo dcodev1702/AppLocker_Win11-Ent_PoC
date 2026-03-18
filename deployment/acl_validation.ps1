@@ -3,65 +3,91 @@
 Validates folder NTFS permissions for AppLocker path rule safety by checking for write-capable access granted to non-admin principals.
 
 .DATE
-2026-03-17
+2026-03-18
 
 .AUTHOR
 DCODEV1702 & GPT-5.4
 
 .DESCRIPTION
-This script reviews NTFS access control lists on a set of folders and flags permissions that may make an AppLocker path rule unsafe. It looks for allow rules that grant write-capable access to broad or non-admin principals such as Everyone, Users, Authenticated Users, Domain Users, or Interactive users. The output highlights findings for review before relying on path-based AppLocker controls.
+This script reviews NTFS access control lists on a set of folders and flags permissions that may make an AppLocker path rule unsafe. It looks for allow rules that grant write-capable access to broad or non-admin principals such as Everyone, Users, Authenticated Users, Domain Users, or Interactive users. It also flags folders whose owner is not BUILTIN\Administrators or NT AUTHORITY\SYSTEM because ownership can still permit ACL changes even when write ACEs appear restricted.
 
 .NOTES
-Intent: Assess whether target folders are safe candidates for AppLocker path rules by identifying potentially risky write permissions.
+Intent: Assess whether target folders are safe candidates for AppLocker path rules by identifying potentially risky write permissions and unsafe ownership.
+
+.PARAMETER Paths
+One or more folder paths to validate.
+
+.PARAMETER PassThru
+Returns validation objects instead of formatting a table.
 
 .EXAMPLE
 .\acl_validation.ps1
-Validates the default folder list and reports whether any risky write-capable ACEs are present.
+Validates the default folder list and reports whether any risky write-capable ACEs or unsafe owners are present.
 
 .EXAMPLE
-Edit the $PathsToValidate array, then run .\acl_validation.ps1
-Checks the updated folder list for risky non-admin write access.
+.\acl_validation.ps1 -Paths 'C:\Fonsi' -PassThru
+Validates a specific folder and returns structured objects for automation.
 
 .USAGE
-Run the script in PowerShell to review the configured folder list. Update the $PathsToValidate array to match the directories you want to assess, then inspect the output to determine whether each path appears safe for AppLocker path rule use.
+Run the script in PowerShell to review the configured folder list. Use -Paths to target the directories you want to assess and -PassThru when you want structured results for another script.
 #>
-$PathsToValidate = @(
-    'C:\Foo',
-    'C:\Baz',
-    'C:\Bar',
-    'C:\Gah'
+[CmdletBinding()]
+param(
+    [string[]]$Paths = @(
+        'C:\Fonsi'
+    ),
+    [switch]$PassThru
 )
 
-$RiskPrincipals = @(
-    'Everyone',
-    'BUILTIN\Users',
-    "$env:USERDOMAIN\Domain Users",
-    'NT AUTHORITY\Authenticated Users',
-    'NT AUTHORITY\INTERACTIVE'
+$RiskPrincipalSids = @(
+    'S-1-1-0',
+    'S-1-5-32-545',
+    'S-1-5-11',
+    'S-1-5-4'
 ) | Sort-Object -Unique
 
-$WriteIndicators = @(
-    [System.Security.AccessControl.FileSystemRights]::Write,
-    [System.Security.AccessControl.FileSystemRights]::Modify,
-    [System.Security.AccessControl.FileSystemRights]::FullControl,
-    [System.Security.AccessControl.FileSystemRights]::CreateFiles,
-    [System.Security.AccessControl.FileSystemRights]::CreateDirectories,
-    [System.Security.AccessControl.FileSystemRights]::WriteData,
-    [System.Security.AccessControl.FileSystemRights]::AppendData,
-    [System.Security.AccessControl.FileSystemRights]::WriteAttributes,
-    [System.Security.AccessControl.FileSystemRights]::WriteExtendedAttributes,
-    [System.Security.AccessControl.FileSystemRights]::Delete,
-    [System.Security.AccessControl.FileSystemRights]::DeleteSubdirectoriesAndFiles,
-    [System.Security.AccessControl.FileSystemRights]::ChangePermissions,
-    [System.Security.AccessControl.FileSystemRights]::TakeOwnership
+$SafeOwnerSids = @(
+    'S-1-5-32-544',
+    'S-1-5-18'
 )
 
-$Findings = foreach ($Path in $PathsToValidate) {
+function ConvertTo-SidValue {
+    param(
+        [Parameter(Mandatory)]
+        [object]$Identity
+    )
+
+    try {
+        return $Identity.Translate([System.Security.Principal.SecurityIdentifier]).Value
+    }
+    catch {
+        return $null
+    }
+}
+
+$WriteIndicators = @(
+    'Write',
+    'Modify',
+    'FullControl',
+    'CreateFiles',
+    'CreateDirectories',
+    'WriteData',
+    'AppendData',
+    'WriteAttributes',
+    'WriteExtendedAttributes',
+    'Delete',
+    'DeleteSubdirectoriesAndFiles',
+    'ChangePermissions',
+    'TakeOwnership'
+)
+
+$Findings = foreach ($Path in $Paths) {
     if (-not (Test-Path -LiteralPath $Path)) {
         [pscustomobject]@{
             Path              = $Path
             Exists            = $false
             SafeForPathRule   = $false
+            Owner             = ''
             IdentityReference = '<path not found>'
             AccessType        = ''
             Rights            = ''
@@ -72,20 +98,39 @@ $Findings = foreach ($Path in $PathsToValidate) {
     }
 
     $Acl = Get-Acl -LiteralPath $Path
+    $OwnerFinding = $null
+    $OwnerSid = $null
+
+    try {
+        $OwnerSid = ([System.Security.Principal.NTAccount]$Acl.Owner).Translate([System.Security.Principal.SecurityIdentifier]).Value
+    }
+    catch {
+        $OwnerSid = $null
+    }
+
+    if ($OwnerSid -notin $SafeOwnerSids) {
+        $OwnerFinding = [pscustomobject]@{
+            Path              = $Path
+            Exists            = $true
+            SafeForPathRule   = $false
+            Owner             = $Acl.Owner
+            IdentityReference = '<owner>'
+            AccessType        = 'Owner'
+            Rights            = ''
+            Inherited         = $false
+            Notes             = 'Folder owner is not BUILTIN\Administrators or NT AUTHORITY\SYSTEM'
+        }
+    }
 
     $SuspiciousRules = foreach ($Ace in $Acl.Access) {
         $Identity = $Ace.IdentityReference.Value
-        $HasWriteLikeRight = $false
-
-        foreach ($Right in $WriteIndicators) {
-            if (($Ace.FileSystemRights -band $Right) -ne 0) {
-                $HasWriteLikeRight = $true
-                break
-            }
-        }
+        $IdentitySid = ConvertTo-SidValue -Identity $Ace.IdentityReference
+        $RightNames = @($Ace.FileSystemRights.ToString().Split(',') | ForEach-Object { $_.Trim() })
+        $HasWriteLikeRight = @($RightNames | Where-Object { $_ -in $WriteIndicators }).Count -gt 0
 
         $PrincipalMatch =
-            $Identity -in $RiskPrincipals -or
+            $IdentitySid -in $RiskPrincipalSids -or
+            $IdentitySid -match '-513$' -or
             $Identity -match '(^|\\)Users$' -or
             $Identity -match 'Authenticated Users$' -or
             $Identity -match 'Everyone$' -or
@@ -98,6 +143,7 @@ $Findings = foreach ($Path in $PathsToValidate) {
                 Path              = $Path
                 Exists            = $true
                 SafeForPathRule   = $false
+                Owner             = $Acl.Owner
                 IdentityReference = $Identity
                 AccessType        = $Ace.AccessControlType
                 Rights            = $Ace.FileSystemRights
@@ -107,21 +153,32 @@ $Findings = foreach ($Path in $PathsToValidate) {
         }
     }
 
-    if ($SuspiciousRules) {
+    $PathFindings = @(
+        $OwnerFinding
         $SuspiciousRules
+    ) | Where-Object { $null -ne $_ }
+
+    if ($PathFindings) {
+        $PathFindings
     }
     else {
         [pscustomobject]@{
             Path              = $Path
             Exists            = $true
             SafeForPathRule   = $true
+            Owner             = $Acl.Owner
             IdentityReference = ''
             AccessType        = ''
             Rights            = ''
             Inherited         = ''
-            Notes             = 'No obvious non-admin write-capable ACEs detected'
+            Notes             = 'No obvious non-admin write-capable ACEs or unsafe ownership detected'
         }
     }
 }
 
-$Findings | Format-Table -AutoSize
+if ($PassThru) {
+    $Findings
+}
+else {
+    $Findings | Format-Table -AutoSize
+}

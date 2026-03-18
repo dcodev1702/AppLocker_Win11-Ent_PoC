@@ -55,10 +55,7 @@ Add the following to:
 
 `GetSafePathsToAllow.ps1`
 
-- `C:\Foo\*`
-- `C:\Baz\*`
-- `C:\Bar\*`
-- `C:\Gah\*`
+- `C:\Fonsi\*`
 
 ### Important
 
@@ -70,20 +67,23 @@ If any of these paths are user-writable, they should **not** be treated as safe 
 
 ## 3. Validate and harden NTFS permissions on custom paths
 
-Before trusting the four custom install paths, confirm they are admin-write only.
+Before trusting the custom install paths, confirm they are admin-write only.
 
 Target folders:
 
-* `C:\Foo`
-* `C:\Baz`
-* `C:\Bar`
-* `C:\Gah`
+* `C:\Fonsi`
 
 ### ACL validation script
 
 [acl_validation.ps1](acl_validation.ps1)
 
-Use this script to review the four custom paths and identify non-admin write-capable ACEs that would make a path unsafe for AppLocker path rules.
+Use this script to review the custom path and identify non-admin write-capable ACEs that would make it unsafe for AppLocker path rules.
+
+You can also validate arbitrary folders directly:
+
+```powershell
+.\acl_validation.ps1 -Paths 'C:\Fonsi'
+```
 
 ---
 
@@ -96,6 +96,18 @@ Use the following script to harden the custom install paths so they can safely r
 [acl_ntfs_hardening.ps1](acl_ntfs_hardening.ps1)
 
 Use this script to back up and harden NTFS permissions on the custom install paths before treating them as AppLocker-safe locations.
+
+The script now also resets folder ownership to `BUILTIN\Administrators`, which closes a common edge case where a non-admin owner could still rewrite the ACL after hardening.
+
+### Lightweight deployment validation
+
+[Invoke-DeploymentValidation.ps1](Invoke-DeploymentValidation.ps1)
+
+Use this script after updating deployment scripts to parse all `.ps1` files in the deployment folder and exercise the ACL hardening workflow on a disposable test directory.
+
+```powershell
+.\Invoke-DeploymentValidation.ps1
+```
 
 ---
 
@@ -248,8 +260,8 @@ Use this script to review AppLocker audit-only events that show which executable
 # Last 7 days on local machine
 .\Get-AppLockerWouldBlockEvents.ps1
 
-# Last 3 days, only events mentioning C:\Foo
-.\Get-AppLockerWouldBlockEvents.ps1 -DaysBack 3 -PathMatch 'C:\Foo' -IncludeMessage
+# Last 3 days, only events mentioning C:\Fonsi
+.\Get-AppLockerWouldBlockEvents.ps1 -DaysBack 3 -PathMatch 'C:\Fonsi' -IncludeMessage
 
 # Export results
 .\Get-AppLockerWouldBlockEvents.ps1 -DaysBack 14 -ExportCsv -CsvPath .\AppLocker-Audit.csv
@@ -265,10 +277,7 @@ Deploy the policy to a small pilot group first.
 
 * Apps installed in:
 
-  * `C:\Foo`
-  * `C:\Baz`
-  * `C:\Bar`
-  * `C:\Gah`
+  * `C:\Fonsi`
 * Administrative scripts and automation tools
 * Any packaged apps users rely on
 * Installer activity
@@ -317,11 +326,8 @@ Use this as the implementation target:
   * Packaged app
 * Add safe paths:
 
-  * `C:\Foo\*`
-  * `C:\Baz\*`
-  * `C:\Bar\*`
-  * `C:\Gah\*`
-* Validate and harden NTFS ACLs on all four custom paths
+  * `C:\Fonsi\*`
+* Validate and harden NTFS ACLs on all custom paths
 * Start in Audit only
 * Review AppLocker audit events
 * Move to Enforce after pilot success
@@ -334,7 +340,7 @@ To meet this baseline:
 
 * Use AaronLocker to generate your AppLocker policy
 * Trust normal Windows locations through the AaronLocker-generated default baseline
-* Trust your four custom root install paths only after ACL hardening
+* Trust `C:\Fonsi\*` only after ACL hardening
 * Verify the generated policy still contains the **Appx** collection and default packaged app allow rule
 * Leave **DLL rules off**
 * Deploy in **Audit only** first, then enforce in phases

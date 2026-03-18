@@ -37,8 +37,8 @@ Path to the CSV export file. Default is .\AppLocker-AuditWouldBlock.csv.
 Queries the local machine for the last 7 days of AppLocker audit-only would-block events.
 
 .EXAMPLE
-.\Get-AppLockerWouldBlockEvents.ps1 -DaysBack 3 -PathMatch 'C:\Foo' -IncludeMessage
-Queries the last 3 days of events and returns only entries related to C:\Foo, including the full event message.
+.\Get-AppLockerWouldBlockEvents.ps1 -DaysBack 3 -PathMatch 'C:\Fonsi' -IncludeMessage
+Queries the last 3 days of events and returns only entries related to C:\Fonsi, including the full event message.
 
 .EXAMPLE
 .\Get-AppLockerWouldBlockEvents.ps1 -DaysBack 14 -ExportCsv -CsvPath .\AppLocker-Audit.csv
