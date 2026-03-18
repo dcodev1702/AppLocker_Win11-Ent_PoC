@@ -267,6 +267,81 @@ Use this script to review AppLocker audit-only events that show which executable
 .\Get-AppLockerWouldBlockEvents.ps1 -DaysBack 14 -ExportCsv -CsvPath .\AppLocker-Audit.csv
 ```
 
+### Signed and unsigned script validation
+
+For user-profile script testing, validate both a signed approved script and an unsigned comparison script from the same user-writable location such as `C:\Users\appuser\Downloads`.
+
+Validated test files:
+
+* `Get-AppLockerWouldBlockEvents.ps1` - signed
+* `AppLocker-LOLBin-PolicyCheck.ps1` - signed
+* `Get-BasicSystemState.ps1` - unsigned by design
+
+### Validate Authenticode state before testing
+
+```powershell
+Get-AuthenticodeSignature .\Get-AppLockerWouldBlockEvents.ps1 |
+  Format-List Status, StatusMessage, SignerCertificate
+
+Get-AuthenticodeSignature .\AppLocker-LOLBin-PolicyCheck.ps1 |
+  Format-List Status, StatusMessage, SignerCertificate
+
+Get-AuthenticodeSignature .\Get-BasicSystemState.ps1 |
+  Format-List Status, StatusMessage, SignerCertificate
+```
+
+Expected result:
+
+* `Get-AppLockerWouldBlockEvents.ps1` = `Valid`
+* `AppLocker-LOLBin-PolicyCheck.ps1` = `Valid`
+* `Get-BasicSystemState.ps1` = `NotSigned`
+
+### AaronLocker change required for signer-based script trust
+
+The signer rule for approved PowerShell scripts was implemented in AaronLocker by updating `CustomizationInputs\TrustedSigners.ps1` to use an exemplar signed script instead of a manually typed `PublisherName`.
+
+```powershell
+@{
+label = "XDR Lab-signed PowerShell scripts";
+RuleCollection = "Script";
+exemplar = "C:\Users\azureadmin\Downloads\AppLocker\AppLocker_Win11-Ent_PoC\deployment\Get-AppLockerWouldBlockEvents.ps1";
+}
+```
+
+Why this matters:
+
+* AppLocker evaluates signed `.ps1` publisher metadata differently than a raw certificate subject string in some cases
+* Using `exemplar` lets AaronLocker derive the publisher condition from the signed script itself
+* This was the change that made the signed scripts match the effective Script publisher rule correctly
+
+### Execute signed and unsigned test scripts
+
+```powershell
+powershell.exe -ExecutionPolicy Bypass -File .\Get-AppLockerWouldBlockEvents.ps1 -DaysBack 1
+powershell.exe -ExecutionPolicy Bypass -File .\AppLocker-LOLBin-PolicyCheck.ps1
+powershell.exe -ExecutionPolicy Bypass -File .\Get-BasicSystemState.ps1
+```
+
+### Review resulting AppLocker audit events
+
+```powershell
+Get-WinEvent -FilterHashtable @{
+  LogName = 'Microsoft-Windows-AppLocker/MSI and Script'
+  Id = 8006
+  StartTime = (Get-Date).AddMinutes(-15)
+} |
+Where-Object {
+  $_.Message -match 'Get-AppLockerWouldBlockEvents\.ps1|Get-BasicSystemState\.ps1|AppLocker-LOLBin-PolicyCheck\.ps1'
+} |
+Select-Object TimeCreated, Message |
+Format-List
+```
+
+Expected result after policy refresh:
+
+* The signed scripts run without generating new 8006 events
+* The unsigned script still runs in Audit mode but generates an 8006 event showing it would be blocked if enforcement were enabled
+
 ---
 
 ## 11. Pilot deployment

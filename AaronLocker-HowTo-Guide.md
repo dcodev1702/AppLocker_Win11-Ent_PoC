@@ -108,6 +108,82 @@ Publisher rules use digital signatures to authorize software and are the most fl
 }
 ```
 
+**Example - Trusting Signed PowerShell Scripts In User-Writable Paths**:
+```powershell
+# Use an exemplar signed script so AaronLocker derives the exact publisher metadata
+# that AppLocker will evaluate for .ps1 files at runtime.
+@{
+   label = "XDR Lab-signed PowerShell scripts";
+   RuleCollection = "Script";
+   exemplar = "C:\Users\azureadmin\Downloads\AppLocker\AppLocker_Win11-Ent_PoC\deployment\Get-AppLockerWouldBlockEvents.ps1";
+}
+```
+
+This pattern was used for the PowerShell script validation workflow in this project. An earlier attempt used a manually typed `PublisherName` based on the certificate subject, but AppLocker evaluated the signed `.ps1` with different publisher metadata than expected. Using `exemplar` fixed the mismatch because AaronLocker derived the signer data from the signed script itself.
+
+### Signed And Unsigned Script Validation
+
+For standard-user script testing in user-writable paths such as `C:\Users\appuser\Downloads`, the following model was validated:
+
+1. Sign the approved script with the lab code-signing certificate
+2. Leave the comparison script unsigned
+3. Add the signer rule in `CustomizationInputs\TrustedSigners.ps1` by using an `exemplar`
+4. Regenerate and redeploy the AaronLocker policy
+5. Validate the scripts from the user profile while the Script rule collection remains in **Audit only**
+
+The validated test files were:
+
+* `deployment\Get-AppLockerWouldBlockEvents.ps1` - signed and expected to match the signer rule
+* `deployment\Get-BasicSystemState.ps1` - unsigned and expected to generate 8006 audit events
+* `AppLocker-LOLBin-PolicyCheck.ps1` - signed and expected to match the signer rule
+
+Use the following commands to validate Authenticode status before testing AppLocker behavior:
+
+```powershell
+Get-AuthenticodeSignature .\Get-AppLockerWouldBlockEvents.ps1 |
+   Format-List Status, StatusMessage, SignerCertificate
+
+Get-AuthenticodeSignature .\Get-BasicSystemState.ps1 |
+   Format-List Status, StatusMessage, SignerCertificate
+
+Get-AuthenticodeSignature .\AppLocker-LOLBin-PolicyCheck.ps1 |
+   Format-List Status, StatusMessage, SignerCertificate
+```
+
+Expected result:
+
+* `Get-AppLockerWouldBlockEvents.ps1` = `Valid`
+* `AppLocker-LOLBin-PolicyCheck.ps1` = `Valid`
+* `Get-BasicSystemState.ps1` = `NotSigned`
+
+Run the scripts from the standard-user session with explicit execution policy bypass to isolate AppLocker behavior from PowerShell execution policy:
+
+```powershell
+powershell.exe -ExecutionPolicy Bypass -File .\Get-AppLockerWouldBlockEvents.ps1 -DaysBack 1
+powershell.exe -ExecutionPolicy Bypass -File .\AppLocker-LOLBin-PolicyCheck.ps1
+powershell.exe -ExecutionPolicy Bypass -File .\Get-BasicSystemState.ps1
+```
+
+Review AppLocker script audit events after testing:
+
+```powershell
+Get-WinEvent -FilterHashtable @{
+   LogName = 'Microsoft-Windows-AppLocker/MSI and Script'
+   Id = 8006
+   StartTime = (Get-Date).AddMinutes(-15)
+} |
+Where-Object {
+   $_.Message -match 'Get-AppLockerWouldBlockEvents\.ps1|Get-BasicSystemState\.ps1|AppLocker-LOLBin-PolicyCheck\.ps1'
+} |
+Select-Object TimeCreated, Message |
+Format-List
+```
+
+Expected result after policy refresh:
+
+* Signed scripts do not generate new 8006 audit events
+* The unsigned script still generates an 8006 audit event from the same user-writable path
+
 ### 2. Path Rules
 
 Path rules authorize execution based on file system location. AaronLocker uses path rules for trusted system directories while explicitly excluding user-writable subdirectories.
