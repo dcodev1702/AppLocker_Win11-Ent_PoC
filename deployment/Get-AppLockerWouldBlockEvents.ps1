@@ -26,6 +26,9 @@ Optional text filter that limits results to events whose path or message contain
 .PARAMETER IncludeMessage
 Includes the full event message in the output object.
 
+.PARAMETER DetailedOutput
+Displays each event as a formatted list so the blocked file or package is easier to read without table truncation.
+
 .PARAMETER ExportCsv
 Exports the collected results to a CSV file.
 
@@ -48,6 +51,10 @@ Queries the last 14 days of events and exports the results to a CSV file.
 .\Get-AppLockerWouldBlockEvents.ps1 -ComputerName SERVER01,SERVER02 -DaysBack 7
 Queries multiple remote computers for AppLocker audit-only would-block events from the last 7 days.
 
+.EXAMPLE
+.\Get-AppLockerWouldBlockEvents.ps1 -DetailedOutput
+Displays each event as a detailed list including the exact file path or package that would be blocked.
+
 .USAGE
 Run the script from PowerShell with any needed parameters to review AppLocker audit-only results before enforcement. Use -ComputerName for remote systems, -PathMatch to narrow results, -IncludeMessage for more detail, and -ExportCsv to save the output.
 #>
@@ -59,6 +66,7 @@ param(
     [string[]]$ComputerName = @($env:COMPUTERNAME),
     [string]$PathMatch,
     [switch]$IncludeMessage,
+    [switch]$DetailedOutput,
     [switch]$ExportCsv,
     [string]$CsvPath = ".\AppLocker-AuditWouldBlock.csv"
 )
@@ -78,6 +86,48 @@ $Logs = @(
 )
 
 $StartTime = (Get-Date).AddDays(-1 * $DaysBack)
+
+function Get-BlockedItemValue {
+    param(
+        [hashtable]$EventData,
+        [System.Diagnostics.Eventing.Reader.EventRecord]$EventRecord
+    )
+
+    foreach ($candidate in @(
+        'FilePath',
+        'File Name',
+        'FileName',
+        'Path',
+        'Package',
+        'PackageFamilyName'
+    )) {
+        if ($EventData.ContainsKey($candidate) -and $EventData[$candidate]) {
+            return $EventData[$candidate]
+        }
+    }
+
+    $propertyValues = @($EventRecord.Properties | ForEach-Object { $_.Value })
+
+    $stringValues = @(
+        $propertyValues |
+            Where-Object { $_ -is [string] -and -not [string]::IsNullOrWhiteSpace($_) } |
+            Select-Object -Unique
+    )
+
+    [array]::Reverse($stringValues)
+
+    foreach ($value in $stringValues) {
+        if ($value -match '^(?:[A-Za-z]:\\|%[A-Za-z0-9_]+%\\|\\\\)') {
+            return $value
+        }
+
+        if ($value -match '^[A-Za-z0-9][A-Za-z0-9._-]*_[A-Za-z0-9._-]+__[A-Za-z0-9]+$') {
+            return $value
+        }
+    }
+
+    return if ($stringValues.Count -gt 0) { $stringValues[0] } else { $null }
+}
 
 function Get-AppLockerWouldBlockEvents {
     param(
@@ -108,24 +158,7 @@ function Get-AppLockerWouldBlockEvents {
                         }
                     }
 
-                    $fileOrPackage = $null
-                    foreach ($candidate in @(
-                        'FilePath',
-                        'File Name',
-                        'FileName',
-                        'Path',
-                        'Package',
-                        'PackageFamilyName'
-                    )) {
-                        if ($eventData.ContainsKey($candidate) -and $eventData[$candidate]) {
-                            $fileOrPackage = $eventData[$candidate]
-                            break
-                        }
-                    }
-
-                    if (-not $fileOrPackage) {
-                        $fileOrPackage = if ($_.Properties.Count -gt 0) { $_.Properties[0].Value } else { $null }
-                    }
+                    $fileOrPackage = Get-BlockedItemValue -EventData $eventData -EventRecord $_
 
                     if ($PathMatch) {
                         $textToSearch = @(
@@ -148,7 +181,7 @@ function Get-AppLockerWouldBlockEvents {
                         SID             = if ($eventData.ContainsKey('Sid')) { $eventData['Sid'] } else { $null }
                         RuleName        = if ($eventData.ContainsKey('RuleName')) { $eventData['RuleName'] } else { $null }
                         RuleId          = if ($eventData.ContainsKey('RuleId')) { $eventData['RuleId'] } else { $null }
-                        FileOrPackage   = $fileOrPackage
+                        BlockedItem     = $fileOrPackage
                         PolicyName      = if ($eventData.ContainsKey('PolicyName')) { $eventData['PolicyName'] } else { $null }
                         Message         = if ($IncludeMessage) { $_.Message } else { $null }
                     }
@@ -177,9 +210,16 @@ if (-not $Results) {
     return
 }
 
-$Results |
-    Select-Object TimeCreated, ComputerName, EventId, WouldBlockType, LogName, User, FileOrPackage, RuleName |
-    Format-Table -AutoSize
+if ($DetailedOutput) {
+    $Results |
+        Select-Object TimeCreated, ComputerName, EventId, WouldBlockType, User, BlockedItem, RuleName, PolicyName, Message |
+        Format-List
+}
+else {
+    $Results |
+        Select-Object TimeCreated, ComputerName, EventId, WouldBlockType, User, @{Name = 'WhatWouldBeBlocked'; Expression = { $_.BlockedItem } }, RuleName |
+        Format-Table -Wrap -AutoSize
+}
 
 "`nSummary:`n"
 $Results |
