@@ -9,11 +9,13 @@
     These are SAFE, benign commands that simply test if the binaries can execute.
     If AppLocker is working correctly, each test should FAIL with an access denied error.
     
-    Works in both Enforce and Audit modes by checking event IDs:
-      8003 = Allowed (audit mode will log this for items that would be blocked)
-      8004 = Blocked (enforce mode)
-      8006 = Policy applied
-      8007 = Policy not applied
+        Works in both Enforce and Audit modes by checking event IDs:
+            8003 = EXE or DLL allowed in audit mode (would be blocked if enforced)
+            8004 = EXE or DLL blocked in enforce mode
+            8006 = MSI or Script allowed in audit mode (would be blocked if enforced)
+            8007 = MSI or Script blocked in enforce mode
+            8021 = Packaged app allowed in audit mode (would be blocked if enforced)
+            8024 = Packaged app deployment allowed in audit mode (would be blocked if enforced)
     
 .NOTES
     Author: DCODEV1702 & Claude Opus 4.5
@@ -36,14 +38,20 @@ $ErrorActionPreference = "SilentlyContinue"
 $languageMode = $ExecutionContext.SessionState.LanguageMode
 if ($languageMode -eq "ConstrainedLanguage") {
     Write-Host "ℹ️  Running in Constrained Language Mode (CLM)" -ForegroundColor Cyan
-    Write-Host "   This is expected when AppLocker is enforcing - script is CLM-compatible.`n" -ForegroundColor DarkCyan
+    Write-Host "   This is expected when AppLocker is enforcing. Interactive PowerShell is constrained, while trusted script files can still run in Full Language mode.`n" -ForegroundColor DarkCyan
 } elseif ($languageMode -eq "FullLanguage") {
     Write-Host "ℹ️  Running in Full Language Mode" -ForegroundColor Gray
-    Write-Host "   AppLocker may not be enforcing, or you may be running as admin.`n" -ForegroundColor DarkGray
+    Write-Host "   This can happen when the script is trusted by policy, AppLocker script enforcement is not active for this file, or you are running elevated.`n" -ForegroundColor DarkGray
 }
 
 # AppLocker Event IDs to check
-$AppLockerEventIDs = @(8003, 8004, 8006, 8007)
+$AppLockerEventIDs = @(8003, 8004, 8006, 8007, 8021, 8024)
+$AppLockerLogs = @(
+    'Microsoft-Windows-AppLocker/EXE and DLL'
+    'Microsoft-Windows-AppLocker/MSI and Script'
+    'Microsoft-Windows-AppLocker/Packaged app-Execution'
+    'Microsoft-Windows-AppLocker/Packaged app-Deployment'
+)
 
 # Colors for output
 function Write-TestResult {
@@ -81,37 +89,51 @@ function Get-AppLockerEvents {
     $events = @()
     $startTime = (Get-Date).AddSeconds(-$SecondsBack)
     
-    # Check EXE and DLL log
-    $exeEvents = Get-WinEvent -FilterHashtable @{
-        LogName = 'Microsoft-Windows-AppLocker/EXE and DLL'
-        ID = $AppLockerEventIDs
-    } -MaxEvents 10 -ErrorAction SilentlyContinue | 
-    Where-Object { $_.TimeCreated -gt $startTime -and $_.Message -match $BinaryName }
-    
-    if ($exeEvents) { $events += $exeEvents }
-    
-    # Also check MSI and Script log for completeness
-    $msiEvents = Get-WinEvent -FilterHashtable @{
-        LogName = 'Microsoft-Windows-AppLocker/MSI and Script'
-        ID = $AppLockerEventIDs
-    } -MaxEvents 10 -ErrorAction SilentlyContinue | 
-    Where-Object { $_.TimeCreated -gt $startTime -and $_.Message -match $BinaryName }
-    
-    if ($msiEvents) { $events += $msiEvents }
+    foreach ($logName in $AppLockerLogs) {
+        $matchingEvents = Get-WinEvent -FilterHashtable @{
+            LogName = $logName
+            ID = $AppLockerEventIDs
+        } -MaxEvents 10 -ErrorAction SilentlyContinue |
+        Where-Object { $_.TimeCreated -gt $startTime -and $_.Message -match $BinaryName }
+
+        if ($matchingEvents) { $events += $matchingEvents }
+    }
     
     return $events
 }
 
 function Get-EventDescription {
-    param([int]$EventId)
+    param(
+        [int]$EventId,
+        [string]$LogName
+    )
     
-    switch ($EventId) {
-        8003 { return "ALLOWED (Audit)" }
-        8004 { return "BLOCKED (Enforce)" }
-        8006 { return "Policy Applied" }
-        8007 { return "Policy Not Applied" }
-        default { return "Unknown ($EventId)" }
+    switch ($LogName) {
+        'Microsoft-Windows-AppLocker/EXE and DLL' {
+            switch ($EventId) {
+                8003 { return 'EXE or DLL would be blocked (Audit)' }
+                8004 { return 'EXE or DLL blocked (Enforce)' }
+            }
+        }
+        'Microsoft-Windows-AppLocker/MSI and Script' {
+            switch ($EventId) {
+                8006 { return 'MSI or Script would be blocked (Audit)' }
+                8007 { return 'MSI or Script blocked (Enforce)' }
+            }
+        }
+        'Microsoft-Windows-AppLocker/Packaged app-Execution' {
+            switch ($EventId) {
+                8021 { return 'Packaged app would be blocked (Audit)' }
+            }
+        }
+        'Microsoft-Windows-AppLocker/Packaged app-Deployment' {
+            switch ($EventId) {
+                8024 { return 'Packaged app deployment would be blocked (Audit)' }
+            }
+        }
     }
+
+    return "Unknown ($EventId)"
 }
 
 function Find-MSBuildInstances {
@@ -208,10 +230,12 @@ if ($isAdmin) {
 }
 
 Write-Host "Checking Event IDs: $($AppLockerEventIDs -join ', ')" -ForegroundColor Gray
-Write-Host "  8003 = Allowed (audit mode logs what would be blocked)" -ForegroundColor DarkGray
-Write-Host "  8004 = Blocked (enforce mode)" -ForegroundColor DarkGray
-Write-Host "  8006 = Policy applied" -ForegroundColor DarkGray
-Write-Host "  8007 = Policy not applied" -ForegroundColor DarkGray
+Write-Host "  8003 = EXE or DLL would be blocked (audit mode)" -ForegroundColor DarkGray
+Write-Host "  8004 = EXE or DLL blocked (enforce mode)" -ForegroundColor DarkGray
+Write-Host "  8006 = MSI or Script would be blocked (audit mode)" -ForegroundColor DarkGray
+Write-Host "  8007 = MSI or Script blocked (enforce mode)" -ForegroundColor DarkGray
+Write-Host "  8021 = Packaged app would be blocked (audit mode)" -ForegroundColor DarkGray
+Write-Host "  8024 = Packaged app deployment would be blocked (audit mode)" -ForegroundColor DarkGray
 Write-Host "`n"
 
 $testResults = @()
@@ -248,13 +272,12 @@ Start-Sleep -Milliseconds 500  # Brief pause to let events log
 $applockerEvents = Get-AppLockerEvents -BinaryName "cipher"
 if ($applockerEvents) {
     $latestEvent = $applockerEvents | Sort-Object TimeCreated -Descending | Select-Object -First 1
-    $eventInfo = "ID $($latestEvent.Id) - $(Get-EventDescription $latestEvent.Id)"
+    $eventInfo = "ID $($latestEvent.Id) - $(Get-EventDescription -EventId $latestEvent.Id -LogName $latestEvent.LogName)"
     
-    # 8004 = blocked in enforce mode, 8003 in audit mode means it would have been blocked
-    if ($latestEvent.Id -eq 8004) {
+    if ($latestEvent.Id -in @(8004, 8007)) {
         $blocked = $true
         $details = "Blocked by AppLocker (Enforce mode)"
-    } elseif ($latestEvent.Id -eq 8003 -and $latestEvent.Message -match "would have been blocked") {
+    } elseif ($latestEvent.Id -in @(8003, 8006, 8021, 8024) -and $latestEvent.Message -match "would have been blocked") {
         $blocked = $false  # Actually ran, but audit logged it
         $details = "Allowed but logged (Audit mode) - WOULD be blocked in Enforce"
         $eventInfo += " [AUDIT MODE - Would block]"
@@ -307,12 +330,12 @@ Start-Sleep -Milliseconds 500
 $applockerEvents = Get-AppLockerEvents -BinaryName "mshta"
 if ($applockerEvents) {
     $latestEvent = $applockerEvents | Sort-Object TimeCreated -Descending | Select-Object -First 1
-    $eventInfo = "ID $($latestEvent.Id) - $(Get-EventDescription $latestEvent.Id)"
+    $eventInfo = "ID $($latestEvent.Id) - $(Get-EventDescription -EventId $latestEvent.Id -LogName $latestEvent.LogName)"
     
-    if ($latestEvent.Id -eq 8004) {
+    if ($latestEvent.Id -in @(8004, 8007)) {
         $blocked = $true
         $details = "Blocked by AppLocker (Enforce mode)"
-    } elseif ($latestEvent.Id -eq 8003 -and $latestEvent.Message -match "would have been blocked") {
+    } elseif ($latestEvent.Id -in @(8003, 8006, 8021, 8024) -and $latestEvent.Message -match "would have been blocked") {
         $blocked = $false
         $details = "Allowed but logged (Audit mode) - WOULD be blocked in Enforce"
         $eventInfo += " [AUDIT MODE - Would block]"
@@ -389,12 +412,12 @@ if ($null -eq $msbuildInstances -or $msbuildInstances.Count -eq 0) {
         $applockerEvents = Get-AppLockerEvents -BinaryName "msbuild"
         if ($applockerEvents) {
             $latestEvent = $applockerEvents | Sort-Object TimeCreated -Descending | Select-Object -First 1
-            $eventInfo = "ID $($latestEvent.Id) - $(Get-EventDescription $latestEvent.Id)"
+            $eventInfo = "ID $($latestEvent.Id) - $(Get-EventDescription -EventId $latestEvent.Id -LogName $latestEvent.LogName)"
             
-            if ($latestEvent.Id -eq 8004) {
+            if ($latestEvent.Id -in @(8004, 8007)) {
                 $blocked = $true
                 $details = "Blocked by AppLocker (Enforce mode)"
-            } elseif ($latestEvent.Id -eq 8003 -and $latestEvent.Message -match "would have been blocked") {
+            } elseif ($latestEvent.Id -in @(8003, 8006, 8021, 8024) -and $latestEvent.Message -match "would have been blocked") {
                 $blocked = $false
                 $details = "Allowed but logged (Audit mode) - WOULD be blocked in Enforce"
                 $eventInfo += " [AUDIT MODE - Would block]"
@@ -443,12 +466,12 @@ Start-Sleep -Milliseconds 500
 $applockerEvents = Get-AppLockerEvents -BinaryName "cscript"
 if ($applockerEvents) {
     $latestEvent = $applockerEvents | Sort-Object TimeCreated -Descending | Select-Object -First 1
-    $eventInfo = "ID $($latestEvent.Id) - $(Get-EventDescription $latestEvent.Id)"
+    $eventInfo = "ID $($latestEvent.Id) - $(Get-EventDescription -EventId $latestEvent.Id -LogName $latestEvent.LogName)"
     
-    if ($latestEvent.Id -eq 8004) {
+    if ($latestEvent.Id -in @(8004, 8007)) {
         $blocked = $true
         $details = "Blocked by AppLocker (Enforce mode)"
-    } elseif ($latestEvent.Id -eq 8003 -and $latestEvent.Message -match "would have been blocked") {
+    } elseif ($latestEvent.Id -in @(8003, 8006, 8021, 8024) -and $latestEvent.Message -match "would have been blocked") {
         $blocked = $false
         $details = "Allowed but logged (Audit mode) - WOULD be blocked in Enforce"
         $eventInfo += " [AUDIT MODE - Would block]"
@@ -519,21 +542,27 @@ Write-Host "Recent AppLocker Events (last 30 seconds):" -ForegroundColor White
 Write-Host ""
 
 # Show recent events for all tested binaries
-$recentEvents = Get-WinEvent -FilterHashtable @{
-    LogName = 'Microsoft-Windows-AppLocker/EXE and DLL'
-    ID = $AppLockerEventIDs
-} -MaxEvents 20 -ErrorAction SilentlyContinue | 
-Where-Object { $_.TimeCreated -gt (Get-Date).AddSeconds(-30) } |
+$recentEvents = foreach ($logName in $AppLockerLogs) {
+    Get-WinEvent -FilterHashtable @{
+        LogName = $logName
+        ID = $AppLockerEventIDs
+    } -MaxEvents 20 -ErrorAction SilentlyContinue |
+    Where-Object { $_.TimeCreated -gt (Get-Date).AddSeconds(-30) }
+}
+
+$recentEvents = $recentEvents |
 Sort-Object TimeCreated -Descending |
 Select-Object -First 10
 
 if ($recentEvents) {
     foreach ($recentRecord in $recentEvents) {
         $color = switch ($recentRecord.Id) {
-            8003 { "Yellow" }   # Allowed/Audit
-            8004 { "Green" }    # Blocked
-            8006 { "Cyan" }     # Policy applied
-            8007 { "Red" }      # Policy not applied
+            8003 { "Yellow" }
+            8004 { "Green" }
+            8006 { "Yellow" }
+            8007 { "Green" }
+            8021 { "Yellow" }
+            8024 { "Yellow" }
             default { "Gray" }
         }
         
@@ -542,7 +571,7 @@ if ($recentEvents) {
         
         Write-Host "  $($recentRecord.TimeCreated.ToString('HH:mm:ss')) " -NoNewline
         Write-Host "[$($recentRecord.Id)] " -ForegroundColor $color -NoNewline
-        Write-Host "$(Get-EventDescription $recentRecord.Id) " -ForegroundColor $color -NoNewline
+        Write-Host "$(Get-EventDescription -EventId $recentRecord.Id -LogName $recentRecord.LogName) " -ForegroundColor $color -NoNewline
         Write-Host "- $filename" -ForegroundColor Gray
     }
 } else {
@@ -557,55 +586,13 @@ Write-Host ""
 Write-Host "---------------------------------------------------------------------" -ForegroundColor DarkGray
 Write-Host "Event Log Location:" -ForegroundColor Gray
 Write-Host "  Event Viewer > Applications and Services Logs > Microsoft >" -ForegroundColor Gray
-Write-Host "  Windows > AppLocker > EXE and DLL" -ForegroundColor Gray
+Write-Host "  Windows > AppLocker > EXE and DLL / MSI and Script / Packaged app-*" -ForegroundColor Gray
 Write-Host ""
 Write-Host "Event IDs:" -ForegroundColor Gray
-Write-Host "  8003 = Allowed (in audit mode, shows what WOULD be blocked)" -ForegroundColor Yellow
-Write-Host "  8004 = Blocked (enforce mode - rule is working!)" -ForegroundColor Green
-Write-Host "  8006 = Policy applied successfully" -ForegroundColor Cyan
-Write-Host "  8007 = Policy not applied (check Application Identity service)" -ForegroundColor Red
+Write-Host "  8003 = EXE or DLL would be blocked (audit mode)" -ForegroundColor Yellow
+Write-Host "  8004 = EXE or DLL blocked (enforce mode - rule is working)" -ForegroundColor Green
+Write-Host "  8006 = MSI or Script would be blocked (audit mode)" -ForegroundColor Yellow
+Write-Host "  8007 = MSI or Script blocked (enforce mode - rule is working)" -ForegroundColor Green
+Write-Host "  8021 = Packaged app would be blocked (audit mode)" -ForegroundColor Yellow
+Write-Host "  8024 = Packaged app deployment would be blocked (audit mode)" -ForegroundColor Yellow
 Write-Host "---------------------------------------------------------------------" -ForegroundColor DarkGray
-
-# SIG # Begin signature block
-# MIIHogYJKoZIhvcNAQcCoIIHkzCCB48CAQExDzANBglghkgBZQMEAgEFADB5Bgor
-# BgEEAYI3AgEEoGswaTA0BgorBgEEAYI3AgEeMCYCAwEAAAQQH8w7YFlLCE63JNLG
-# KX7zUQIBAAIBAAIBAAIBAAIBADAxMA0GCWCGSAFlAwQCAQUABCAecJcDM6ZR7QI/
-# mlext/5e6q+iQZil70LHeUWtJKD/naCCBGgwggRkMIICzKADAgECAhBVeo1yT3Ey
-# oUNaMtF/B39gMA0GCSqGSIb3DQEBCwUAMEoxCzAJBgNVBAYTAlVTMRAwDgYDVQQK
-# DAdYRFIgTGFiMSkwJwYDVQQDDCBYRFIgTGFiIEFwcExvY2tlciBTY3JpcHQgU2ln
-# bmluZzAeFw0yNjAzMTgwNTUwMjhaFw0yODAzMTgwNjAwMjhaMEoxCzAJBgNVBAYT
-# AlVTMRAwDgYDVQQKDAdYRFIgTGFiMSkwJwYDVQQDDCBYRFIgTGFiIEFwcExvY2tl
-# ciBTY3JpcHQgU2lnbmluZzCCAaIwDQYJKoZIhvcNAQEBBQADggGPADCCAYoCggGB
-# AMGYdxK8WA0bxBDZJMzgQ2VKR1+RFMLYCQavnqIagHvhf+tPx3a/POIJy7Gf32Me
-# 150f/LJeYi8ypOu9kPp5VxdOPE029/pqXaVdUKwRb9zwkpfn3++dIw57s5EF0b7U
-# 8w4lzuHCgzifilNl1MKIylOBD+PgnjK0VjAvgaQ8J8mPpqHWIsBEUY0lRkQoUT+K
-# UGPoa0eQDnTTreok0GY1XDliS+xtDJbmXlQAQW6lv8HRsTT4siF6egJh2M9HA5h8
-# 0VO/5vHJsiq71H0dW4mtgMu+rUBLdgj+cijO0KaauGhwqIyOl/nmol6api4cQomF
-# ZxqMN1YSc66BU63PGlVWlctpDaNUW2whfA1WMgu9/Yn/IYCWzy0bLOzfDnCCrRAu
-# qaZHnsBe0n3aFf7Rlq9J8U3YhWNKP38TcWktG52k1HsrVrw0z6xWxgzAbQgWerJV
-# L75sF5ZN7iBeSCAtLHX1IU9gHYzh5EAx9cJ4LiZt3pCKmjb8tsWGKpizfwi7XMzT
-# /QIDAQABo0YwRDAOBgNVHQ8BAf8EBAMCB4AwEwYDVR0lBAwwCgYIKwYBBQUHAwMw
-# HQYDVR0OBBYEFMUgfqv67KkYKizqVxfgGABZ09kfMA0GCSqGSIb3DQEBCwUAA4IB
-# gQBaRwDBixHFYBUwYMBn3dnKRb6fN0TKeJlEaHqfVqEMgOXJs4YFPfp/C5PK0f0G
-# M9DFGlwH/7Q9ddIdMP2cMOYs3aKjQktFtfWjX5utvzAFwCYZuEoVKxB14hG52Plu
-# 70+Pgel3i6SGvxn963boiwEOvAM5PFJfA7WLsW/fY4av9Lg+PyRaBxTRoy3I39CZ
-# AYO7otTcPTDKiAGe1eM1uOYundkXvijH8qRuxtM148C+P2kg9vSHZCmdx9PcMg4+
-# VcHY/CmaDExLbmuYODhXqKFE2IpTdv2fUc86xvrHq9Icc3c9dc0tQkr0NktbtCSv
-# Oqp350wM4tUchM+JNVuQLsq+y5rE0meaUKLqXOYHhc9RFyd0vYYw1XL163yDsFW/
-# lGcSjguua0dGEAwCPSEtYjFqBu2vS2OT1wh2lzWpY7X3VtCrIKSRfeBdVBU7Fj0N
-# Mbtx9MjzIjllRaor19Uw/zqd4oEmdI6nruqYw4R7N1C2VUSdlGnbV6CccQ+EBXUc
-# kNIxggKQMIICjAIBATBeMEoxCzAJBgNVBAYTAlVTMRAwDgYDVQQKDAdYRFIgTGFi
-# MSkwJwYDVQQDDCBYRFIgTGFiIEFwcExvY2tlciBTY3JpcHQgU2lnbmluZwIQVXqN
-# ck9xMqFDWjLRfwd/YDANBglghkgBZQMEAgEFAKCBhDAYBgorBgEEAYI3AgEMMQow
-# CKACgAChAoAAMBkGCSqGSIb3DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcC
-# AQsxDjAMBgorBgEEAYI3AgEVMC8GCSqGSIb3DQEJBDEiBCA+2JBKmX3FMGy14z5M
-# OwcSP0+jLlgCuGIeQ1dwdzz6SjANBgkqhkiG9w0BAQEFAASCAYCDLUpKG2x8ndGi
-# ml6twBjmYVZYZPj8gER15bE+lm8OxitbgXC6oKsDBT7beKIkm7m/yoQ4ZZsK/RhH
-# cwPbp0UpuxFyKi6gToo56UzISPbu/Ly/rX6wJ/F0VmYCoRKkASQASO7FwXLlNNvE
-# Nxt5Z7G4WLMITzGJfeDphTSpJfm8JIYNG5B7dzAk/f3x1YDAcV+7PxN16UB3VgX1
-# azsTdmJtakig6Oz7OSGeubX2uWPSwoXtiT1HqM0L/pUc6u2o5p85JR1xiWM650gW
-# CD5ZkwiVIn0l4gm0i2qs4Di3Je5r1hBYE82PnKhj54wJKpuZb66sFf6/DGVDjvES
-# VBItrjdMVbWVCbY3M8mi5w5so0OqrWrej1DreCIceX6hp+I9Nq1kjpx/JYNhBhpQ
-# hLUv0MZqk5Cqyn82v401uMitVugVDTDT6zLb3uI3WBYOCzMKrp0/XrG55OX+HYWM
-# /Wnvaqexp3Mz7Q8KaHs7lWrtcJK8eUmLkq6kFEx2FPyBtZGhCZA=
-# SIG # End signature block
