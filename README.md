@@ -313,6 +313,12 @@ gpresult /r /scope computer
 .\AppLocker-LOLBin-PolicyCheck.ps1
 ```
 
+Notes:
+
+- `AppLocker-LOLBin-PolicyCheck.ps1` is intentionally **unsigned** in this repository so it can validate AppLocker behavior from a user-writable path without signer trust affecting results.
+- The script reports whether it is running in `ConstrainedLanguage` or `FullLanguage` and explains that interactive PowerShell can remain constrained while trusted script files may still run in Full Language mode.
+- The validation logic checks AppLocker audit and enforce events across `EXE and DLL`, `MSI and Script`, and packaged app logs, including event IDs `8003`, `8004`, `8006`, `8007`, `8021`, and `8024`.
+
 <img width="452" height="985" alt="image" src="https://github.com/user-attachments/assets/15fd585e-3fd9-454c-9d1b-abaeb8e4587a" />
 
 ### [CLIENT 🖥️] - Observe the results and tune AppLocker policy rules using AaronLocker and Claude as necessary.

@@ -274,7 +274,7 @@ For user-profile script testing, validate both a signed approved script and an u
 Validated test files:
 
 * `Get-AppLockerWouldBlockEvents.ps1` - signed
-* `AppLocker-LOLBin-PolicyCheck.ps1` - signed
+* `AppLocker-LOLBin-PolicyCheck.ps1` - unsigned by design
 * `Get-BasicSystemState.ps1` - unsigned by design
 
 ### Validate Authenticode state before testing
@@ -293,7 +293,7 @@ Get-AuthenticodeSignature .\Get-BasicSystemState.ps1 |
 Expected result:
 
 * `Get-AppLockerWouldBlockEvents.ps1` = `Valid`
-* `AppLocker-LOLBin-PolicyCheck.ps1` = `Valid`
+* `AppLocker-LOLBin-PolicyCheck.ps1` = `NotSigned`
 * `Get-BasicSystemState.ps1` = `NotSigned`
 
 ### AaronLocker change required for signer-based script trust
@@ -339,8 +339,9 @@ Format-List
 
 Expected result after policy refresh:
 
-* The signed scripts run without generating new 8006 events
-* The unsigned script still runs in Audit mode but generates an 8006 event showing it would be blocked if enforcement were enabled
+* `Get-AppLockerWouldBlockEvents.ps1` runs without generating new 8006 events when the signer rule matches
+* `Get-BasicSystemState.ps1` still runs in Audit mode and generates an 8006 event showing it would be blocked if enforcement were enabled
+* `AppLocker-LOLBin-PolicyCheck.ps1` still runs in Audit mode and generates an 8006 event showing it would be blocked if enforcement were enabled because it is intentionally unsigned
 
 ---
 

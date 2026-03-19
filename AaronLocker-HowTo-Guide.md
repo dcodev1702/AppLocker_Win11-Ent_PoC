@@ -135,7 +135,7 @@ The validated test files were:
 
 * `deployment\Get-AppLockerWouldBlockEvents.ps1` - signed and expected to match the signer rule
 * `deployment\Get-BasicSystemState.ps1` - unsigned and expected to generate 8006 audit events
-* `AppLocker-LOLBin-PolicyCheck.ps1` - signed and expected to match the signer rule
+* `AppLocker-LOLBin-PolicyCheck.ps1` - unsigned and expected to generate 8006 audit events while still validating LOLBin EXE/MSI/packaged-app outcomes
 
 Use the following commands to validate Authenticode status before testing AppLocker behavior:
 
@@ -153,7 +153,7 @@ Get-AuthenticodeSignature .\AppLocker-LOLBin-PolicyCheck.ps1 |
 Expected result:
 
 * `Get-AppLockerWouldBlockEvents.ps1` = `Valid`
-* `AppLocker-LOLBin-PolicyCheck.ps1` = `Valid`
+* `AppLocker-LOLBin-PolicyCheck.ps1` = `NotSigned`
 * `Get-BasicSystemState.ps1` = `NotSigned`
 
 Run the scripts from the standard-user session with explicit execution policy bypass to isolate AppLocker behavior from PowerShell execution policy:
@@ -181,8 +181,9 @@ Format-List
 
 Expected result after policy refresh:
 
-* Signed scripts do not generate new 8006 audit events
-* The unsigned script still generates an 8006 audit event from the same user-writable path
+* `Get-AppLockerWouldBlockEvents.ps1` does not generate new 8006 audit events when the signer rule matches
+* `Get-BasicSystemState.ps1` still generates an 8006 audit event from the same user-writable path
+* `AppLocker-LOLBin-PolicyCheck.ps1` still generates an 8006 audit event from the same user-writable path because it is intentionally unsigned
 
 ### 2. Path Rules
 
@@ -654,12 +655,20 @@ SUMMARY: 5/5 tests passed
 | 8005 | MSI and Script | Script/MSI was allowed |
 | 8006 | MSI and Script | Script/MSI would have been blocked (Audit) |
 | 8007 | MSI and Script | Script/MSI was blocked (Enforce) |
+| 8021 | Packaged app-Execution | Packaged app would have been blocked (Audit) |
+| 8024 | Packaged app-Deployment | Packaged app deployment would have been blocked (Audit) |
 
 **Viewing AppLocker Events**:
 ```powershell
-# View recent EXE/DLL events
-Get-WinEvent -LogName "Microsoft-Windows-AppLocker/EXE and DLL" -MaxEvents 20 |
-    Select-Object TimeCreated, Id, Message | Format-Table -Wrap
+# View recent AppLocker events across the same logs used by the LOLBin validation script
+'Microsoft-Windows-AppLocker/EXE and DLL',
+'Microsoft-Windows-AppLocker/MSI and Script',
+'Microsoft-Windows-AppLocker/Packaged app-Execution',
+'Microsoft-Windows-AppLocker/Packaged app-Deployment' |
+   ForEach-Object { Get-WinEvent -LogName $_ -MaxEvents 10 } |
+   Sort-Object TimeCreated -Descending |
+   Select-Object -First 20 TimeCreated, LogName, Id, Message |
+   Format-Table -Wrap
 
 # View recent Script events  
 Get-WinEvent -LogName "Microsoft-Windows-AppLocker/MSI and Script" -MaxEvents 20 |
