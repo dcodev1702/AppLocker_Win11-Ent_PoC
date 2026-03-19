@@ -16,10 +16,17 @@
             8007 = MSI or Script blocked in enforce mode
             8021 = Packaged app allowed in audit mode (would be blocked if enforced)
             8024 = Packaged app deployment allowed in audit mode (would be blocked if enforced)
+
+.EXAMPLE
+     powershell.exe -ExecutionPolicy Bypass -File .\AppLocker-LOLBin-PolicyCheck.ps1
+
+     Runs the LOLBin validation checks from the current directory and reports whether
+     the tested binaries were blocked, allowed in audit mode, or not governed by the
+     current AppLocker policy.
     
 .NOTES
-    Author: DCODEV1702 & Claude Opus 4.5
-    Date: December 2025
+    Author: DCODEV1702 & GPT 5.4
+    Date: December 2025 | Updated March 2026
     
     Run from a non-admin user account to properly test the policy.
     Administrators typically have a blanket allow rule.
@@ -52,6 +59,7 @@ $AppLockerLogs = @(
     'Microsoft-Windows-AppLocker/Packaged app-Execution'
     'Microsoft-Windows-AppLocker/Packaged app-Deployment'
 )
+$EventLogWaitSeconds = 2
 
 # Colors for output
 function Write-TestResult {
@@ -267,8 +275,8 @@ try {
     $details = $_.Exception.Message
 }
 
-# Check for AppLocker events (8003, 8004, 8006, 8007)
-Start-Sleep -Milliseconds 500  # Brief pause to let events log
+# Check for AppLocker events after allowing time for AppLocker to write them
+Start-Sleep -Seconds $EventLogWaitSeconds
 $applockerEvents = Get-AppLockerEvents -BinaryName "cipher"
 if ($applockerEvents) {
     $latestEvent = $applockerEvents | Sort-Object TimeCreated -Descending | Select-Object -First 1
@@ -325,8 +333,8 @@ try {
     $details = $_.Exception.Message
 }
 
-# Check for AppLocker events (8003, 8004, 8006, 8007)
-Start-Sleep -Milliseconds 500
+# Check for AppLocker events after allowing time for AppLocker to write them
+Start-Sleep -Seconds $EventLogWaitSeconds
 $applockerEvents = Get-AppLockerEvents -BinaryName "mshta"
 if ($applockerEvents) {
     $latestEvent = $applockerEvents | Sort-Object TimeCreated -Descending | Select-Object -First 1
@@ -407,8 +415,8 @@ if ($null -eq $msbuildInstances -or $msbuildInstances.Count -eq 0) {
             $details = $_.Exception.Message
         }
         
-        # Check for AppLocker events (8003, 8004, 8006, 8007)
-        Start-Sleep -Milliseconds 500
+        # Check for AppLocker events after allowing time for AppLocker to write them
+        Start-Sleep -Seconds $EventLogWaitSeconds
         $applockerEvents = Get-AppLockerEvents -BinaryName "msbuild"
         if ($applockerEvents) {
             $latestEvent = $applockerEvents | Sort-Object TimeCreated -Descending | Select-Object -First 1
@@ -461,8 +469,8 @@ try {
     $details = $_.Exception.Message
 }
 
-# Check for AppLocker events (8003, 8004, 8006, 8007)
-Start-Sleep -Milliseconds 500
+# Check for AppLocker events after allowing time for AppLocker to write them
+Start-Sleep -Seconds $EventLogWaitSeconds
 $applockerEvents = Get-AppLockerEvents -BinaryName "cscript"
 if ($applockerEvents) {
     $latestEvent = $applockerEvents | Sort-Object TimeCreated -Descending | Select-Object -First 1
