@@ -46,35 +46,57 @@ function Get-DomainRoleSummary {
     }
 }
 
-function Get-ActiveInteractiveSession {
+function Get-ActiveInteractiveSessionLine {
     param(
         [string[]]$InteractiveSessions
     )
 
     foreach ($session in $InteractiveSessions) {
         if ($session -match '^\s*>?(?<User>\S+)\s+(?<SessionName>(console|rdp\-tcp[^\s]*))\s+\d+\s+Active\b') {
-            $sessionType = if ($matches.SessionName -ieq 'console') { 'Console' } else { 'RDP' }
-
-            return [pscustomobject]@{
-                User        = $matches.User
-                SessionName = $matches.SessionName
-                SessionType = $sessionType
-            }
+            return $session
         }
     }
 
     return $null
 }
 
+function Get-InteractiveSessionUser {
+    param(
+        [string]$SessionLine
+    )
+
+    if ($SessionLine -and $SessionLine -match '^\s*>?(?<User>\S+)\s+(?<SessionName>(console|rdp\-tcp[^\s]*))\s+\d+\s+Active\b') {
+        return $matches.User
+    }
+
+    return $null
+}
+
+function Get-InteractiveSessionType {
+    param(
+        [string]$SessionLine
+    )
+
+    if ($SessionLine -and $SessionLine -match '^\s*>?(?<User>\S+)\s+(?<SessionName>(console|rdp\-tcp[^\s]*))\s+\d+\s+Active\b') {
+        if ($matches.SessionName -ieq 'console') {
+            return 'Console'
+        }
+
+        return 'RDP'
+    }
+
+    return 'Unknown'
+}
+
 function Resolve-LoggedOnUser {
     param(
         [string]$CurrentUser,
-        [psobject]$ActiveSession,
+        [string]$ActiveSessionLine,
         [string]$FallbackUser
     )
 
-    if ($ActiveSession) {
-        $sessionUser = $ActiveSession.User
+    if ($ActiveSessionLine) {
+        $sessionUser = Get-InteractiveSessionUser -SessionLine $ActiveSessionLine
         if ($CurrentUser -and $CurrentUser -match '\\' -and (($CurrentUser -split '\\')[-1]) -ieq $sessionUser) {
             return $CurrentUser
         }
@@ -144,10 +166,10 @@ elseif ($languageMode -eq 'FullLanguage') {
 }
 
 $interactiveSessions = @(query user 2>$null | Select-Object -Skip 1)
-$activeInteractiveSession = Get-ActiveInteractiveSession -InteractiveSessions $interactiveSessions
-$loggedOnUser = Resolve-LoggedOnUser -CurrentUser $currentUser -ActiveSession $activeInteractiveSession -FallbackUser $computerSystem.UserName
+$activeInteractiveSessionLine = Get-ActiveInteractiveSessionLine -InteractiveSessions $interactiveSessions
+$loggedOnUser = Resolve-LoggedOnUser -CurrentUser $currentUser -ActiveSessionLine $activeInteractiveSessionLine -FallbackUser $computerSystem.UserName
 $loggedOnUserScope = Get-LoggedOnUserScope -LoggedOnUser $loggedOnUser -ComputerName $env:COMPUTERNAME -Domain $computerSystem.Domain -PartOfDomain $computerSystem.PartOfDomain
-$loggedOnSessionType = if ($activeInteractiveSession) { $activeInteractiveSession.SessionType } else { 'Unknown' }
+$loggedOnSessionType = Get-InteractiveSessionType -SessionLine $activeInteractiveSessionLine
 
 if (-not $loggedOnUser) {
     $loggedOnUser = 'Unable to determine logged on user'
