@@ -100,7 +100,7 @@ Example output (compliant system):
 
 Import the SCC results into STIG Viewer 3.7 to confirm V-253262 shows as **Not a Finding** with a score of 100%.
 
-![V-253262 STIG Viewer - Not a Finding](../../images/stig-viewer-v253262-pass.png)
+![V-253262 STIG Viewer - Not a Finding](../images/stig-viewer-v253262-pass.png)
 
 ---
 
