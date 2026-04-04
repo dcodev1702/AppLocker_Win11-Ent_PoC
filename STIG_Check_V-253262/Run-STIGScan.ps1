@@ -12,7 +12,7 @@
 
 .PARAMETER SccPath
     Path to the SCC installation directory.
-    Default: "C:\Users\Lorenzo.SKYNET\Downloads\WIN11 STIG\scc-5.14_Windows_bundle\scc-5.14_Windows\scc-5.14_Windows\scc_5.14"
+    Default: "C:\Users\"$env:USERNAME.$env:USERDOMAIN"\Downloads\WIN11 STIG\scc-5.14_Windows_bundle\scc-5.14_Windows\scc-5.14_Windows\scc_5.14"
 
 .PARAMETER RunScan
     If specified, launches cscc.exe after updating the answer file.
@@ -24,7 +24,7 @@
 
 [CmdletBinding()]
 param(
-    [string]$SccPath = "C:\Users\Lorenzo.SKYNET\Downloads\WIN11 STIG\scc-5.14_Windows_bundle\scc-5.14_Windows\scc-5.14_Windows\scc_5.14",
+    [string]$SccPath = "C:\Users\$env:USERNAME.$env:USERDOMAIN\Downloads\WIN11 STIG\scc-5.14_Windows_bundle\scc-5.14_Windows\scc-5.14_Windows\scc_5.14",
     [switch]$RunScan
 )
 
