@@ -634,7 +634,7 @@ File(s) found in: %OSDRIVE%\USERS\ABBY\APPDATA\LOCAL\MICROSOFT\ONEDRIVE" UserOrG
             </Conditions>
         </FileHashRule>
     </RuleCollection>
-    <RuleCollection Type="Dll" EnforcementMode="Enabled">
+    <RuleCollection Type="Dll" EnforcementMode="AuditOnly">
         <FilePublisherRule Id="8dc9e770-88db-425f-86a6-200c0012d824" Name="LOLBin Block (DLL): lxssmanager.dll" Description="Microsoft Recommended Block - lxssmanager.dll - WSL Manager" UserOrGroupSid="S-1-1-0" Action="Deny">
             <Conditions>
                 <FilePublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US" ProductName="*" BinaryName="LXSSMANAGER.DLL">
