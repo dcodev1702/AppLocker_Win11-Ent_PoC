@@ -96,6 +96,12 @@ Example output (compliant system):
 4. Question 4 (V-253262) should now show your answer instead of "Not Reviewed"
 5. Run the scan - V-253262 will be included in the results
 
+## Step 7 - Verify in STIG Viewer
+
+Import the SCC results into STIG Viewer 3.7 to confirm V-253262 shows as **Not a Finding** with a score of 100%.
+
+![V-253262 STIG Viewer - Not a Finding](images/stig-viewer-v253262-pass.png)
+
 ---
 
 ## What Each Result Means
