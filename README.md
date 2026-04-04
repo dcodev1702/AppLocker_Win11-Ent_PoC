@@ -152,7 +152,7 @@ This layered approach combines AaronLocker's practical whitelisting with Microso
 ---
 
 ### DISA STIG - WIN-11 | APPLICATION CONTROL
-![image](https://github.com/user-attachments/assets/4939b530-8acc-49f0-b5d3-33e777f225ba)
+![image](images/Win11_STIG_APPLOCKER.jpeg)
 
 ### APPLICATION LOCKER - MODE: ENFORCEMENT
 ![image](https://github.com/user-attachments/assets/b6fd39dc-df0b-4edd-9871-c8ab5f0b96d1)
