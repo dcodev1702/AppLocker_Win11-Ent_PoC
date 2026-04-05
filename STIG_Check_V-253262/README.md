@@ -1,4 +1,4 @@
-# V-253262 AppLocker STIG Check - Setup & Run Instructions
+# V-253262 AppLocker STIG Check (Automated) - Setup & Run Instructions
 
 **Windows 11 Enterprise VM**
 
