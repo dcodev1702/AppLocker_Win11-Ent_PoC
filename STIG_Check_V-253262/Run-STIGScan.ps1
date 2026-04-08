@@ -85,8 +85,8 @@ $lines = Get-Content $sourceFile
 # We need to find the answer block for V-253262 and set the right one.
 
 $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-$comment   = "Automated: Check-V253262.ps1 ran $timestamp. " +
-             "AppLocker Exe/Msi/Script/Appx enforcement mode evaluated."
+$comment   = "Automated: Check-V253262.ps1 ran - $timestamp. " +
+             "AppLocker Policy for Exe|MSI|Script|AppX enforcement mode evaluated."
 
 $inV253262Block = $false
 $answerBlockFound = $false
